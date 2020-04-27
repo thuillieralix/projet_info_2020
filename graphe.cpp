@@ -75,7 +75,55 @@ void Graphe::afficher()
         std::cout<< "              Poids " <<m_arrete[j]->getPoids();
         std::cout << std::endl;
     }
-
+    for (size_t x=0;x<m_sommet.size(); x++)
+    {
+        std::cout << " Cvp " << m_sommet[x]->getIndice() << " : " << m_sommet[x]->getCvp()<< std::endl;
+    }
     std::cout << std::endl << std::endl;
+
+}
+void Graphe::trouver_indice_centralite_vecteur_propre()
+{
+    int c;
+    float lambda;
+    int somme_c_sommets=0;
+
+    for (size_t i=0;i<m_sommet.size();i++)//initialisation
+    {
+        m_sommet[i]->mettre_indice_cvp_a_1();
+        m_sommet[i]->ADJ_mettre_indice_cvp_a_1();
+    }
+
+
+    //faire
+    for (size_t x=0;x<m_sommet.size();x++)//pour le calcul de lambda
+    {
+        c=0;
+        c=m_sommet[x]->calculer_somme_cvp_adj();
+        somme_c_sommets=somme_c_sommets+pow(c,2);
+    }
+
+
+    lambda=pow(somme_c_sommets,0.5);//4.41
+    std::cout<<" lambda "<<" : "<<lambda<<std::endl;
+
+
+    float cvp=0;
+    int c2;
+    std::vector<float> tableau_cvp;
+    for (size_t j=0;j<m_sommet.size();j++)//pour calcul cvp de chaque sommet
+    {
+        c2=0;
+        c2=m_sommet[j]->calculer_somme_cvp_adj();
+        cvp=c2/lambda;
+        tableau_cvp.push_back(cvp);
+
+    }
+    for (size_t z=0;z<m_sommet.size();z++)//pour calcul cvp de chaque sommet
+    {
+       m_sommet[z]->mettre_indice_cvp(tableau_cvp[z]);
+    }
+
+
 
 }
