@@ -82,7 +82,7 @@ void Graphe::afficher()
     std::cout << std::endl << std::endl;
 
 }
-void Graphe::trouver_indice_centralite()
+void Graphe::trouver_indice_centralite_vecteur_propre()
 {
     int c;
     float lambda;
