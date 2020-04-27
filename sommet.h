@@ -5,7 +5,7 @@
 #include <vector>
 #include <queue>
 #include <string>
-
+#include<math.h>
 class Sommet
 {
 private :
@@ -13,6 +13,7 @@ private :
     int m_x;
     int m_y;
     char m_nom;
+    float indice_cvp;
     std::vector<Sommet*> m_adjacent;
 public :
     Sommet();
@@ -22,6 +23,11 @@ public :
     char getNom();
     void Ajouter_adj(Sommet* adj);
     void Afficher_adj();
+    float getCvp();
+    void mettre_indice_cvp(float nb);
+    void mettre_indice_cvp_a_1();
+    void ADJ_mettre_indice_cvp_a_1();
+    int calculer_somme_cvp_adj();
 };
 
 #endif // SOMMET_H_INCLUDED
