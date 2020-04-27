@@ -22,7 +22,8 @@ public :
     Graphe(std::string fichier,std::string fichier2);
     ~Graphe();
     void afficher();
-
+    void trouver_indice_cvp_sommet();
+    void trouver_indice_centralite();
 };
 
 
