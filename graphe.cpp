@@ -127,3 +127,50 @@ void Graphe::trouver_indice_centralite_vecteur_propre()
 
 
 }
+void Graphe::trouver_centralite_degres()
+{
+    float nb_degre;
+    float deg_max=0;
+    for (size_t i=0; i<m_sommet.size();i++)
+    {
+        nb_degre=0;
+        for (size_t j=0;j<m_arrete.size();j++)
+        {
+            if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice())
+            {
+                nb_degre++;
+            }
+            if (m_arrete[j]->getArrivee()==m_sommet[i]->getIndice())
+            {
+                nb_degre++;
+            }
+        }
+        if (nb_degre>deg_max)
+        {
+            deg_max=nb_degre;
+        }
+    }
+    std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
+    std::cout<<std::endl;
+
+    float indice_deg=0.00;
+    std::cout<<"indice normalise de degre : "<<std::endl;
+    for (size_t x=0;x<m_sommet.size();x++)
+    {
+        nb_degre=0;
+        for (size_t z=0;z<m_arrete.size();z++)
+        {
+            if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
+            {
+                nb_degre++;
+            }
+            if (m_arrete[z]->getArrivee()==m_sommet[x]->getIndice())
+            {
+                nb_degre++;
+            }
+        }
+        indice_deg=nb_degre/deg_max;
+        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
+    }
+
+}
