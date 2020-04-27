@@ -1,10 +1,14 @@
+
+
 #ifndef SOMMET_H_INCLUDED
 #define SOMMET_H_INCLUDED
 
+#include "Arrete.h"
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <string>
+
 
 class Sommet
 {
@@ -20,8 +24,12 @@ public :
     ~Sommet();
     int getIndice();
     char getNom();
+    int getTabSize();
     void Ajouter_adj(Sommet* adj);
     void Afficher_adj();
+
+    void actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau , std::vector<Arrete*> tab_arrete);
+
 };
 
 #endif // SOMMET_H_INCLUDED

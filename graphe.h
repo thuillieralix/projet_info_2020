@@ -23,6 +23,8 @@ public :
     ~Graphe();
     void afficher();
 
+    std::vector<std::vector<int>> dijkstra(int depart);
+
 };
 
 
