@@ -80,6 +80,11 @@ void Graphe::afficher()
 
 }
 
+int Graphe::getOrdre()
+{
+    return m_ordre;
+}
+
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)
 {
     //std::cout<< "entree dans le dijkstra graphe"<<std::endl;

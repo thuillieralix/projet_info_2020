@@ -22,6 +22,7 @@ public :
     Graphe(std::string fichier,std::string fichier2);
     ~Graphe();
     void afficher();
+    int getOrdre();
 
     std::vector<std::vector<int>> dijkstra(int depart);
 
