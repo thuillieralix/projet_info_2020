@@ -131,6 +131,7 @@ void Graphe::trouver_centralite_degres()
 {
     float nb_degre;
     float deg_max=0;
+    std::cout<<"indice de degre non normalise : "<<std::endl;
     for (size_t i=0; i<m_sommet.size();i++)
     {
         nb_degre=0;
@@ -149,7 +150,9 @@ void Graphe::trouver_centralite_degres()
         {
             deg_max=nb_degre;
         }
+        std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
     }
+    std::cout<<std::endl<<std::endl<<std::endl;
     std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
     std::cout<<std::endl;
 
