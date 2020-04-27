@@ -1,11 +1,8 @@
-
 #include "svgfile.h"
 #include <iostream>
-#include "Graphe.h"
-#include "Sommet.h"
 #include <sstream>
 
-int main()
+
 const std::string svgHeader =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
     "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" ";
@@ -68,8 +65,6 @@ std::string attrib(std::string name, T val)
 
 void Svgfile::addDisk(double x, double y, double r, std::string color)
 {
-    Graphe g("fichier1.txt","fichier_poids.txt");
-    g.afficher();
     m_ostrm << "<circle "
             << attrib("cx", x)
             << attrib("cy", y)
