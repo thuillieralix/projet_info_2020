@@ -24,8 +24,13 @@ public :
     void afficher();
     void trouver_indice_centralite_vecteur_propre();
     void trouver_centralite_degres();
-    
+
     void charger_nouveau_fichier_ponderation(std::string fichier);
+    int getOrdre();
+
+    std::vector<std::vector<int>> dijkstra(int depart);
+    void centralite_de_proximite();
+
 
     void tester_connexite();
     void supprimer_arrete();
