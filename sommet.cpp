@@ -50,12 +50,10 @@ void Sommet::Afficher_adj()
 void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau, std::vector<Arrete*> tab_arrete)
 {
     int poidsArreteI=0;
-
-    std::cout<<"entree dans le dijkstra Sommet"<<std::endl;
-    std::cout << "tableau[plusPetitSommet][1] : " <<tableau[plusPetitSommet][1]<< '\n';
+    //std::cout<<"entree dans le dijkstra Sommet"<<std::endl;
+    //std::cout << "tableau[plusPetitSommet][1] : " <<tableau[plusPetitSommet][1]<< '\n';
     for( int i=0 ; i<getTabSize() ; ++i)
     {
-
         //si le sommet a des sucesseurs
         if(m_adjacent[i] != nullptr)
         {
@@ -65,11 +63,11 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
                 //si les 2 extrmités sont trouvés pour une arrete
                 if ((m_adjacent[i]->getIndice() == tab_arrete[j]->getDepart()) || (m_indice == tab_arrete[j]->getDepart()))
                 {
-                    if((m_indice == tab_arrete[j]->getDepart()) || (m_indice == tab_arrete[j]->getArrivee()))
+                    if((m_adjacent[i]->getIndice() == tab_arrete[j]->getArrivee()) || (m_indice == tab_arrete[j]->getArrivee()))
                     {
                         //on enregistre le poids de l'arrete en question
                         poidsArreteI = tab_arrete[j]->getPoids();
-                        std::cout << "poidsArreteI : " <<poidsArreteI<< '\n';
+                        //std::cout << "poidsArreteI : " <<poidsArreteI<< '\n';
                     }
                 }
             }
@@ -81,8 +79,8 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
                 {
                     //on met le numero, le poids et le predecesseur dans la case correspondante tableau
                     tableau[m_adjacent[i]->getIndice()] = { 0 , tableau[plusPetitSommet][1] + poidsArreteI , plusPetitSommet };
-                    std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
-                    std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
+                    //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
+                    //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
                 }
             }
         }

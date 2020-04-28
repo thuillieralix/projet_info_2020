@@ -85,6 +85,34 @@ int Graphe::getOrdre()
     return m_ordre;
 }
 
+void Graphe::centralite_de_proximite()
+{
+    int sommetDepart = -1;
+    std::vector<std::vector<int>> resDijkstra;
+
+    //blindage pour avoir un sommet qui existe et qui est dans le graphe
+    while(sommetDepart < 0 || sommetDepart > getOrdre())
+    {
+        std::cout<<"Entrez le sommet de depart"<<std::endl;
+        std::cin>>sommetDepart;
+    }
+    //recuperation du resultat de l'algo de Dijkstra
+    resDijkstra = dijkstra(sommetDepart);
+
+    //calcul de la centralité de proximité
+    int numerateur = 0;
+    int denominateur = 0;
+
+    //le dénominateur est la somme des distances du point de départ
+    for(unsigned int i=0 ; i < resDijkstra.size() ; ++i)
+    {
+        denominateur = denominateur + resDijkstra[i][1];
+    }
+    numerateur = getOrdre() - 1;
+
+    std::cout << "Indice de proximite normalise du sommet " << numerateur<<'/'<<denominateur<< '\n';
+}
+
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)
 {
     //std::cout<< "entree dans le dijkstra graphe"<<std::endl;
@@ -113,7 +141,7 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
         //note: a letape 1 le sommet de départ est le premier pris, son poids d'arrte etant de 0
         for( int i=0 ; i < m_ordre ; ++i)
         {
-            std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
+            //std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
             if(plusPetitSommet == -1 && tableau[i][0] == 0 && tableau[i][1] > 0)
             {
                 plusPetitSommet = i;
@@ -130,7 +158,7 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
             }
 
         }
-        std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
+        //std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
         tableau[plusPetitSommet][0] = 1;
         ++comptSommets;
         //on marque le sommet explore
