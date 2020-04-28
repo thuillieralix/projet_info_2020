@@ -113,22 +113,24 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
         //note: a letape 1 le sommet de départ est le premier pris, son poids d'arrte etant de 0
         for( int i=0 ; i < m_ordre ; ++i)
         {
-            if(plusPetitSommet == -1 && tableau[i][0] == 0)
+            std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
+            if(plusPetitSommet == -1 && tableau[i][0] == 0 && tableau[i][1] > 0)
             {
                 plusPetitSommet = i;
             }
             //blindage pour empecher de relire des cases par inadvertance
-            if( plusPetitSommet != -1)
+            if( plusPetitSommet != -1 )
             {
                 //sinon on regarde si la valeur de la case i est plus petite
                 //la valeur doit etre positive sinon elle est non découverte
-                if(tableau[plusPetitSommet][1] > tableau[i][1] && tableau[i][1] > 0 && tableau[i][0] != 1 )
+                if((tableau[plusPetitSommet][1] > tableau[i][1]) && (tableau[i][1] > 0) && (tableau[i][0] != 1) )
                 {
                     plusPetitSommet = i;
                 }
             }
 
         }
+        std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
         tableau[plusPetitSommet][0] = 1;
         ++comptSommets;
         //on marque le sommet explore
