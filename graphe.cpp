@@ -1,6 +1,7 @@
 #include "Graphe.h"
 #include "Sommet.h"
 #include "Arrete.h"
+#include "svgfile.h"
 
 Graphe::Graphe()
 {
@@ -12,6 +13,7 @@ Graphe::Graphe()
 Graphe::Graphe(std::string fichier, std::string fichier2)
 {
     std::ifstream lire(fichier.c_str());
+    Svgfile svgout ; 
 
     lire >> m_orientation;
     lire >> m_ordre;
@@ -26,22 +28,31 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         lire >> sommet_y;
         Sommet* s = new Sommet(m_indice, m_nom,sommet_x,sommet_y);
         m_sommet.push_back(s);
+        svgout.addCross(sommet_x,sommet_y,5,"red");
+        svgout.addGrid() ; 
     }
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
-
+    int x1, y1, x2, y2 ;
 
     for(int i=0; i<m_taille; i++)
     {
         lire >> indice;
         lire >> extremite_dep;
         lire >> extremite_ar;
+        lire >> x1 ;
+        lire >> y1 ;
+        lire >> x2 ;
+        lire >> y2 ;
+
 
         ///faire adjacence
         Arrete* a=new Arrete(extremite_dep,extremite_ar,indice);
         m_arrete.push_back(a);
         m_sommet[extremite_dep]->Ajouter_adj(m_sommet[extremite_ar]);
         m_sommet[extremite_ar]->Ajouter_adj(m_sommet[extremite_dep]);
+        svgout.addLine(x1,y1,x2,y2,"black");
+
     }
 
 
@@ -75,106 +86,114 @@ void Graphe::afficher()
         std::cout<< "              Poids " <<m_arrete[j]->getPoids();
         std::cout << std::endl;
     }
-    for (size_t x=0;x<m_sommet.size(); x++)
-    {
-        std::cout << " Cvp " << m_sommet[x]->getIndice() << " : " << m_sommet[x]->getCvp()<< std::endl;
-    }
+
     std::cout << std::endl << std::endl;
 
 }
-void Graphe::trouver_indice_centralite_vecteur_propre()
+
+void Graphe:: Dikjstra (int depart, int arrivee)
 {
-    int c;
-    float lambda;
-    int somme_c_sommets=0;
-
-    for (size_t i=0;i<m_sommet.size();i++)//initialisation
+    std::vector<bool> marque ;
+    for (size_t i = 0 ; i<m_sommet.size(); ++i)
+        marque.push_back(false) ;
+    std::vector <int> pred ;
+    for (size_t i=0 ; i<m_sommet.size();++i)
     {
-        m_sommet[i]->mettre_indice_cvp_a_1();
-        m_sommet[i]->ADJ_mettre_indice_cvp_a_1();
+        if(i==depart)
+        {
+            pred.push_back(depart);
+        }
+        else pred.push_back(100) ;
     }
 
+      std::vector<int> distance;
+        for(size_t i=0; i<m_sommet.size(); ++i)
+        {
+            if(i==depart)
+            {
+              distance.push_back(0);
+            }else distance.push_back(100);
+        }
 
-    //faire
-        std::cout<<"pour l'indice de centralite du vecteur propre NON NORMALISE : "<<std::endl;
-    for (size_t x=0;x<m_sommet.size();x++)//pour le calcul de lambda
-    {
-        c=0;
-        c=m_sommet[x]->calculer_somme_cvp_adj();
-        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<c<<std::endl;
-        somme_c_sommets=somme_c_sommets+pow(c,2);
-    }
+    std::priority_queue<int, std::vector<int>, std::greater<int>> liste;
+        bool fin = false;
+        int temp = 0;
+        marque[depart]=true;
+        for(size_t i =0; i < m_sommet[depart]->getAdj().size();++i)
+        {
+            liste.push(m_sommet[depart]->getDist()[i]);
+            distance[m_sommet[depart]->getAdj()[i]->getNum()] = m_sommet[depart]->getDist()[i];
+            pred[m_sommet[depart]->getAdj()[i]->getNum()] = depart;
+        }
+        while (fin != true)
+        {
+            fin = true;
+            for (size_t i= 0; i<marque.size();++i)
+            {
+                if (marque[i]==false)
+                {
+                    fin = false;
+                }
+            }
+            for (size_t i =0; i < distance.size();++i)
+            {
+                if (distance[i]==liste.top() && marque[i]==false)
+                {
+                    temp = i;
+                    break;
+                }
+            }
+            marque[temp]=true;
+            for(size_t i =0; i < m_sommet[temp]->getAdj().size();++i)
+            {
+                if(distance[m_sommet[temp]->getAdj()[i]->getNum()] > distance[temp] + m_sommet[temp]->getDist()[i] )
+                {
+                    liste.push(m_sommet[temp]->getDist()[i] + distance[temp]);
+                    distance[m_sommet[temp]->getAdj()[i]->getNum()] = m_sommet[temp]->getDist()[i] + distance[temp];
+                    pred[m_sommet[temp]->getAdj()[i]->getNum()] = temp;
+                }
+            }
+            liste.pop();
+        }
+        ///std::cout << "Distance entre " << depart << " et " << arrivee << " : " << distance[arrivee] << std::endl;
+        int suiv=arrivee;
+        std::queue<int> chemin;
+        do
+        {
+            std::cout << suiv << "<--";
+            for(size_t i=0; i<m_sommet[pred[suiv]]->getAdj().size();++i)
+            {
+
+                if(m_sommet[pred[suiv]]->getAdj()[i]->getNum()==suiv)
+                {
+                    chemin.push(m_sommet[pred[suiv]]->getDist()[i]);
+                    break;
+                }
+            }
+            suiv=pred[suiv];
+
+        }while (suiv != depart);
+        std::cout << depart << " : longueur ";
+        while(!chemin.empty())
+        {
+            std::cout << chemin.front();
+            if(chemin.size()!= 1)
+                std::cout << "+";
+            chemin.pop();
+        }
 
 
-    lambda=pow(somme_c_sommets,0.5);//4.41
-    std::cout<<" lambda "<<" : "<<lambda<<std::endl;
+        std::cout << "=" << distance[arrivee]<<std::endl;
 
 
-    float cvp=0;
-    int c2;
-    std::vector<float> tableau_cvp;
-    std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
-    for (size_t j=0;j<m_sommet.size();j++)//pour calcul cvp de chaque sommet
-    {
-        c2=0;
-        c2=m_sommet[j]->calculer_somme_cvp_adj();
-        cvp=c2/lambda;
-        tableau_cvp.push_back(cvp);
-        std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
-    }
-    for (size_t z=0;z<m_sommet.size();z++)//pour calcul cvp de chaque sommet
-    {
-       m_sommet[z]->mettre_indice_cvp(tableau_cvp[z]);
-    }
-    
 }
-void Graphe::trouver_centralite_degres()
+
+
+/*
+void Graphe::Dessiner (Svgfile& svgout)
 {
-    float nb_degre;
-    float deg_max=0;
-    std::cout<<"indice de degre non normalise : "<<std::endl;
-    for (size_t i=0; i<m_sommet.size();i++)
-    {
-        nb_degre=0;
-        for (size_t j=0;j<m_arrete.size();j++)
-        {
-            if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice())
-            {
-                nb_degre++;
-            }
-            if (m_arrete[j]->getArrivee()==m_sommet[i]->getIndice())
-            {
-                nb_degre++;
-            }
-        }
-        if (nb_degre>deg_max)
-        {
-            deg_max=nb_degre;
-        }
-        std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
-    }
-    std::cout<<std::endl<<std::endl<<std::endl;
-    std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
-    std::cout<<std::endl;
 
-    float indice_deg=0.00;
-    std::cout<<"indice normalise de degre : "<<std::endl;
-    for (size_t x=0;x<m_sommet.size();x++)
-    {
-        nb_degre=0;
-        for (size_t z=0;z<m_arrete.size();z++)
-        {
-            if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-            if (m_arrete[z]->getArrivee()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-        }
-        indice_deg=nb_degre/deg_max;
-        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
-    }
-
-}
+    svgout.addLine(2,1,2,3, "black") ;
+    svgout.addLine(1,2,3,2,"black");
+    svgout.addCross(2,2,0,"red") ;
+}*/
