@@ -24,6 +24,7 @@ public :
     void afficher();
     void trouver_indice_centralite_vecteur_propre();
     void trouver_centralite_degres();
+    void charger_nouveau_fichier_ponderation(std::string fichier);
 };
 
 

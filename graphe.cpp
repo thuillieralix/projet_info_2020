@@ -251,3 +251,17 @@ void Graphe::tester_connexite()
     if(connexe_test==1)
         std::cout<<"le graphe est connexe"<<std::endl;
 }
+void Graphe::charger_nouveau_fichier_ponderation(std::string fichier)
+{
+    std::ifstream lire2(fichier.c_str());
+    int m_nbre_arrete, poids, indice;
+
+    lire2>>m_nbre_arrete;
+    for (int y=0; y<m_nbre_arrete;y++)
+    {
+        lire2>>indice;
+
+        lire2>>poids;
+        m_arrete[indice]->mettre_poids(poids);
+    }
+}
