@@ -48,7 +48,8 @@ int main()
                             std::cout << " 3: supprimer une arrete" << std::endl;
                             std::cout << " 4: tester la connexite du graphe" << std::endl;
                             std::cout << " 5: afficher composantes graphe " << std::endl;
-                            std::cout << " 6: quitter" << std::endl<< std::endl;
+                            std::cout << " 6: trouver l'indice de proximité d'un sommet" << std::endl;
+                            std::cout << " 7: quitter" << std::endl<< std::endl;
                             std::cin>>choix;
                             std::cout << std::endl<< std::endl<< std::endl;
                             switch (choix)
@@ -104,6 +105,10 @@ int main()
                                 break;
 
                                 case 6:
+                                    g.centralite_de_proximite();
+                                    std::cout << std::endl<< std::endl<< std::endl;
+
+                                case 7:
                                     stop=0;
                                 break;
 
@@ -114,11 +119,11 @@ int main()
                             }
 
                         }
-                        }
+                    }
                     else
-                        {
-                            std::cout<<"saisie incorrecte, veuillez recommencer"<<std::endl;
-                        }
+                    {
+                        std::cout<<"saisie incorrecte, veuillez recommencer"<<std::endl;
+                    }
                 }
             }
             else

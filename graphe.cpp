@@ -296,7 +296,7 @@ void Graphe::centralite_de_proximite()
     }
     numerateur = getOrdre() - 1;
 
-    std::cout << "Indice de proximite normalise du sommet " << numerateur<<'/'<<denominateur<< '\n';
+    std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << numerateur<<'/'<<denominateur<< '\n';
 }
 
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)
