@@ -75,10 +75,7 @@ void Graphe::afficher()
         std::cout<< "              Poids " <<m_arrete[j]->getPoids();
         std::cout << std::endl;
     }
-    for (size_t x=0;x<m_sommet.size(); x++)
-    {
-        std::cout << " Cvp " << m_sommet[x]->getIndice() << " : " << m_sommet[x]->getCvp()<< std::endl;
-    }
+    
     std::cout << std::endl << std::endl;
 
 }
@@ -177,4 +174,80 @@ void Graphe::trouver_centralite_degres()
         std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
     }
 
+}
+void Graphe::supprimer_arrete()
+{
+    std::string supp_arrete;
+    int stop=1;
+    int indice_arrete_a_supp;
+    std::vector<int> tab_indices_arretes;
+    int nb_test;
+    for (size_t j=0;j<m_arrete.size();j++)
+        {
+            tab_indices_arretes.push_back(m_arrete[j]->getIndice());
+        }
+    while (stop!=0)
+    {
+            std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
+            std::cin>>supp_arrete;
+
+
+            if (supp_arrete=="oui")
+            {
+                std::cout<<"quelle arrete ? mettre indice"<<std::endl;
+                std::cin>>indice_arrete_a_supp;
+
+                ///blindage
+                for (size_t x=0; x<tab_indices_arretes.size();x++)
+                {
+                    if (tab_indices_arretes[x]==indice_arrete_a_supp)
+                    {
+                        m_arrete.erase (m_arrete.begin()+(indice_arrete_a_supp));
+                        nb_test++;
+                    }
+                }
+                if (nb_test==0)
+                {
+                    std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
+                }
+            }
+            else if (supp_arrete=="non")///si c'est non
+            {
+                stop=0;
+            }
+            else
+            {
+                std::cout<<"saisie incorrecte, veuillez recommencer"<<std::endl;
+            }
+    }
+}
+
+
+void Graphe::tester_connexite()
+{
+    ///graphe connexe si pour chaque sommet, il y a une arrete
+    int connexe_test=1;
+    for (size_t i=0;i<m_sommet.size();i++)
+    {
+        std::cout<<"i : "<<i<<std::endl;
+        int nb_arrete;
+        nb_arrete=0;
+        for (size_t j=0;j<m_arrete.size();j++)
+        {
+
+            if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice()||m_arrete[j]->getArrivee()==m_sommet[i]->getIndice())
+            {
+                nb_arrete++;
+            }
+        }
+        if(nb_arrete==0)
+        {
+            std::cout<<"le graphe n'est pas connexe"<<std::endl<<std::endl;
+            connexe_test=0;
+            break;
+
+        }
+    }
+    if(connexe_test==1)
+        std::cout<<"le graphe est connexe"<<std::endl;
 }
