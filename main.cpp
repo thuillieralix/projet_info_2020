@@ -107,6 +107,7 @@ int main()
                                 case 6:
                                     g.centralite_de_proximite();
                                     std::cout << std::endl<< std::endl<< std::endl;
+                                    break;
 
                                 case 7:
                                     stop=0;
