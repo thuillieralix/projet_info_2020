@@ -35,6 +35,9 @@ public :
 
     void actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau , std::vector<Arrete*> tab_arrete);
 
+    void actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vector<std::vector<int>>> &tableau, std::vector<Arrete*> tab_arrete);
+
+
 };
 
 #endif // SOMMET_H_INCLUDED

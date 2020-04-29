@@ -29,6 +29,7 @@ public :
     int getOrdre();
 
     std::vector<std::vector<int>> dijkstra(int depart);
+    void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
     void centralite_de_proximite();
 
 
