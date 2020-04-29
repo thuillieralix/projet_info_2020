@@ -310,7 +310,7 @@ void Graphe::supprimer_arrete()
             std::cin>>indice_arrete_a_supp;
 
             ///rajouter blindage
-            if (indice_arrete_a_supp<=m_arrete.size())
+            if (indice_arrete_a_supp <= m_arrete.size())
             {
                 for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {

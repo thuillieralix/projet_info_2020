@@ -9,8 +9,8 @@ int main()
 {
 
     std::string fichier1, fichier2;
-    int choix, stop=1, fichier_ok;
-    int test=1, saisie_fichier1=0, saisie_fichier2=0, saisie_nouv_fichier=0;
+    int choix, stop=1;
+    int  saisie_nouv_fichier=0;
 
 
         std::cout << std::endl<< std::endl<< std::endl;
@@ -55,7 +55,7 @@ int main()
                                                                     std::cout<<"ok fichier existe"<<std::endl;
                                                                         g.mettre_fichier_ponderation(fichier2);
                                                                         g.charger_nouveau_fichier_ponderation(fichier2);
-                                                                
+
                                                                 }
 
                                                                 std::cout << std::endl<< std::endl<< std::endl;

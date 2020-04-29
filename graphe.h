@@ -15,6 +15,8 @@ private :
       int m_ordre;
       int m_taille;
       bool m_orientation;
+    std::string fichier_topologie;
+    std::string fichier_ponderation;
 
     std::vector<Sommet*> m_sommet;
     std::vector<Arrete*> m_arrete;
