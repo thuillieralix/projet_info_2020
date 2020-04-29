@@ -4,7 +4,6 @@
 
 int main()
 {
-
     std::string fichier1, fichier2;
     // Graphe g("fichier1.txt","fichier_poids.txt");
     int choix, stop=1, fichier_ok;
