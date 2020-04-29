@@ -384,6 +384,18 @@ void Graphe::centralite_intermediarite()
     int numerateur = 0;
     int denominateur = 0;
 
+    std::cout << "affichage du result dijkstra" << '\n';
+    for(int i=0 ; i<resDijkstra.size() ; ++i)
+    {
+        for(int j=0 ; j<resDijkstra[i].size() ; ++j)
+        {
+            for(int k=0 ; k<resDijkstra[i][j].size(); ++k)
+            {
+                
+            }
+        }
+    }
+
     //le dénominateur est la somme des distances du point de départ
 }
 
