@@ -500,163 +500,9 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
     return tableau;
 }
 
-void Graphe::comparer_valeurs_indice_degre()
-{
-    std::vector<float> tab_avant_supp_non_normalise;
-    std::vector<float> tab_apres_supp_non_normalise;
-    std::vector<float> tab_avant_supp_normalise;
-    std::vector<float> tab_apres_supp_normalise;
-
-    std::string fichier_avant = "indice_sans_suppression.txt";
-    std::ifstream lire_avant(fichier_avant.c_str());
-
-    std::string fichier_apres = "indice_avec_suppression.txt";
-    std::ifstream lire_apres(fichier_apres.c_str());
-
-    std::string ligne, ligne2;
-
-    lire_apres>>ligne;
-    lire_avant>>ligne2;
-
-    float nombre_avant, nombre_apres;
-    for (size_t i=0; i<m_sommet.size(); i++)
-    {
-        lire_avant>>nombre_avant;
-        tab_avant_supp_non_normalise.push_back(nombre_avant);
-
-        lire_apres>>nombre_apres;
-        tab_apres_supp_non_normalise.push_back(nombre_apres);
-    }
-
-    lire_apres>>ligne;
-    lire_avant>>ligne2;
-
-    for (size_t j=0; j<m_sommet.size(); j++)
-    {
-        lire_avant>>nombre_avant;
-        tab_avant_supp_normalise.push_back(nombre_avant);
-
-        lire_apres>>nombre_apres;
-        tab_apres_supp_normalise.push_back(nombre_apres);
-    }
-    float nombre;
-    std::cout<<"difference indice degre non normalise"<<std::endl<<std::endl;
-    for (size_t z=0; z<m_sommet.size(); z++)
-    {
-        nombre=tab_avant_supp_non_normalise[z]-tab_apres_supp_non_normalise[z];
-
-        std::cout<<nombre<<std::endl;
-
-        if(tab_avant_supp_non_normalise[z]<tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z])
-            std::cout<<" ; l'indice de degre a augmente avec la suppression"<<std::endl;
-        if(tab_avant_supp_non_normalise[z]>tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z])
-            std::cout<<" ; l'indice de degre a baisse avec la suppression"<<std::endl;
-        if(tab_apres_supp_non_normalise[z]==0)
-            std::cout<<" ; le degre du sommet est passe a 0 avec la suppression"<<std::endl;
-        if(nombre==0)
-            std::cout<<" ; l'indice de degre est reste  pareil avec la suppression"<<std::endl;
-    }
-    std::cout<<std::endl;
-    std::cout<<"difference indice degre normalise"<<std::endl<<std::endl;
-    nombre=0;
-    for (size_t z=0; z<m_sommet.size(); z++)
-    {
-        nombre=tab_avant_supp_normalise[z]-tab_apres_supp_normalise[z];
-
-        std::cout<<nombre<<std::endl;
-
-        if(tab_avant_supp_normalise[z]<tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z])
-            std::cout<<" ; l'indice de degre a augmente avec la suppression"<<std::endl;
-        if(tab_avant_supp_normalise[z]>tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z])
-            std::cout<<" ; l'indice de degre a baisse avec la suppression"<<std::endl;
-        if(tab_apres_supp_normalise[z]==0)
-            std::cout<<" ; le degre du sommet est passe a 0 avec la suppression"<<std::endl;
-        if(nombre==0)
-            std::cout<<" ; l'indice de degre est reste  pareil avec la suppression"<<std::endl;
-    }
-
-}
-void Graphe::comparer_valeurs_indice_vecteur_propre()
-{
-    std::vector<float> tab_avant_supp_non_normalise;
-    std::vector<float> tab_apres_supp_non_normalise;
-    std::vector<float> tab_avant_supp_normalise;
-    std::vector<float> tab_apres_supp_normalise;
-
-    std::string fichier_avant = "indice_sans_suppression.txt";
-    std::ifstream lire_avant(fichier_avant.c_str());
-
-    std::string fichier_apres = "indice_avec_suppression.txt";
-    std::ifstream lire_apres(fichier_apres.c_str());
-
-    std::string ligne, ligne2;
-
-    lire_apres>>ligne;
-    lire_avant>>ligne2;
-
-    float nombre_avant, nombre_apres;
-    for (size_t i=0; i<m_sommet.size(); i++)
-    {
-        lire_avant>>nombre_avant;
-        tab_avant_supp_non_normalise.push_back(nombre_avant);
-
-        lire_apres>>nombre_apres;
-        tab_apres_supp_non_normalise.push_back(nombre_apres);
-    }
-
-    lire_apres>>ligne;
-    lire_avant>>ligne2;
-
-    for (size_t j=0; j<m_sommet.size(); j++)
-    {
-        lire_avant>>nombre_avant;
-        tab_avant_supp_normalise.push_back(nombre_avant);
-
-        lire_apres>>nombre_apres;
-        tab_apres_supp_normalise.push_back(nombre_apres);
-    }
-    float nombre;
-    std::cout<<"difference indice de vecteur propre non normalise"<<std::endl<<std::endl;
-    for (size_t z=0; z<m_sommet.size(); z++)
-    {
-        nombre=tab_avant_supp_non_normalise[z]-tab_apres_supp_non_normalise[z];
-
-        std::cout<<nombre<<std::endl;
-
-        if(tab_avant_supp_non_normalise[z]<tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z])
-            std::cout<<" ; l'indice de vecteur propre a augmente avec la suppression"<<std::endl;
-        if(tab_avant_supp_non_normalise[z]>tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z]&&tab_apres_supp_non_normalise[z]!=0)
-            std::cout<<" ; l'indice de vecteur propre a baisse avec la suppression"<<std::endl;
-        if(tab_apres_supp_non_normalise[z]==0)
-            std::cout<<" ; l'indice de vecteur propre du sommet est passe a 0 avec la suppression"<<std::endl;
-        if(nombre==0)
-            std::cout<<" ; l'indice de vecteur propre est reste  pareil avec la suppression"<<std::endl;
-    }
-    std::cout<<std::endl;
-    std::cout<<"difference indice degre normalise"<<std::endl<<std::endl;
-    nombre=0;
-    for (size_t z=0; z<m_sommet.size(); z++)
-    {
-        nombre=tab_avant_supp_normalise[z]-tab_apres_supp_normalise[z];
-
-        std::cout<<nombre<<std::endl;
-
-        if(tab_avant_supp_normalise[z]<tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z])
-            std::cout<<" ; l'indice de vecteur propre a augmente avec la suppression"<<std::endl;
-        if(tab_avant_supp_normalise[z]>tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z]&&tab_apres_supp_normalise[z]!=0)
-            std::cout<<" ; l'indice de vecteur propre a baisse avec la suppression"<<std::endl;
-        if(tab_apres_supp_normalise[z]==0)
-            std::cout<<" ; l'indice de vecteur propre du sommet est passe a 0 avec la suppression"<<std::endl;
-        if(nombre==0)
-            std::cout<<" ;l'indice de vecteur propre est reste  pareil avec la suppression"<<std::endl;
-    }
-
-}
-
 void Graphe::mettre_fichier_topo(std::string fichier)
 {
     fichier_topologie=fichier;
-
 }
 void Graphe::mettre_fichier_ponderation(std::string fichier)
 {
@@ -669,4 +515,83 @@ std::string Graphe::getFichierTopo()
 std::string Graphe::getFichierPonderation()
 {
     return fichier_ponderation;
+}
+
+void Graphe::comparer_valeurs_indice()
+{
+    std::vector<float> tab_avant_supp_non_normalise;
+    std::vector<float> tab_apres_supp_non_normalise;
+    std::vector<float> tab_avant_supp_normalise;
+    std::vector<float> tab_apres_supp_normalise;
+
+    std::string fichier_avant = "indice_sans_suppression.txt";
+    std::ifstream lire_avant(fichier_avant.c_str());
+
+    std::string fichier_apres = "indice_avec_suppression.txt";
+    std::ifstream lire_apres(fichier_apres.c_str());
+
+    std::string ligne, ligne2;
+
+    lire_apres>>ligne;
+    lire_avant>>ligne2;
+
+    float nombre_avant, nombre_apres;
+    for (size_t i=0;i<m_sommet.size();i++)
+    {
+        lire_avant>>nombre_avant;
+        tab_avant_supp_non_normalise.push_back(nombre_avant);
+
+        lire_apres>>nombre_apres;
+        tab_apres_supp_non_normalise.push_back(nombre_apres);
+    }
+
+    lire_apres>>ligne;
+    lire_avant>>ligne2;
+
+    for (size_t j=0;j<m_sommet.size();j++)
+    {
+        lire_avant>>nombre_avant;
+        tab_avant_supp_normalise.push_back(nombre_avant);
+
+        lire_apres>>nombre_apres;
+        tab_apres_supp_normalise.push_back(nombre_apres);
+    }
+    float nombre;
+
+
+    std::cout<<"DIFFERENCE INDICE NON NORMALISE"<<std::endl<<std::endl;
+    for (size_t z=0;z<m_sommet.size();z++)
+    {
+        nombre=tab_avant_supp_non_normalise[z]-tab_apres_supp_non_normalise[z];
+
+        std::cout<<nombre<<std::endl;
+
+        if(tab_avant_supp_non_normalise[z]<tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z])
+            std::cout<<" ; l'indice a augmente avec la suppression"<<std::endl;
+        if(tab_avant_supp_non_normalise[z]>tab_apres_supp_non_normalise[z]&&nombre!=tab_avant_supp_non_normalise[z]&&tab_apres_supp_non_normalise[z]!=0)
+            std::cout<<" ; l'indice a baisse avec la suppression"<<std::endl;
+        if(tab_apres_supp_non_normalise[z]==0)
+            std::cout<<" ; l'indice du sommet est passe a 0 avec la suppression"<<std::endl;
+        if(nombre==0)
+            std::cout<<" ; l'indice est reste  pareil avec la suppression"<<std::endl;
+    }
+    std::cout<<std::endl;
+    std::cout<<" DIFFERENCE INDICE NORMALISE   "<<std::endl<<std::endl;
+    nombre=0;
+    for (size_t z=0;z<m_sommet.size();z++)
+    {
+        nombre=tab_avant_supp_normalise[z]-tab_apres_supp_normalise[z];
+
+        std::cout<<nombre<<std::endl;
+
+        if(tab_avant_supp_normalise[z]<tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z])
+            std::cout<<" ; l'indice a augmente avec la suppression"<<std::endl;
+        if(tab_avant_supp_normalise[z]>tab_apres_supp_normalise[z]&&nombre!=tab_avant_supp_normalise[z]&&tab_apres_supp_normalise[z]!=0)
+            std::cout<<" ; l'indice a baisse avec la suppression"<<std::endl;
+        if(tab_apres_supp_normalise[z]==0)
+            std::cout<<" ; l'indice du sommet est passe a 0 avec la suppression"<<std::endl;
+        if(nombre==0)
+            std::cout<<" ;l'indice est reste  pareil avec la suppression"<<std::endl;
+    }
+
 }

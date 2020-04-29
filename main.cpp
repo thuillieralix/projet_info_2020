@@ -55,6 +55,7 @@ int main()
                                                                     std::cout<<"ok fichier existe"<<std::endl;
                                                                         g.mettre_fichier_ponderation(fichier2);
                                                                         g.charger_nouveau_fichier_ponderation(fichier2);
+                                                                
                                                                 }
 
                                                                 std::cout << std::endl<< std::endl<< std::endl;
@@ -115,7 +116,8 @@ int main()
                                                                                 //refaire calcul indice degré
                                                                                 g.trouver_centralite_degres(2);
                                                                                 std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralité des degrés"<< std::endl;
-                                                                                g.comparer_valeurs_indice_degre();
+                                                                                //g.comparer_valeurs_indice_degre();
+                                                                                g.comparer_valeurs_indice();
                                                                                 break;
                                                                             }
                                                                         case 2:
@@ -128,8 +130,8 @@ int main()
 
                                                                                 g.trouver_indice_centralite_vecteur_propre(2);
 
-                                                                                g.comparer_valeurs_indice_vecteur_propre();
-
+                                                                                //g.comparer_valeurs_indice_vecteur_propre();
+                                                                                g.comparer_valeurs_indice();
                                                                                 break;
                                                                             }
                                                                         default:

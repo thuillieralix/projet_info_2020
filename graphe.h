@@ -37,8 +37,7 @@ public :
     void tester_connexite();
     void supprimer_arrete();
 
-    void comparer_valeurs_indice_degre();
-    void comparer_valeurs_indice_vecteur_propre();
+    void comparer_valeurs_indice();
 
     void mettre_fichier_topo(std::string fichier);
     void mettre_fichier_ponderation(std::string fichier);
