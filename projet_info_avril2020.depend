@@ -60,7 +60,7 @@
 	"Sommet.h"
 	"Arrete.h"
 
-1588084442 c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.h
+1588174319 c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.h
 	"Arrete.h"
 	<iostream>
 	<vector>
@@ -68,12 +68,13 @@
 	<string>
 	<math.h>
 
-1588084444 source:c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.cpp
+1588174448 source:c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.cpp
 	"Graphe.h"
 	"Sommet.h"
 	"Arrete.h"
+	"svgfile.h"
 
-1588084623 c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.h
+1588174587 c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.h
 	<iostream>
 	<vector>
 	<queue>
@@ -86,7 +87,7 @@
 	"Graphe.h"
 	"Sommet.h"
 
-1588084811 source:c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.cpp
+1588174319 source:c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.cpp
 	"Sommet.h"
 	"Arrete.h"
 

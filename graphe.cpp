@@ -7,13 +7,13 @@ Graphe::Graphe()
 {
     m_orientation = 0;
     m_ordre = 0;
- 
+
 }
 
 Graphe::Graphe(std::string fichier, std::string fichier2)
 {
     std::ifstream lire(fichier.c_str());
-    Svgfile svgout ; 
+    Svgfile svgout ;
     lire >> m_orientation;
     lire >> m_ordre;
     int sommet_x, sommet_y;
@@ -33,7 +33,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
     }
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
-    int x1, y1, x2, y2; 
+    int x1, y1, x2, y2;
 
     for(int i=0; i<m_taille; i++)
     {
@@ -51,14 +51,14 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_sommet[extremite_dep]->Ajouter_adj(m_sommet[extremite_ar]);
         m_sommet[extremite_ar]->Ajouter_adj(m_sommet[extremite_dep]);
         svgout.addLine(x1,y1,x2,y2,"black");
-      }
+    }
 
 
     std::ifstream lire2(fichier2.c_str());
     int m_nbre_arrete, poids;
 
     lire2>>m_nbre_arrete;
-    for (int y=0; y<m_nbre_arrete;y++)
+    for (int y=0; y<m_nbre_arrete; y++)
     {
         lire2>>indice;
 
@@ -118,17 +118,19 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     ///pour comparaison
     std::string fichier1;
     if (num_pour_comparer==1)
-        { //cas ou on a pas encore supprimé d'arrete
+    {
+        //cas ou on a pas encore supprimé d'arrete
 
-            fichier1="indice_sans_suppression.txt";
+        fichier1="indice_sans_suppression.txt";
 
-        }
+    }
     if (num_pour_comparer==2)
-        { //cas ou on a pas encore supprimé d'arrete
+    {
+        //cas ou on a pas encore supprimé d'arrete
 
-            fichier1="indice_avec_suppression.txt";
+        fichier1="indice_avec_suppression.txt";
 
-        }
+    }
 
     std::ofstream ecrire1(fichier1.c_str());
 
@@ -137,7 +139,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     float lambda;
     int somme_c_sommets=0;
 
-    for (size_t i=0;i<m_sommet.size();i++)//initialisation
+    for (size_t i=0; i<m_sommet.size(); i++) //initialisation
     {
         m_sommet[i]->mettre_indice_cvp_a_1();
         m_sommet[i]->ADJ_mettre_indice_cvp_a_1();
@@ -147,7 +149,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
 
     //faire
     std::cout<<"pour l'indice de centralite du vecteur propre NON NORMALISE : "<<std::endl;
-    for (size_t x=0;x<m_sommet.size();x++)//pour le calcul de lambda
+    for (size_t x=0; x<m_sommet.size(); x++) //pour le calcul de lambda
     {
         c=0;
         c=m_sommet[x]->calculer_somme_cvp_adj();
@@ -165,7 +167,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     int c2;
     std::vector<float> tableau_cvp;
     std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
-    for (size_t j=0;j<m_sommet.size();j++)//pour calcul cvp de chaque sommet
+    for (size_t j=0; j<m_sommet.size(); j++) //pour calcul cvp de chaque sommet
     {
         c2=0;
         c2=m_sommet[j]->calculer_somme_cvp_adj();
@@ -174,26 +176,28 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
         std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
         ecrire1<<cvp<<std::endl;
     }
-    for (size_t z=0;z<m_sommet.size();z++)//pour calcul cvp de chaque sommet
+    for (size_t z=0; z<m_sommet.size(); z++) //pour calcul cvp de chaque sommet
     {
-       m_sommet[z]->mettre_indice_cvp(tableau_cvp[z]);
+        m_sommet[z]->mettre_indice_cvp(tableau_cvp[z]);
     }
 }
 void Graphe::trouver_centralite_degres(int num_pour_comparer)
 {
     std::string fichier1;
     if (num_pour_comparer==1)
-        { //cas ou on a pas encore supprimé d'arrete
+    {
+        //cas ou on a pas encore supprimé d'arrete
 
-            fichier1="indice_sans_suppression.txt";
+        fichier1="indice_sans_suppression.txt";
 
-        }
+    }
     if (num_pour_comparer==2)
-        { //cas ou on a pas encore supprimé d'arrete
+    {
+        //cas ou on a pas encore supprimé d'arrete
 
-            fichier1="indice_avec_suppression.txt";
+        fichier1="indice_avec_suppression.txt";
 
-        }
+    }
 
     std::ofstream ecire1(fichier1.c_str());
 
@@ -202,17 +206,17 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
     float deg_max=0;
     std::cout<<"indice de degre non normalise : "<<std::endl;
 
-            ecire1<<"nonNormalise "<<std::endl;
+    ecire1<<"nonNormalise "<<std::endl;
 
 //    if (num_pour_comparer==2)
 //        { //cas ou on a pas encore supprimé d'arrete
 //
 //            ecire2<<"indice de degre non normalise "<<std::endl;
 //        }
-    for (size_t i=0; i<m_sommet.size();i++)
+    for (size_t i=0; i<m_sommet.size(); i++)
     {
         nb_degre=0;
-        for (size_t j=0;j<m_arrete.size();j++)
+        for (size_t j=0; j<m_arrete.size(); j++)
         {
             if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice())
             {
@@ -229,7 +233,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         }
         std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
 
-            ecire1<<nb_degre<<std::endl;
+        ecire1<<nb_degre<<std::endl;
 
 //        if (num_pour_comparer==2)
 //        { //cas ou on a pas encore supprimé d'arrete
@@ -245,17 +249,17 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
     float indice_deg=0.00;
     std::cout<<"indice normalise de degre : "<<std::endl;
 
-            ecire1<<"Normalise "<<std::endl;
+    ecire1<<"Normalise "<<std::endl;
 
 //    if (num_pour_comparer==2)
 //        { //cas ou on a pas encore supprimé d'arrete
 //
 //            ecire2<<"indice de degre normalise "<<std::endl;
 //        }
-    for (size_t x=0;x<m_sommet.size();x++)
+    for (size_t x=0; x<m_sommet.size(); x++)
     {
         nb_degre=0;
-        for (size_t z=0;z<m_arrete.size();z++)
+        for (size_t z=0; z<m_arrete.size(); z++)
         {
             if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
             {
@@ -269,7 +273,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         indice_deg=nb_degre/deg_max;
         std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
 
-            ecire1<<indice_deg<<std::endl;
+        ecire1<<indice_deg<<std::endl;
 
 //        if (num_pour_comparer==2)
 //        { //cas ou on a pas encore supprimé d'arrete
@@ -287,67 +291,69 @@ void Graphe::supprimer_arrete()
     int indice_arrete_a_supp;
     std::vector<int> tab_indices_arretes;
     int nb_test;
-    for (size_t j=0;j<m_arrete.size();j++)
-        {
-            tab_indices_arretes.push_back(m_arrete[j]->getIndice());
-        }
+    for (size_t j=0; j<m_arrete.size(); j++)
+    {
+        tab_indices_arretes.push_back(m_arrete[j]->getIndice());
+    }
     while (stop!=0)
     {
-            std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
-            std::cin>>supp_arrete;
+        std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
+        std::cin>>supp_arrete;
 
 
-            if (supp_arrete=="oui")
+        if (supp_arrete=="oui")
+        {
+            std::cout<<"quelle arrete ? mettre indice"<<std::endl;
+            std::cin>>indice_arrete_a_supp;
+
+            ///rajouter blindage
+            if (indice_arrete_a_supp<=m_arrete.size())
             {
-                std::cout<<"quelle arrete ? mettre indice"<<std::endl;
-                std::cin>>indice_arrete_a_supp;
-
-                ///rajouter blindage
-                if (indice_arrete_a_supp<=m_arrete.size())
+                for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {
-                     for (size_t x=0; x<tab_indices_arretes.size();x++)
+                    if (tab_indices_arretes[x]==indice_arrete_a_supp)
                     {
-                        if (tab_indices_arretes[x]==indice_arrete_a_supp)
+                        nb_test++;
+
+                        ///parcourir tableau adjacences pour enlever cette connexion
+                        int g=0,k=0;
+                        do
                         {
-                            nb_test++;
-
-                            ///parcourir tableau adjacences pour enlever cette connexion
-                                    int g=0,k=0;
-                                    do
-                                    {
-                                        g++;
-                                    } while (m_sommet[g]->getIndice()!=m_arrete[indice_arrete_a_supp]->getDepart());
-                                    do
-                                    {
-                                        k++;
-                                    }while (m_sommet[k]->getIndice()!=m_arrete[indice_arrete_a_supp]->getArrivee());
-
-                                    m_sommet[g]->supprimer_adjacence(m_sommet[k]->getIndice()); ///supp  adj
-                                    m_sommet[k]->supprimer_adjacence(m_sommet[g]->getIndice());
-
-                                    m_arrete.erase (m_arrete.begin()+(indice_arrete_a_supp));
-                       }
-                        if (nb_test==0)
-                        {
-                            std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
+                            g++;
                         }
+                        while (m_sommet[g]->getIndice()!=m_arrete[indice_arrete_a_supp]->getDepart());
+                        do
+                        {
+                            k++;
+                        }
+                        while (m_sommet[k]->getIndice()!=m_arrete[indice_arrete_a_supp]->getArrivee());
 
+                        m_sommet[g]->supprimer_adjacence(m_sommet[k]->getIndice()); ///supp  adj
+                        m_sommet[k]->supprimer_adjacence(m_sommet[g]->getIndice());
+
+                        m_arrete.erase (m_arrete.begin()+(indice_arrete_a_supp));
                     }
-                }
-                else
-                {
-                    std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
-                }
+                    if (nb_test==0)
+                    {
+                        std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
+                    }
 
-            }
-            else if (supp_arrete=="non")///si c'est non
-            {
-                stop=0;
+                }
             }
             else
             {
-                std::cout<<"saisie incorrecte, veuillez recommencer"<<std::endl;
+                std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
             }
+
+        }
+        else if (supp_arrete=="non")///si c'est non
+        {
+            stop=0;
+        }
+        else
+        {
+            std::cout<<"saisie incorrecte, veuillez recommencer"<<std::endl;
+        }
     }
 }
 
@@ -355,12 +361,12 @@ void Graphe::tester_connexite()
 {
     ///graphe connexe si pour chaque sommet, il y a une arrete
     int connexe_test=1;
-    for (size_t i=0;i<m_sommet.size();i++)
+    for (size_t i=0; i<m_sommet.size(); i++)
     {
         std::cout<<"i : "<<i<<std::endl;
         int nb_arrete;
         nb_arrete=0;
-        for (size_t j=0;j<m_arrete.size();j++)
+        for (size_t j=0; j<m_arrete.size(); j++)
         {
 
             if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice()||m_arrete[j]->getArrivee()==m_sommet[i]->getIndice())
@@ -385,7 +391,7 @@ void Graphe::charger_nouveau_fichier_ponderation(std::string fichier)
     int m_nbre_arrete, poids, indice;
 
     lire2>>m_nbre_arrete;
-    for (int y=0; y<m_nbre_arrete;y++)
+    for (int y=0; y<m_nbre_arrete; y++)
     {
         lire2>>indice;
 
@@ -483,7 +489,7 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
         // le numero du sommet courant dans la case précédent
         //pour accéder aux propriétés du sommet facilement on doit faire un sous programme propre à la classe sommet
         //std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
-        m_sommet[plusPetitSommet]->actualiserDijkstra( plusPetitSommet , tableau , m_arrete);
+        m_sommet[plusPetitSommet]->actualiserDijkstra( plusPetitSommet, tableau, m_arrete);
         plusPetitSommet = -1;
 
     }
@@ -510,7 +516,7 @@ void Graphe::comparer_valeurs_indice_degre()
     lire_avant>>ligne2;
 
     float nombre_avant, nombre_apres;
-    for (size_t i=0;i<m_sommet.size();i++)
+    for (size_t i=0; i<m_sommet.size(); i++)
     {
         lire_avant>>nombre_avant;
         tab_avant_supp_non_normalise.push_back(nombre_avant);
@@ -522,7 +528,7 @@ void Graphe::comparer_valeurs_indice_degre()
     lire_apres>>ligne;
     lire_avant>>ligne2;
 
-    for (size_t j=0;j<m_sommet.size();j++)
+    for (size_t j=0; j<m_sommet.size(); j++)
     {
         lire_avant>>nombre_avant;
         tab_avant_supp_normalise.push_back(nombre_avant);
@@ -532,7 +538,7 @@ void Graphe::comparer_valeurs_indice_degre()
     }
     float nombre;
     std::cout<<"difference indice degre non normalise"<<std::endl<<std::endl;
-    for (size_t z=0;z<m_sommet.size();z++)
+    for (size_t z=0; z<m_sommet.size(); z++)
     {
         nombre=tab_avant_supp_non_normalise[z]-tab_apres_supp_non_normalise[z];
 
@@ -550,7 +556,7 @@ void Graphe::comparer_valeurs_indice_degre()
     std::cout<<std::endl;
     std::cout<<"difference indice degre normalise"<<std::endl<<std::endl;
     nombre=0;
-    for (size_t z=0;z<m_sommet.size();z++)
+    for (size_t z=0; z<m_sommet.size(); z++)
     {
         nombre=tab_avant_supp_normalise[z]-tab_apres_supp_normalise[z];
 
@@ -586,7 +592,7 @@ void Graphe::comparer_valeurs_indice_vecteur_propre()
     lire_avant>>ligne2;
 
     float nombre_avant, nombre_apres;
-    for (size_t i=0;i<m_sommet.size();i++)
+    for (size_t i=0; i<m_sommet.size(); i++)
     {
         lire_avant>>nombre_avant;
         tab_avant_supp_non_normalise.push_back(nombre_avant);
@@ -598,7 +604,7 @@ void Graphe::comparer_valeurs_indice_vecteur_propre()
     lire_apres>>ligne;
     lire_avant>>ligne2;
 
-    for (size_t j=0;j<m_sommet.size();j++)
+    for (size_t j=0; j<m_sommet.size(); j++)
     {
         lire_avant>>nombre_avant;
         tab_avant_supp_normalise.push_back(nombre_avant);
@@ -608,7 +614,7 @@ void Graphe::comparer_valeurs_indice_vecteur_propre()
     }
     float nombre;
     std::cout<<"difference indice de vecteur propre non normalise"<<std::endl<<std::endl;
-    for (size_t z=0;z<m_sommet.size();z++)
+    for (size_t z=0; z<m_sommet.size(); z++)
     {
         nombre=tab_avant_supp_non_normalise[z]-tab_apres_supp_non_normalise[z];
 
@@ -626,7 +632,7 @@ void Graphe::comparer_valeurs_indice_vecteur_propre()
     std::cout<<std::endl;
     std::cout<<"difference indice degre normalise"<<std::endl<<std::endl;
     nombre=0;
-    for (size_t z=0;z<m_sommet.size();z++)
+    for (size_t z=0; z<m_sommet.size(); z++)
     {
         nombre=tab_avant_supp_normalise[z]-tab_apres_supp_normalise[z];
 
