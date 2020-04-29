@@ -13,7 +13,7 @@ Graphe::Graphe()
 Graphe::Graphe(std::string fichier, std::string fichier2)
 {
     std::ifstream lire(fichier.c_str());
-
+    Svgfile svgout ; 
     lire >> m_orientation;
     lire >> m_ordre;
     int sommet_x, sommet_y;
@@ -29,10 +29,11 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_sommet.push_back(s);
         svgout.addCross(sommet_x,sommet_y,5,"red");
         svgout.addGrid() ;
+
     }
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
-
+    int x1, y1, x2, y2; 
 
     for(int i=0; i<m_taille; i++)
     {
@@ -50,7 +51,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_sommet[extremite_dep]->Ajouter_adj(m_sommet[extremite_ar]);
         m_sommet[extremite_ar]->Ajouter_adj(m_sommet[extremite_dep]);
         svgout.addLine(x1,y1,x2,y2,"black");
-    }
+      }
 
 
     std::ifstream lire2(fichier2.c_str());
@@ -65,6 +66,31 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_arrete[indice]->mettre_poids(poids);
     }
 }
+
+/*
+void Graphe::dessiner_graphe(std::string fichier)
+{
+    Svgfile svgout ;
+    std::ifstream lire(fichier.c_str());
+    Sommet*s ;
+    int x1, y1, x2, y2 ;
+
+    for (int i =0;i<m_ordre; i++ )
+    {
+        svgout.addCross(s->m_x,s->m_y,5,"red");
+        svgout.addGrid() ;
+    }
+    for(int i=0; i<m_taille; i++)
+    {
+        lire >> x1 ;
+        lire >> y1 ;
+        lire >> x2 ;
+        lire >> y2 ;
+        svgout.addLine(x1,y1,x2,y2,"black");
+    }
+}*/
+
+
 Graphe::~Graphe()
 { }
 void Graphe::afficher()

@@ -68,6 +68,8 @@ int main()
 ////
 
                                             g.charger_nouveau_fichier_ponderation(fichier2);
+                                            //g.dessiner_graphe(fichier2);
+
                                         }
                                         else
                                         {
