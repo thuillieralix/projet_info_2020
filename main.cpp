@@ -39,7 +39,7 @@ int main()
                                                     std::cout << " 4: tester la connexite du graphe" << std::endl;
                                                     std::cout << " 5: afficher composantes graphe " << std::endl;
                                                     std::cout << " 6: quitter" << std::endl<< std::endl;
-                                                    std::cout << " 7: comparer indice degre" << std::endl<< std::endl;
+                                                    std::cout << " 7: comparer indice (choix de quel indice apres)" << std::endl<< std::endl;
                                                     std::cin>>choix;
                                                     std::cout << std::endl<< std::endl<< std::endl;
                                                     switch (choix)
