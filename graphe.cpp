@@ -1,6 +1,7 @@
 #include "Graphe.h"
 #include "Sommet.h"
 #include "Arrete.h"
+#include "svgfile.h"
 
 Graphe::Graphe()
 {
