@@ -22,6 +22,7 @@ public :
     Graphe(std::string fichier,std::string fichier2);
     ~Graphe();
     void afficher();
+    //void dessiner_graphe(std::string fichier) ;
     void trouver_indice_centralite_vecteur_propre();
     void trouver_centralite_degres();
 
