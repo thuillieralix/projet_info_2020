@@ -6,7 +6,7 @@ Graphe::Graphe()
 {
     m_orientation = 0;
     m_ordre = 0;
-    m_taille = 0;
+ 
 }
 
 Graphe::Graphe(std::string fichier, std::string fichier2)
