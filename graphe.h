@@ -39,6 +39,8 @@ public :
 
     void comparer_valeurs_indice_degre();
     void comparer_valeurs_indice_vecteur_propre();
+
+
 };
 
 
