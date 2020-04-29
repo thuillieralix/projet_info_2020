@@ -1,12 +1,13 @@
 #include "Graphe.h"
 #include "Sommet.h"
 #include "Arrete.h"
+#include "svgfile.h"
 
 Graphe::Graphe()
 {
     m_orientation = 0;
     m_ordre = 0;
-    m_taille = 0;
+ 
 }
 
 Graphe::Graphe(std::string fichier, std::string fichier2)
@@ -26,6 +27,8 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         lire >> sommet_y;
         Sommet* s = new Sommet(m_indice, m_nom,sommet_x,sommet_y);
         m_sommet.push_back(s);
+        svgout.addCross(sommet_x,sommet_y,5,"red");
+        svgout.addGrid() ;
     }
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
@@ -36,12 +39,17 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         lire >> indice;
         lire >> extremite_dep;
         lire >> extremite_ar;
+        lire >> x1 ;
+        lire >> y1 ;
+        lire >> x2 ;
+        lire >> y2 ;
 
         ///faire adjacence
         Arrete* a=new Arrete(extremite_dep,extremite_ar,indice);
         m_arrete.push_back(a);
         m_sommet[extremite_dep]->Ajouter_adj(m_sommet[extremite_ar]);
         m_sommet[extremite_ar]->Ajouter_adj(m_sommet[extremite_dep]);
+        svgout.addLine(x1,y1,x2,y2,"black");
     }
 
 
