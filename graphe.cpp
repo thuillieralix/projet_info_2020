@@ -7,6 +7,9 @@ Graphe::Graphe()
 {
     m_orientation = 0;
     m_ordre = 0;
+    m_taille = 0;
+    fichier_topologie=" ";
+    fichier_ponderation=" ";
 
 }
 
@@ -648,4 +651,22 @@ void Graphe::comparer_valeurs_indice_vecteur_propre()
             std::cout<<" ;l'indice de vecteur propre est reste  pareil avec la suppression"<<std::endl;
     }
 
+}
+
+void Graphe::mettre_fichier_topo(std::string fichier)
+{
+    fichier_topologie=fichier;
+
+}
+void Graphe::mettre_fichier_ponderation(std::string fichier)
+{
+    fichier_ponderation=fichier;
+}
+std::string Graphe::getFichierTopo()
+{
+    return fichier_topologie;
+}
+std::string Graphe::getFichierPonderation()
+{
+    return fichier_ponderation;
 }
