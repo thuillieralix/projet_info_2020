@@ -433,6 +433,7 @@ void Graphe::centralite_de_proximite()
     }
     numerateur = getOrdre() - 1;
 
+    std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " << 1<<'/'<<denominateur<< '\n';
     std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << numerateur<<'/'<<denominateur<< '\n';
 }
 
