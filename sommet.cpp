@@ -115,3 +115,14 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
         }
     }
 }
+
+void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
+{
+    for(size_t i=0;i<m_adjacent.size();i++)
+    {
+        if (m_adjacent[i]->getIndice()==indice_arrivee_arrete_a_supp)
+        {
+            m_adjacent.erase(m_adjacent.begin()+i);
+        }
+    }
+}
