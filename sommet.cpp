@@ -87,7 +87,7 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
         if(m_adjacent[i] != nullptr)
         {
             //on doit d'abord trouver les arretes correspondant aux sommets adjacents
-            for(int j=0 ; j<tab_arrete.size() ; ++j)
+            for(unsigned int j=0 ; j<tab_arrete.size() ; ++j)
             {
                 //si les 2 extrmités sont trouvés pour une arrete
                 if ((m_adjacent[i]->getIndice() == tab_arrete[j]->getDepart()) || (m_indice == tab_arrete[j]->getDepart()))
@@ -127,7 +127,7 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
         if(m_adjacent[i] != nullptr)
         {
             //on doit d'abord trouver les arretes correspondant aux sommets adjacents
-            for(int j=0 ; j<tab_arrete.size() ; ++j)
+            for(unsigned int j=0 ; j<tab_arrete.size() ; ++j)
             {
                 //si les 2 extrmités sont trouvés pour une arrete
                 if ((m_adjacent[i]->getIndice() == tab_arrete[j]->getDepart()) || (m_indice == tab_arrete[j]->getDepart()))
@@ -156,7 +156,7 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
             if((tableau[m_adjacent[i]->getIndice()][0][1] = tableau[plusPetitSommet][0][1] + poidsArreteI) || tableau[m_adjacent[i]->getIndice()][0][1] == -1 )
             {
                 //on met le numero, le poids et le predecesseur dans la case correspondante tableau
-                tableau[m_adjacent[i]->getIndice()] =push_back( { 0 , tableau[plusPetitSommet][1] + poidsArreteI , plusPetitSommet } );
+                tableau[m_adjacent[i]->getIndice()].push_back( { 0 , tableau[plusPetitSommet][0][1] + poidsArreteI , plusPetitSommet } );
                 //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
                 //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
             }

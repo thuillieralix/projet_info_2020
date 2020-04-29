@@ -2,6 +2,7 @@
 #include "Sommet.h"
 #include "Arrete.h"
 
+
 Graphe::Graphe()
 {
     m_orientation = 0;
@@ -398,13 +399,19 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
     //on prendra la premiere case de la seconde dimension du vector pour stocker les etats, les distances ,et les prédecesseurs
     //on prendra 0 pour un sommet en cours de découverte et 1 pour un sommet complètement découvert
     // une valeur négative représentera une distance infinie ou une absence de prédecesseurs
+
+    //initialisation du tableau
     for( int i=0 ; i<m_ordre ; ++i)
     {
-        resDijkstra[i][0].push_back({0,-1,-1});
+        resDijkstra.push_back(std::vector<std::vector<int>>());
+        resDijkstra[i].push_back({0,-1,-1});
     }
-    resDijkstra[depart][0] = {0,0,-1};
+    //affichage tableau
+    std::cout << "largeur/hauteur/profondeur" << resDijkstra.size()<<'/' << resDijkstra[0].size()<<'/' << resDijkstra[0][0].size() << '\n';
+
+    resDijkstra[sommetDepart][0] = {0,0,-1};
     //le plus petit sommet est est celui de sommetDepart
-    plusPetitSommet = depart;
+    plusPetitSommet = sommetDepart;
     //on peut mettre maintenant en palce une boucle contenant la partie répétitive de l'algorithme de dijkstra
     //la boucle s'arrète quand on a exploré tous les sommets
     while(comptSommets != m_ordre)
@@ -414,7 +421,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
         for( int i=0 ; i < m_ordre ; ++i)
         {
             //std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
-            if(plusPetitSommet == -1 && tableau[i][0][0] == 0 && tableau[i][0][1] > 0)
+            if(plusPetitSommet == -1 && resDijkstra[i][0][0] == 0 && resDijkstra[i][0][1] > 0)
             {
                 plusPetitSommet = i;
             }
@@ -423,7 +430,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
             {
                 //sinon on regarde si la valeur de la case i est plus petite
                 //la valeur doit etre positive sinon elle est non découverte
-                if((tableau[plusPetitSommet][0][1] > tableau[i][0][1]) && (tableau[i][0][1] > 0) && (tableau[i][0][0] != 1) )
+                if((resDijkstra[plusPetitSommet][0][1] > resDijkstra[i][0][1]) && (resDijkstra[i][0][1] > 0) && (resDijkstra[i][0][0] != 1) )
                 {
                     plusPetitSommet = i;
                 }
@@ -431,7 +438,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
 
         }
         //std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
-        tableau[plusPetitSommet][0][0] = 1;
+        resDijkstra[plusPetitSommet][0][0] = 1;
         ++comptSommets;
         //on marque le sommet explore
         //on cherche les successeurs du plus sommet a la plus petite arrete
@@ -441,7 +448,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
         // le numero du sommet courant dans la case précédent
         //pour accéder aux propriétés du sommet facilement on doit faire un sous programme propre à la classe sommet
         //std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
-        m_sommet[plusPetitSommet]->actualiserDijkstra_inter( plusPetitSommet , tableau , m_arrete);
+        m_sommet[plusPetitSommet]->actualiserDijkstra_inter( plusPetitSommet , resDijkstra , m_arrete);
         plusPetitSommet = -1;
     }
 }

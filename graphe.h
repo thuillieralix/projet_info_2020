@@ -32,6 +32,8 @@ public :
     void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
     void centralite_de_proximite();
 
+    void centralite_intermediarite();
+
 
     void tester_connexite();
     void supprimer_arrete();

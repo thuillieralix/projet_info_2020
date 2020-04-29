@@ -42,14 +42,15 @@ int main()
                         while (stop!=0)
                         {
                             std::cout << "Que voulez-vous faire ?" << std::endl;
-                            std::cout << " 0: changer fichier pondération " << std::endl;
+                            std::cout << " 0: changer fichier ponderation " << std::endl;
                             std::cout << " 1: trouver indice de centralite de degre " << std::endl;
                             std::cout << " 2: trouver indice de centralite vecteur propre" << std::endl;
                             std::cout << " 3: supprimer une arrete" << std::endl;
                             std::cout << " 4: tester la connexite du graphe" << std::endl;
                             std::cout << " 5: afficher composantes graphe " << std::endl;
-                            std::cout << " 6: trouver l'indice de proximité d'un sommet" << std::endl;
-                            std::cout << " 7: quitter" << std::endl<< std::endl;
+                            std::cout << " 6: trouver l'indice de proximite d'un sommet" << std::endl;
+                            std::cout << " 7: trouver l'indice d'intermediarite d'un sommet"<<std::endl;
+                            std::cout << " 8: quitter" << std::endl<< std::endl;
                             std::cin>>choix;
                             std::cout << std::endl<< std::endl<< std::endl;
                             switch (choix)
@@ -109,6 +110,10 @@ int main()
                                     std::cout << std::endl<< std::endl<< std::endl;
 
                                 case 7:
+                                    g.centralite_intermediarite();
+                                    std::cout << std::endl<< std::endl<< std::endl;
+
+                                case 8:
                                     stop=0;
                                 break;
 
