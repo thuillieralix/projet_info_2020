@@ -166,7 +166,7 @@ int main()
 
                                 case 8:
                                     stop=0;
-                                    break;
+                                break;
 
                                 default:
                                     std::cout << "Erreur de saisie, il faut recommencer" << std::endl;

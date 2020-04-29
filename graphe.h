@@ -7,6 +7,7 @@
 #include <fstream>
 #include "Sommet.h"
 #include "Arrete.h"
+#include <math.h>
 
 class Graphe
 {
@@ -23,7 +24,7 @@ public :
     ~Graphe();
     void afficher();
     //void dessiner_graphe(std::string fichier) ;
-    void trouver_indice_centralite_vecteur_propre();
+    void trouver_indice_centralite_vecteur_propre(int num_pour_comparer);
     void trouver_centralite_degres(int num_pour_comparer);
 
     void charger_nouveau_fichier_ponderation(std::string fichier);
