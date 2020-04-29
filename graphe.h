@@ -23,6 +23,20 @@ public :
     ~Graphe();
     void afficher();
 
+<<<<<<< Updated upstream
+=======
+    void charger_nouveau_fichier_ponderation(std::string fichier);
+    int getOrdre();
+
+    std::vector<std::vector<int>> dijkstra(int depart);
+    void centralite_de_proximite();
+
+
+    void tester_connexite();
+    void supprimer_arrete();
+
+    void Dijkstra_intermediarite(int depart, int arrivee);
+>>>>>>> Stashed changes
 };
 
 

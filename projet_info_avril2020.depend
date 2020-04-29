@@ -36,3 +36,125 @@
 	"Sommet.h"
 	"Arrete.h"
 
+<<<<<<< Updated upstream
+=======
+1587982258 source:c:\users\marc\onedrive\documents\github\projet_info_2020\arrete.cpp
+	"Arrete.h"
+
+1588083269 D
+
+1588083759 c:\users\marc\onedrive\documents\github\projet_info_2020\arrete.h
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+
+1588081436 c-centralite-de-proximite
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+	<math.h>
+	"Sommet.h"
+	"Arrete.h"
+
+1588084442 c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.h
+	"Arrete.h"
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+	<math.h>
+
+1588084444 source:c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.cpp
+	"Graphe.h"
+	"Sommet.h"
+	"Arrete.h"
+
+1588084623 c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.h
+	<iostream>
+	<vector>
+	<queue>
+	<fstream>
+	"Sommet.h"
+	"Arrete.h"
+
+1588085136 source:c:\users\marc\onedrive\documents\github\projet_info_2020\main.cpp
+	<iostream>
+	"Graphe.h"
+	"Sommet.h"
+
+1588084811 source:c:\users\marc\onedrive\documents\github\projet_info_2020\sommet.cpp
+	"Sommet.h"
+	"Arrete.h"
+
+1587996337 source:c:\users\marc\onedrive\documents\github\projet_info_2020\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+	"svgfile.h"
+	<iostream>
+	<sstream>
+
+1587998661 c:\users\marc\onedrive\documents\github\projet_info_2020\svgfile.h
+	<string>
+	<fstream>
+	<set>
+	<string>
+	<fstream>
+	<set>
+
+1588068562 source:c:\users\alix\documents\github\projet_info_2020\arrete.cpp
+	"Arrete.h"
+
+1588110021 c:\users\alix\documents\github\projet_info_2020\arrete.h
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+
+1588152622 source:c:\users\alix\documents\github\projet_info_2020\graphe.cpp
+	"Graphe.h"
+	"Sommet.h"
+	"Arrete.h"
+
+1588150680 c:\users\alix\documents\github\projet_info_2020\graphe.h
+	<iostream>
+	<vector>
+	<queue>
+	<fstream>
+	"Sommet.h"
+	"Arrete.h"
+
+1588152365 c:\users\alix\documents\github\projet_info_2020\sommet.h
+	"Arrete.h"
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+	<math.h>
+
+1588110021 source:c:\users\alix\documents\github\projet_info_2020\main.cpp
+	<iostream>
+	"Graphe.h"
+	"Sommet.h"
+
+1588110021 source:c:\users\alix\documents\github\projet_info_2020\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+
+1587999860 c:\users\alix\documents\github\projet_info_2020\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1588152365 source:c:\users\alix\documents\github\projet_info_2020\sommet.cpp
+	"Sommet.h"
+	"Arrete.h"
+
+>>>>>>> Stashed changes
