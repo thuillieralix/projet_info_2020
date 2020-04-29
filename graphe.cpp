@@ -170,11 +170,18 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     int c2;
     std::vector<float> tableau_cvp;
     std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
+    float dlambda=0;
     for (size_t j=0; j<m_sommet.size(); j++) //pour calcul cvp de chaque sommet
     {
         c2=0;
         c2=m_sommet[j]->calculer_somme_cvp_adj();
-        cvp=c2/lambda;
+        dlambda=dlambda-c2;
+        int nb_div;
+        nb_div=(10)^(-2);
+        if (dlambda>nb_div)
+            cvp=c2/lambda;
+        else
+            cvp=c2;
         tableau_cvp.push_back(cvp);
         std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
         ecrire1<<cvp<<std::endl;
