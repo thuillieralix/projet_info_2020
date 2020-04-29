@@ -52,7 +52,6 @@ int main()
                                                                     std::cout<<"quel est le nom du fichier de ponderation ? mettre le.txt à la fin"<<std::endl;
                                                                     std::cin>>fichier2;
                                                                     saisie_nouv_fichier=1;
-                                                                    std::cout<<"ok fichier existe"<<std::endl;
                                                                         g.mettre_fichier_ponderation(fichier2);
                                                                         g.charger_nouveau_fichier_ponderation(fichier2);
 
@@ -115,7 +114,7 @@ int main()
                                                                                 g.supprimer_arrete();
                                                                                 //refaire calcul indice degré
                                                                                 g.trouver_centralite_degres(2);
-                                                                                std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralité des degrés"<< std::endl;
+                                                                                std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralite des degres"<< std::endl;
                                                                                 //g.comparer_valeurs_indice_degre();
                                                                                 g.comparer_valeurs_indice();
                                                                                 break;
