@@ -39,7 +39,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
     int x1, y1, x2, y2;
-    int ymax=0,xmax=0;
+    float ymax=0,xmax=0;
     for (size_t g=0;g<m_sommet.size();g++)
     {
         if (m_sommet[g]->get_x()>xmax)
@@ -51,7 +51,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
             ymax=m_sommet[g]->get_y();
         }
     }
-    int agrandireX, agrandireY;
+    float  agrandireX, agrandireY;
     agrandireX=900/xmax;
     agrandireY=800/ymax;
     std::string tmp;
