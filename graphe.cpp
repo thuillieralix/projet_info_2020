@@ -171,6 +171,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     std::vector<float> tableau_cvp;
     std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
     float dlambda=0;
+    std::vector<float> tab_indice_degre_NORMALISE;
     for (size_t j=0; j<m_sommet.size(); j++) //pour calcul cvp de chaque sommet
     {
         c2=0;
@@ -184,11 +185,119 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
             cvp=c2;
         tableau_cvp.push_back(cvp);
         std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
+        tab_indice_degre_NORMALISE.push_back(cvp);
         ecrire1<<cvp<<std::endl;
     }
     for (size_t z=0; z<m_sommet.size(); z++) //pour calcul cvp de chaque sommet
     {
         m_sommet[z]->mettre_indice_cvp(tableau_cvp[z]);
+    }
+    if (num_pour_comparer==3)
+    {
+            Svgfile svgout;
+            svgout.addGrid() ;
+            int ymax=0,xmax=0;
+            for (size_t g=0;g<m_sommet.size();g++)
+            {
+                if (m_sommet[g]->get_x()>xmax)
+                {
+                    xmax=m_sommet[g]->get_x();
+                }
+                if (m_sommet[g]->get_y()>ymax)
+                {
+                    ymax=m_sommet[g]->get_y();
+                }
+            }
+            int agrandireX, agrandireY;
+            agrandireX=900/xmax;
+            agrandireY=800/ymax;
+            std::string tmp;
+            ///on dessine dans svgout
+             float max1=0, max2=0,max3=0;
+             std::cout<<"size tab : "<<tab_indice_degre_NORMALISE.size()<<std::endl;
+             for (size_t m=0;m<tab_indice_degre_NORMALISE.size();m++)
+             {
+                 std::cout<< "voici le tab indice de vecteur propre indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
+             }
+
+            for (size_t i=0;i<tab_indice_degre_NORMALISE.size();i++)
+            {
+                if (tab_indice_degre_NORMALISE[i]>max3)
+                {
+                    max1=max2;
+                    max2=max3;
+                    max3=tab_indice_degre_NORMALISE[i];
+                    std::cout<<"1"<<std::endl;
+                }
+                else if (tab_indice_degre_NORMALISE[i]<max3&&tab_indice_degre_NORMALISE[i]>max2)
+                {
+                    max1=max2;
+                    //std::swap(max1,max2);
+                    max2=tab_indice_degre_NORMALISE[i];
+                     std::cout<<"2"<<std::endl;
+                }
+                else if (tab_indice_degre_NORMALISE[i]<max2&&tab_indice_degre_NORMALISE[i]>max1)
+                {
+                    max1=tab_indice_degre_NORMALISE[i];
+                     std::cout<<"3"<<std::endl;
+                }
+            }
+            std::cout<<"max3 final : "<<max3<<std::endl;
+            std::cout<<"max2 final : "<<max2<<std::endl;
+            std::cout<<"max1 final : "<<max1<<std::endl;
+            for(size_t h=0;h<tab_indice_degre_NORMALISE.size();h++)
+            {
+                if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
+                {
+                    std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"red");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indVec = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max3, "black");
+                }
+                if(tab_indice_degre_NORMALISE[h]==max2)
+                {
+                    std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"orange");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indVec = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                }
+                if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
+                {
+                    std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"yellow");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indVec = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max1, "black");
+                }
+            }
+
+            for (size_t d=0; d<m_sommet.size();d++)
+            {
+                //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
+
+                tmp=m_sommet[d]->getNom();
+                svgout.addText(m_sommet[d]->get_x()*agrandireX -35, m_sommet[d]->get_y()*agrandireY-35, tmp, "black");
+
+            }
+            int extremite_dep,extremite_ar,indice;
+            for(int i=0; i<m_taille; i++)
+            {
+                extremite_dep=m_arrete[i]->getDepart();
+                extremite_ar=m_arrete[i]->getArrivee();
+                indice =m_arrete[i]->getIndice();
+
+                svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX-50,m_sommet[extremite_dep]->get_y()*agrandireY-50
+                               ,m_sommet[extremite_ar]->get_x()*agrandireX-50,m_sommet[extremite_ar]->get_y()*agrandireY-50,"black");
+                int x_poids, y_poids;
+                int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX-50);
+                int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY-50);
+                int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX-50);
+                int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY-50);
+                x_poids=x_dep+(x_ar-x_dep)/2;
+                y_poids=y_dep+(y_ar-y_dep)/2-20;
+                svgout.addText(x_poids, y_poids, indice, "blue");
+
+            }
+
     }
 }
 void Graphe::trouver_centralite_degres(int num_pour_comparer)
@@ -217,12 +326,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
     std::cout<<"indice de degre non normalise : "<<std::endl;
 
     ecire1<<"nonNormalise "<<std::endl;
-
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre non normalise "<<std::endl;
-//        }
     for (size_t i=0; i<m_sommet.size(); i++)
     {
         nb_degre=0;
@@ -244,13 +347,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
 
         ecire1<<nb_degre<<std::endl;
-
-//        if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<nb_degre<<std::endl;
-//        }
-
     }
     std::cout<<std::endl<<std::endl<<std::endl;
     std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
@@ -261,11 +357,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
 
     ecire1<<"Normalise "<<std::endl;
 
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre normalise "<<std::endl;
-//        }
+    std::vector<float> tab_indice_degre_NORMALISE;
     for (size_t x=0; x<m_sommet.size(); x++)
     {
         nb_degre=0;
@@ -281,16 +373,123 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
             }
         }
         indice_deg=nb_degre/deg_max;
+        tab_indice_degre_NORMALISE.push_back(indice_deg);
         std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
 
         ecire1<<indice_deg<<std::endl;
-
-//        if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<indice_deg<<std::endl;
-//        }
     }
+
+    if (num_pour_comparer==3)
+    {
+            Svgfile svgout;
+            svgout.addGrid() ;
+            int ymax=0,xmax=0;
+            for (size_t g=0;g<m_sommet.size();g++)
+            {
+                if (m_sommet[g]->get_x()>xmax)
+                {
+                    xmax=m_sommet[g]->get_x();
+                }
+                if (m_sommet[g]->get_y()>ymax)
+                {
+                    ymax=m_sommet[g]->get_y();
+                }
+            }
+            int agrandireX, agrandireY;
+            agrandireX=900/xmax;
+            agrandireY=800/ymax;
+            std::string tmp;
+            ///on dessine dans svgout
+             float max1=0, max2=0,max3=0;
+             std::cout<<"size tab : "<<tab_indice_degre_NORMALISE.size()<<std::endl;
+             for (size_t m=0;m<tab_indice_degre_NORMALISE.size();m++)
+             {
+                 std::cout<< "voici le tab indice de degré indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
+             }
+
+            for (size_t i=0;i<tab_indice_degre_NORMALISE.size();i++)
+            {
+                if (tab_indice_degre_NORMALISE[i]>max3)
+                {
+                    max1=max2;
+                    max2=max3;
+                    max3=tab_indice_degre_NORMALISE[i];
+                    std::cout<<"1"<<std::endl;
+                }
+                else if (tab_indice_degre_NORMALISE[i]<max3&&tab_indice_degre_NORMALISE[i]>max2)
+                {
+                    max1=max2;
+                    //std::swap(max1,max2);
+                    max2=tab_indice_degre_NORMALISE[i];
+                     std::cout<<"2"<<std::endl;
+                }
+                else if (tab_indice_degre_NORMALISE[i]<max2&&tab_indice_degre_NORMALISE[i]>max1)
+                {
+                    max1=tab_indice_degre_NORMALISE[i];
+                     std::cout<<"3"<<std::endl;
+                }
+            }
+            std::cout<<"max3 final : "<<max3<<std::endl;
+            std::cout<<"max2 final : "<<max2<<std::endl;
+            std::cout<<"max1 final : "<<max1<<std::endl;
+            for(size_t h=0;h<tab_indice_degre_NORMALISE.size();h++)
+            {
+                if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
+                {
+                    std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"red");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max3, "black");
+                }
+                if(tab_indice_degre_NORMALISE[h]==max2)
+                {
+                    std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"orange");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                }
+                if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
+                {
+                    std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"yellow");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max1, "black");
+                }
+            }
+
+        for (size_t d=0; d<m_sommet.size();d++)
+            {
+                //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
+
+                tmp=m_sommet[d]->getNom();
+                svgout.addText(m_sommet[d]->get_x()*agrandireX -35, m_sommet[d]->get_y()*agrandireY-35, tmp, "black");
+
+            }
+        int extremite_dep,extremite_ar,indice;
+        for(int i=0; i<m_taille; i++)
+            {
+                extremite_dep=m_arrete[i]->getDepart();
+                extremite_ar=m_arrete[i]->getArrivee();
+                indice =m_arrete[i]->getIndice();
+
+                svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX-50,m_sommet[extremite_dep]->get_y()*agrandireY-50
+                               ,m_sommet[extremite_ar]->get_x()*agrandireX-50,m_sommet[extremite_ar]->get_y()*agrandireY-50,"black");
+                int x_poids, y_poids;
+                int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX-50);
+                int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY-50);
+                int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX-50);
+                int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY-50);
+                x_poids=x_dep+(x_ar-x_dep)/2;
+                y_poids=y_dep+(y_ar-y_dep)/2-20;
+                svgout.addText(x_poids, y_poids, indice, "blue");
+
+            }
+//
+//        std::string phrase;
+//            phrase="en rouge : indice degré le + haut";
+//            svgout.addText(600, 100, phrase, "black");
+
+        }
 }
 
 

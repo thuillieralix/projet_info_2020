@@ -42,6 +42,8 @@ int main()
         std::cout << " 6: quitter" << std::endl<< std::endl;
         std::cout << " 7: comparer indice (choix de quel indice apres)" << std::endl;
         std::cout << " 8: centralite de proximite" << std::endl;
+        std::cout << " 9: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
+        std::cout << " 10: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -148,6 +150,14 @@ int main()
         case 8:
             g.centralite_de_proximite();
             std::cout << std::endl<< std::endl<< std::endl;
+            break;
+        
+        case 9:
+            g.trouver_centralite_degres(3);
+            break;
+
+        case 10:
+            g.trouver_indice_centralite_vecteur_propre(3);
             break;
 
         default:
