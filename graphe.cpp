@@ -29,6 +29,8 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         lire >> m_nom;
         lire >> sommet_x;
         lire >> sommet_y;
+        sommet_x=sommet_x*100;
+        sommet_y=sommet_y*100;
         Sommet* s = new Sommet(m_indice, m_nom,sommet_x,sommet_y);
         m_sommet.push_back(s);
 
