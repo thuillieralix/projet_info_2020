@@ -126,3 +126,12 @@ void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
         }
     }
 }
+
+int Sommet::get_x()
+{
+    return m_x;
+}
+int Sommet::get_y()
+{
+    return m_y;
+}
