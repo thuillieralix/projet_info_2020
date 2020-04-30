@@ -89,7 +89,7 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
         {
             std::cout << "arrete seeker" << '\n';
             //on doit d'abord trouver les arretes correspondant aux sommets adjacents
-            for(int j=0 ; j<tab_arrete.size() ; ++j)
+            for(unsigned int j=0 ; j<tab_arrete.size() ; ++j)
             {
                 //si les 2 extrmités sont trouvés pour une arrete
                 if ((m_adjacent[i]->getIndice() == tab_arrete[j]->getDepart()) || (m_indice == tab_arrete[j]->getDepart()))
@@ -132,4 +132,40 @@ void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
             m_adjacent.erase(m_adjacent.begin()+i);
         }
     }
+}
+
+//partie du dfs propre a la classe sommet
+void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence)
+{
+    //recursif pour les sommets
+    //passe le sommet parcouru a gris
+    temoinParcours[m_indice] = 1;
+    //il ajoute le sommet actuel a la pile
+    pile.push_front(m_indice);
+    resultat.push_back(m_indice);
+    //affichage de la liste actuelle
+    if(!silence)
+    {
+        for(unsigned int j=0 ; j<pile.size() ; ++j)
+        {
+            std::cout << "--" << pile[j];
+        }
+        std::cout<<std::endl;
+    }
+
+    //on explore les suivants si ils sont "blancs"cad non explorés
+    for(unsigned int i=0 ; i<m_adjacent.size() ; ++i)
+    {
+        if(m_adjacent[i] != nullptr)
+        {
+            if(temoinParcours[m_adjacent[i]->getIndice()] == 0)
+            {
+                m_adjacent[i]->parcoursDFS(pile,temoinParcours,resultat,silence);
+            }
+        }
+    }
+    //passe a noir
+    temoinParcours[m_indice] = 2;
+    //enlève le premier element de la pile car c'est celui parcouru : il n'a plus de successeur non exploré
+    pile.pop_front();
 }

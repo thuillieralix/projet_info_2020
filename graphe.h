@@ -46,6 +46,9 @@ public :
     std::string getFichierTopo();
     std::string getFichierPonderation();
 
+    void composantesConnexe();
+    void dfspath(int sommet_number, std::deque<int>& resultat, bool silence);
+
 
 };
 

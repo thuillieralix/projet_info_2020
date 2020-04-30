@@ -432,14 +432,19 @@ void Graphe::centralite_de_proximite()
     //calcul de la centralité de proximité
     int numerateur = 0;
     int denominateur = 0;
+    //pour trouver les sommets composante connexe concernée
+    std::deque<int> resultat;
 
-    //le dénominateur est la somme des distances du point de départ
+    dfspath(sommetDepart, resultat,1);
+
+    //le dénominateur est la somme des distances du point de départ sans compter ceux qui sont hors composante connexe
     for(unsigned int i=0 ; i < resDijkstra.size() ; ++i)
     {
         if(resDijkstra[i][1] > 0)
         {denominateur = denominateur + resDijkstra[i][1];}
     }
-    numerateur = getOrdre() - 1;
+    //nbr de sommets de la composante connexe - le sommet concerne
+    numerateur = resultat.size() - 1;
 
     std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " << 1<<'/'<<denominateur<< '\n';
     std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << numerateur<<'/'<<denominateur<< '\n';
@@ -617,4 +622,64 @@ void Graphe::comparer_valeurs_indice()
             std::cout<<" ;l'indice est reste  pareil avec la suppression"<<std::endl;
     }
 
+}
+
+///sert a avoir toutes les composantes connexes d'un graphe
+void Graphe::composantesConnexe()
+{
+    std::cout<<"\n recherche de composantes connexes"<<std::endl;
+    int compteur = 0, nbr_composantes = 0, variable = 0;
+    std::vector<bool> temoinParcours;
+    std::deque<int> resultat;
+    //cree les cases du tableau temoin qui est initialisé à 0
+    for(unsigned int i = 0; i < m_sommet.size(); ++i)
+    {
+        temoinParcours.push_back(0);
+    }
+    //tant qu'on a pas visité tous les sommets
+    while(compteur < m_sommet.size())
+    {
+        //on effectue un parcours a partir d'un sommet non parcouru
+        while(temoinParcours[variable] != 0)
+        {
+            ++variable;
+        }
+        //on parcours la composante connexe
+        dfspath(variable, resultat,1);
+        //on incremente le nombre de composantes connexes
+        ++nbr_composantes;
+        //on affiche la composante connexe
+        std::cout<<"\n\t composante connexe numero "<<nbr_composantes<<" : "<<std::endl;
+        //on affiche la composante
+        for(unsigned int k=0 ; k<resultat.size() ; ++k)
+        {
+            std::cout<<"--"<<resultat[k];
+            //on en profite pour actualiser le tableau de temoinParcours
+            temoinParcours[resultat[k]] = 1;
+        }
+        //on regarde si on a tout vu
+        compteur = compteur + resultat.size();
+        //on nettoie la pile
+        resultat.clear();
+        std::cout<<std::endl;
+    }
+    std::cout<<"il y a "<<nbr_composantes<<" composantes connexes dans le graphe "<<std::endl;
+}
+
+//dfs fonctionnel aussi utilise pour les composantes connexes
+void Graphe::dfspath(int sommet_number, std::deque<int>& resultat, bool silence)
+{
+    //std::cout<<"Debut du parcours a partir du sommet "<< sommet_number<<std::endl;
+    std::vector<int> temoinParcours;
+    ///IMPORTANT on doit utiliser deque car sinon on ne peut pas faire l'affichage demandé (pas d'accès a toutes les cases a tout moment)
+    std::deque<int> pile;
+    //cree les cases du tableau temoin qui est initialisé à 0
+    for(unsigned int i = 0; i < m_sommet.size(); ++i)
+    {
+        temoinParcours.push_back(0);
+    }
+    //met le sommet actuel a gris
+    temoinParcours[sommet_number] = 1;
+    ///appel de la fonction dfs récursive
+    m_sommet[sommet_number]->parcoursDFS(pile , temoinParcours,resultat,silence);
 }
