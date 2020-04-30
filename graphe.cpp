@@ -202,6 +202,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     std::vector<float> tableau_cvp;
     std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
     float dlambda=0;
+    std::vector<float> tab_indice_degre_NORMALISE;
     for (size_t j=0; j<m_sommet.size(); j++) //pour calcul cvp de chaque sommet
     {
         c2=0;
@@ -215,6 +216,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
             cvp=c2;
         tableau_cvp.push_back(cvp);
         std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
+        tab_indice_degre_NORMALISE.push_back(cvp);
         ecrire1<<cvp<<std::endl;
     }
     for (size_t z=0; z<m_sommet.size(); z++) //pour calcul cvp de chaque sommet
@@ -368,6 +370,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
 //
 //            ecire2<<"indice de degre non normalise "<<std::endl;
 //        }
+    std::vector<float> tab_indice_degre_NORMALISE;
     for (size_t i=0; i<m_sommet.size(); i++)
     {
         nb_degre=0;
@@ -387,6 +390,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
             deg_max=nb_degre;
         }
         std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
+        tab_indice_degre_NORMALISE.push_back(nb_degre);
 
         ecire1<<nb_degre<<std::endl;
 
