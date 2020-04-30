@@ -175,7 +175,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     {
         c2=0;
         c2=m_sommet[j]->calculer_somme_cvp_adj();
-        dlambda=dlambda-c2;
+        dlambda=dlambda+c2;
         int nb_div;
         nb_div=(10)^(-2);
         if (dlambda>nb_div)
