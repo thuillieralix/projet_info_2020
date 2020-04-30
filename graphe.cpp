@@ -444,39 +444,49 @@ int Graphe::getOrdre()
     return m_ordre;
 }
 
-void Graphe::centralite_de_proximite()
+void Graphe::centralite_de_proximite(int numero)
 {
     int sommetDepart = -1;
     std::vector<std::vector<int>> resDijkstra;
-
-    //blindage pour avoir un sommet qui existe et qui est dans le graphe
-    while(sommetDepart < 0 || sommetDepart > getOrdre())
+    std::vector<float> tab_indice_prox_NON_NORMALISE;
+    std::vector<float> tab_indice_prox_NORMALISE;
+    for (size_t y=0;y<m_sommet.size();y++)
     {
-        std::cout<<"Entrez le sommet de depart"<<std::endl;
-        std::cin>>sommetDepart;
+            sommetDepart=m_sommet[y]->getIndice();
+            resDijkstra = dijkstra(sommetDepart);
+            std::cout << "sortie du dijkstra" << '\n';
+            float numerateur = 0;
+            float denominateur = 0;
+            std::deque<int> resultat;
+
+            dfspath(sommetDepart, resultat,1);
+
+            for(unsigned int i=0 ; i < resDijkstra.size() ; ++i)
+            {
+                if(resDijkstra[i][1] > 0)
+                {denominateur = denominateur + resDijkstra[i][1];}
+            }
+            numerateur = resultat.size() - 1;
+            float nb, nb2;
+            nb=1/denominateur;
+            std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " <<nb<< '\n';
+            tab_indice_prox_NON_NORMALISE.push_back(nb);
+            nb2=numerateur/denominateur;
+            std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << nb2<< '\n';
+            tab_indice_prox_NORMALISE.push_back(nb2);
     }
-    //recuperation du resultat de l'algo de Dijkstra
-    resDijkstra = dijkstra(sommetDepart);
-    std::cout << "sortie du dijkstra" << '\n';
-    //calcul de la centralité de proximité
-    int numerateur = 0;
-    int denominateur = 0;
-    //pour trouver les sommets composante connexe concernée
-    std::deque<int> resultat;
 
-    dfspath(sommetDepart, resultat,1);
 
-    //le dénominateur est la somme des distances du point de départ sans compter ceux qui sont hors composante connexe
-    for(unsigned int i=0 ; i < resDijkstra.size() ; ++i)
-    {
-        if(resDijkstra[i][1] > 0)
-        {denominateur = denominateur + resDijkstra[i][1];}
-    }
-    //nbr de sommets de la composante connexe - le sommet concerne
-    numerateur = resultat.size() - 1;
-
-    std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " << 1<<'/'<<denominateur<< '\n';
-    std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << numerateur<<'/'<<denominateur<< '\n';
+        std::cout<<"affichage indice prox non normalise"<<std::endl;
+        for (size_t y=0;y<m_sommet.size();y++)
+        {
+            std::cout<<"pour le sommet "<<y<<" : "<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
+        }
+        std::cout<<"affichage indice prox normalise"<<std::endl;
+        for (size_t z=0;z<m_sommet.size();z++)
+        {
+            std::cout<<"pour le sommet "<<z<<" : "<<tab_indice_prox_NORMALISE[z]<<std::endl;
+        }
 }
 
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)

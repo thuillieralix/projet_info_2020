@@ -33,7 +33,7 @@ public :
     int getOrdre();
 
     std::vector<std::vector<int>> dijkstra(int depart);
-    void centralite_de_proximite();
+    void centralite_de_proximite(int numero);
 
 
     void tester_connexite();

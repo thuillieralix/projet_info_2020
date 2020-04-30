@@ -146,7 +146,7 @@ int main()
             break;
         }
         case 8:
-            g.centralite_de_proximite();
+            g.centralite_de_proximite(0);
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
