@@ -169,3 +169,12 @@ void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcour
     //enlève le premier element de la pile car c'est celui parcouru : il n'a plus de successeur non exploré
     pile.pop_front();
 }
+
+int Sommet::get_x()
+{
+    return m_x;
+}
+int Sommet::get_y()
+{
+    return m_y;
+}
