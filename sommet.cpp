@@ -143,6 +143,14 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
             //si la case n'a pas été "terminée"
             if(tableau[m_adjacent[i]->getIndice()][0][0] != 1)
             {
+                //si on a 2 chemins de longueur égale
+                if((tableau[m_adjacent[i]->getIndice()][0][1] == tableau[plusPetitSommet][0][1] + poidsArreteI) )
+                {
+                    //on met le numero, le poids et le predecesseur dans la case correspondante tableau
+                    tableau[m_adjacent[i]->getIndice()].push_back( { 0 , tableau[plusPetitSommet][0][1] + poidsArreteI , plusPetitSommet } );
+                    //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
+                    //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
+                }
                 //si on a une distance plus petite que celle renseignée ou un nouveau sommet
                 if((tableau[m_adjacent[i]->getIndice()][0][1] > tableau[plusPetitSommet][0][1] + poidsArreteI) || tableau[m_adjacent[i]->getIndice()][0][1] == -1 )
                 {
@@ -151,15 +159,9 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
                     //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
                     //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
                 }
+
             }
-            //si on a 2 chemins de longueur égale
-            if((tableau[m_adjacent[i]->getIndice()][0][1] = tableau[plusPetitSommet][0][1] + poidsArreteI) || tableau[m_adjacent[i]->getIndice()][0][1] == -1 )
-            {
-                //on met le numero, le poids et le predecesseur dans la case correspondante tableau
-                tableau[m_adjacent[i]->getIndice()].push_back( { 0 , tableau[plusPetitSommet][0][1] + poidsArreteI , plusPetitSommet } );
-                //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
-                //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
-            }
+
         }
     }
 }

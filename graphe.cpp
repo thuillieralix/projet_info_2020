@@ -381,19 +381,25 @@ void Graphe::centralite_intermediarite()
     dijkstra_inter(sommetDepart, resDijkstra);
 
     //calcul de la centralité de proximité
-    int numerateur = 0;
-    int denominateur = 0;
+    //int numerateur = 0;
+    //int denominateur = 0;
 
     std::cout << "affichage du result dijkstra" << '\n';
     for(int i=0 ; i<resDijkstra.size() ; ++i)
     {
+        std::cout <<  '{';
+
         for(int j=0 ; j<resDijkstra[i].size() ; ++j)
         {
+            std::cout  << '{';
+
             for(int k=0 ; k<resDijkstra[i][j].size(); ++k)
             {
-                
+                std::cout <<resDijkstra[i][j][k]<< '/';
             }
+            std::cout << "}\n";
         }
+        std::cout << "} \n\n";
     }
 
     //le dénominateur est la somme des distances du point de départ
@@ -405,6 +411,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
     //varible comptant les sommets
     int comptSommets=0;
     int plusPetitSommet;
+    bool sortie = false;
     //On recoit un sommet de départ
     //on cree un tableau de la taille de l'ordre du Graphe capable de stocker l'etat, le prédécesseur et le poids des sommets
     //On initialise les etats des sommets a 0_infini_? comme spécifié dans le cours
@@ -426,7 +433,7 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
     plusPetitSommet = sommetDepart;
     //on peut mettre maintenant en palce une boucle contenant la partie répétitive de l'algorithme de dijkstra
     //la boucle s'arrète quand on a exploré tous les sommets
-    while(comptSommets != m_ordre)
+    while(!sortie)
     {
         //on cherche le sommet avec l'arrète la plus petite
         //note: a letape 1 le sommet de départ est le premier pris, son poids d'arrte etant de 0
@@ -450,17 +457,24 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
 
         }
         //std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
-        resDijkstra[plusPetitSommet][0][0] = 1;
-        ++comptSommets;
-        //on marque le sommet explore
-        //on cherche les successeurs du plus sommet a la plus petite arrete
-        //on va stocker dans le tableau les valeurs suivantes
-        // l'etat du sommet (decouvert ou non)
-        // la distance au sommet d'origine (on additione les distances avec le sommet courant)
-        // le numero du sommet courant dans la case précédent
-        //pour accéder aux propriétés du sommet facilement on doit faire un sous programme propre à la classe sommet
-        //std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
-        m_sommet[plusPetitSommet]->actualiserDijkstra_inter( plusPetitSommet , resDijkstra , m_arrete);
+        if(plusPetitSommet != -1)
+        {
+            resDijkstra[plusPetitSommet][0][0] = 1;
+            ++comptSommets;
+            //on marque le sommet explore
+            //on cherche les successeurs du plus sommet a la plus petite arrete
+            //on va stocker dans le tableau les valeurs suivantes
+            // l'etat du sommet (decouvert ou non)
+            // la distance au sommet d'origine (on additione les distances avec le sommet courant)
+            // le numero du sommet courant dans la case précédent
+            //pour accéder aux propriétés du sommet facilement on doit faire un sous programme propre à la classe sommet
+            //std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
+            m_sommet[plusPetitSommet]->actualiserDijkstra_inter( plusPetitSommet , resDijkstra , m_arrete);
+        }
+        if(plusPetitSommet == -1)
+        {
+            sortie = true;
+        }
         plusPetitSommet = -1;
     }
 }

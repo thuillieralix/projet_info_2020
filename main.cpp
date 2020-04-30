@@ -7,8 +7,8 @@ int main()
 
     std::string fichier1, fichier2;
     // Graphe g("fichier1.txt","fichier_poids.txt");
-    int choix, stop=1, fichier_ok;
-    int test=1, saisie_fichier1=0, saisie_fichier2=0, saisie_nouv_fichier=0;
+    int choix, stop=1;
+    int saisie_fichier1=0, saisie_fichier2=0, saisie_nouv_fichier=0;
 
     while (saisie_fichier1!=1)
     {
