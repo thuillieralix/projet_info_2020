@@ -134,6 +134,7 @@ void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
     }
 }
 
+
 //partie du dfs propre a la classe sommet
 void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence)
 {
@@ -168,4 +169,13 @@ void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcour
     temoinParcours[m_indice] = 2;
     //enlève le premier element de la pile car c'est celui parcouru : il n'a plus de successeur non exploré
     pile.pop_front();
+}
+
+int Sommet::get_x()
+{
+    return m_x;
+}
+int Sommet::get_y()
+{
+    return m_y;
 }

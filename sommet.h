@@ -36,8 +36,13 @@ public :
     void actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau , std::vector<Arrete*> tab_arrete);
 
     void supprimer_adjacence(int indice_arrivee_arrete_a_supp);
+
     void parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence);
 
+
+
+    int get_x();
+    int get_y();
 };
 
 #endif // SOMMET_H_INCLUDED
