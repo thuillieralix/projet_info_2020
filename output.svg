@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
-<line x1="195" y1="95" x2="205" y2="105" stroke="red" />
-<line x1="195" y1="105" x2="205" y2="95" stroke="red" />
+<circle cx="550" cy="150" r="5" fill="red" />
+<text x="565" y="165" fill="black" >A</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -43,8 +43,8 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<line x1="95" y1="195" x2="105" y2="205" stroke="red" />
-<line x1="95" y1="205" x2="105" y2="195" stroke="red" />
+<circle cx="250" cy="350" r="5" fill="red" />
+<text x="265" y="365" fill="black" >B</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -85,8 +85,8 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<line x1="195" y1="195" x2="205" y2="205" stroke="red" />
-<line x1="195" y1="205" x2="205" y2="195" stroke="red" />
+<circle cx="550" cy="350" r="5" fill="red" />
+<text x="565" y="365" fill="black" >C</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -127,8 +127,8 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<line x1="295" y1="195" x2="305" y2="205" stroke="red" />
-<line x1="295" y1="205" x2="305" y2="195" stroke="red" />
+<circle cx="850" cy="350" r="5" fill="red" />
+<text x="865" y="365" fill="black" >D</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -169,8 +169,8 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<line x1="195" y1="295" x2="205" y2="305" stroke="red" />
-<line x1="195" y1="305" x2="205" y2="295" stroke="red" />
+<circle cx="550" cy="550" r="5" fill="red" />
+<text x="565" y="565" fill="black" >E</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -211,10 +211,14 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<line x1="200" y1="100" x2="200" y2="200" stroke="black" />
-<line x1="100" y1="200" x2="200" y2="200" stroke="black" />
-<line x1="200" y1="200" x2="300" y2="200" stroke="black" />
-<line x1="200" y1="200" x2="200" y2="300" stroke="black" />
+<line x1="550" y1="150" x2="550" y2="350" stroke="black" />
+<text x="550" y="230" fill="blue" >0</text>
+<line x1="250" y1="350" x2="550" y2="350" stroke="black" />
+<text x="400" y="330" fill="blue" >1</text>
+<line x1="550" y1="350" x2="850" y2="350" stroke="black" />
+<text x="700" y="330" fill="blue" >2</text>
+<line x1="550" y1="350" x2="550" y2="550" stroke="black" />
+<text x="550" y="430" fill="blue" >3</text>
   
 
 <defs>

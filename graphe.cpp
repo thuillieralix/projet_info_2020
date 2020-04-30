@@ -456,7 +456,7 @@ void Graphe::centralite_de_proximite(int numero)
     {
             sommetDepart=m_sommet[y]->getIndice();
             resDijkstra = dijkstra(sommetDepart);
-            std::cout << "sortie du dijkstra" << '\n';
+            //std::cout << "sortie du dijkstra" << '\n';
             float numerateur = 0;
             float denominateur = 0;
             std::deque<int> resultat;
@@ -470,11 +470,14 @@ void Graphe::centralite_de_proximite(int numero)
             }
             numerateur = resultat.size() - 1;
             float nb, nb2;
-            nb=1/denominateur;
-            std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " <<nb<< '\n';
+            if(denominateur > 0)
+            {
+                nb=1/denominateur;
+                        }
+            //std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " <<nb<< '\n';
             tab_indice_prox_NON_NORMALISE.push_back(nb);
             nb2=numerateur/denominateur;
-            std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << nb2<< '\n';
+            //std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << nb2<< '\n';
             tab_indice_prox_NORMALISE.push_back(nb2);
     }
 
@@ -493,7 +496,7 @@ void Graphe::centralite_de_proximite(int numero)
 
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)
 {
-    std::cout<< "entree dans le dijkstra graphe"<<std::endl;
+    //std::cout<< "entree dans le dijkstra graphe"<<std::endl;
     //varible comptant les sommets
     int comptSommets=0;
     int plusPetitSommet;
@@ -516,12 +519,12 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
     //la boucle s'arrète quand on a exploré tous les sommets
     while(!sortie)
     {
-        std::cout << "top boucle" << '\n';
+        //std::cout << "top boucle" << '\n';
         //on cherche le sommet avec l'arrète la plus petite
         //note: a letape 1 le sommet de départ est le premier pris, son poids d'arrte etant de 0
         for( int i=0 ; i < m_ordre ; ++i)
         {
-            std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
+            //std::cout << "sommet numero "<<i<<" a pour valeurs \t"<<tableau[i][0]<<'\t'<<tableau[i][1]<<'\t'<<tableau[i][2] << '\n';
             if(plusPetitSommet == -1 && tableau[i][0] == 0 && tableau[i][1] > 0)
             {
                 plusPetitSommet = i;
@@ -529,7 +532,7 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
             //blindage pour empecher de relire des cases par inadvertance
             if( plusPetitSommet != -1 )
             {
-                std::cout << "plus petit sommet =/ 1" << '\n';
+                //std::cout << "plus petit sommet =/ 1" << '\n';
                 //sinon on regarde si la valeur de la case i est plus petite
                 //la valeur doit etre positive sinon elle est non découverte
                 if((tableau[plusPetitSommet][1] > tableau[i][1]) && (tableau[i][1] > 0) && (tableau[i][0] != 1) )
@@ -539,7 +542,7 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
             }
 
         }
-        std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
+        //std::cout << "plusPetitSommet"<<plusPetitSommet << '\n';
         if(plusPetitSommet != -1)
         {
             tableau[plusPetitSommet][0] = 1;
@@ -559,12 +562,12 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
         }
 
 
-        std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
+        //std::cout << "\n indice du sommet selectionne " <<plusPetitSommet<<std::endl;
 
         plusPetitSommet = -1;
 
     }
-    std::cout << "fin du Dijkstra" << '\n';
+    //std::cout << "fin du Dijkstra" << '\n';
     //On retourne le résultat sous forme d'un tableau
     return tableau;
 }
