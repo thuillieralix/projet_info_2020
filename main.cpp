@@ -135,6 +135,14 @@ int main()
                     g.comparer_valeurs_indice();
                     break;
                 }
+                case 3:
+                {
+                    g.centralite_de_proximite(1);
+                    g.supprimer_arrete();
+                    g.centralite_de_proximite(2);
+                    g.comparer_valeurs_indice();
+                    break;
+                }
                 default:
                 {
 
