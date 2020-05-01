@@ -1,0 +1,66 @@
+0
+32
+0 SaintDenis 2 0.2
+1 Basilique 2 0.4
+2 PorteParis 2 0.6
+3 CarrefourPleyel 2 0.8
+4 MairieSaintOuen 2 1
+5 Garibaldi 2 1.2
+6 PorteSaintOuen 2 1.4
+7 GuyMoquet 2 1.6
+8 Courtilles 5 0.6
+9 Agnettes 5 0.8
+10 GabrielPeri 5 1
+11 MairieClichy 5 1.2
+12 PorteClichy 5 1.4
+13 Brochant 5 1.6
+14 LaFourche 4 1.8
+15 PlaceClichy 4 2
+16 Liege 4 2.2
+17 SaintLazare 4 2.4
+18 Miromesnil 4 2.6
+19 ChampsElysees 4 2.8
+20 Invalides 4 3
+21 Varenne 4 3.2
+22 SaintFrancoisXavier 4 3.4
+23 Duroc 4 3.6
+24 Montparnasse 4 3.8
+25 Gaiete 4 4
+26 Pernety 4 4.2
+27 Plaisance 4 4.4
+28 PorteVanves 4 4.6
+29 PlateauVanves 4 4.8
+30 RueEtienneDolet 4 5
+31 ChatillonMonrouge 4 5.2
+31
+0 8 9
+1 9 10
+2 11 12
+3 12 13
+4 13 14
+5 0 1
+6 1 2
+7 2 3 
+8 3 4 
+9 4 5 
+10 5 6 
+11 6 7  
+12 7 14
+13 14 15
+14 15 16
+15 16 17
+16 17 18
+17 18 19
+18 19 20
+19 20 21
+20 21 22
+21 22 23
+22 23 24
+23 24 25
+24 25 26
+25 26 27
+26 27 28
+27 28 29
+28 29 30
+29 30 31
+30 10 11
