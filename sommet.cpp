@@ -9,7 +9,7 @@ Sommet::Sommet()
     m_y=0;
     indice_cvp=0;
 }
-Sommet::Sommet(int indice, char nom,int x, int y)
+Sommet::Sommet(int indice, std::string nom,int x, int y)
 {
     m_indice = indice;
     m_nom=nom;
@@ -25,7 +25,7 @@ int Sommet::getIndice()
     return m_indice;
 }
 
-char Sommet::getNom()
+std::string Sommet::getNom()
 {
     return m_nom;
 }
@@ -171,11 +171,11 @@ void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcour
     pile.pop_front();
 }
 
-int Sommet::get_x()
+float Sommet::get_x()
 {
     return m_x;
 }
-int Sommet::get_y()
+float Sommet::get_y()
 {
     return m_y;
 }
