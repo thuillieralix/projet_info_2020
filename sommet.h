@@ -13,17 +13,17 @@ class Sommet
 {
 private :
     int m_indice;
-    int m_x;
-    int m_y;
-    char m_nom;
+    float m_x;
+    float m_y;
+    std::string m_nom; 
     float indice_cvp;
     std::vector<Sommet*> m_adjacent;
 public :
     Sommet();
-    Sommet(int indice, char nom,int m_x, int m_y);
+    Sommet(int indice, std::string nom,int m_x, int m_y);
     ~Sommet();
     int getIndice();
-    char getNom();
+    std::string getNom();
     int getTabSize();
     void Ajouter_adj(Sommet* adj);
     void Afficher_adj();
@@ -41,8 +41,8 @@ public :
 
 
 
-    int get_x();
-    int get_y();
+    float get_x();
+    float get_y();
 };
 
 #endif // SOMMET_H_INCLUDED
