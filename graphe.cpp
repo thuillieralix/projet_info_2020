@@ -15,7 +15,7 @@ Graphe::Graphe()
 
 Graphe::Graphe(std::string fichier, std::string fichier2)
 {
-    std::ifstream lire(fichier.c_str());
+        std::ifstream lire(fichier.c_str());
     Svgfile svgout ;
     lire >> m_orientation;
     lire >> m_ordre;
@@ -84,10 +84,17 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         float x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
         float y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
         float tmp;
-       
+        if (x_dep>x_ar)
+            x_poids=x_ar+(x_dep-x_ar)/2;
+        else if (x_dep<x_ar)
+            x_poids=x_dep+(x_ar-x_dep)/2;
+        else if (y_dep>y_ar)
+            y_poids=y_ar+(y_dep-y_ar)/2;
+        else if (y_dep<y_ar)
+            y_poids=y_dep+(y_ar-y_dep)/2;
         x_poids=x_dep+(x_ar-x_dep)/2;
-        y_poids=y_dep+(y_ar-y_dep)/2-20;
-        //svgout.addText(x_poids, y_poids, indice, "blue");
+        y_poids=y_dep+(y_ar-y_dep)/2;
+        svgout.addText(x_poids, y_poids, indice, "blue");
     }
 
 
