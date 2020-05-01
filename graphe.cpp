@@ -538,10 +538,7 @@ void Graphe::supprimer_arrete()
     int indice_arrete_a_supp;
     std::vector<int> tab_indices_arretes;
     int nb_test;
-    for (size_t j=0; j<m_arrete.size(); j++)
-    {
-        tab_indices_arretes.push_back(m_arrete[j]->getIndice());
-    }
+
     while (stop!=0)
     {
         std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
@@ -550,35 +547,68 @@ void Graphe::supprimer_arrete()
 
         if (supp_arrete=="oui")
         {
+            for (size_t j=0; j<m_arrete.size(); j++)
+            {
+                tab_indices_arretes.push_back(m_arrete[j]->getIndice());
+            }
+
             std::cout<<"quelle arrete ? mettre indice"<<std::endl;
             std::cin>>indice_arrete_a_supp;
-
+            std::cin.ignore();
+            std::cin.clear();
+            int g_arrete_dep;
+            int indice_arrete_final;
+            int k_arrete_a_supp;
             ///rajouter blindage
             if (indice_arrete_a_supp <= m_arrete.size())
             {
+                std::cout<<"arrete a supp trouvee"<<std::endl;
                 for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {
+                    std::cout<<"rentre dans le for"<<std::endl;
                     if (tab_indices_arretes[x]==indice_arrete_a_supp)
                     {
+                        std::cout<<"numero arrete a supp trouve dans le tableau d'arretes"<<std::endl;
+                        std::cout<<"indice arrete a sup = "<<indice_arrete_a_supp<<std::endl;
                         nb_test++;
 
                         ///parcourir tableau adjacences pour enlever cette connexion
                         int g=0,k=0;
-                        do
-                        {
-                            g++;
-                        }
-                        while (m_sommet[g]->getIndice()!=m_arrete[indice_arrete_a_supp]->getDepart());
-                        do
-                        {
-                            k++;
-                        }
-                        while (m_sommet[k]->getIndice()!=m_arrete[indice_arrete_a_supp]->getArrivee());
 
-                        m_sommet[g]->supprimer_adjacence(m_sommet[k]->getIndice()); ///supp  adj
-                        m_sommet[k]->supprimer_adjacence(m_sommet[g]->getIndice());
+                        for (size_t e=0;e<m_arrete.size();e++)
+                        {
+                            if (m_arrete[e]->getIndice()==indice_arrete_a_supp)
+                            {
+                                indice_arrete_final=e;
+                                for(size_t m=0;m<m_sommet.size();m++)
+                                {
+                                    if (m_sommet[m]->getIndice()==m_arrete[e]->getDepart())
+                                    {
+//                                        g_arrete_dep=m_sommet[m]->getIndice();
+                                          g_arrete_dep=m;
+                                        std::cout<<"rentre dans le if de depart"<<std::endl;
+                                    }
+                                }
+                            }
+                        }
 
-                        m_arrete.erase (m_arrete.begin()+(indice_arrete_a_supp));
+                        for (size_t e=0;e<m_arrete.size();e++)
+                        {
+                            if (m_arrete[e]->getIndice()==indice_arrete_a_supp)
+                            {
+                                for (size_t p=0;p<m_sommet.size();p++)
+                                {
+                                    if(m_sommet[p]->getIndice()==m_arrete[e]->getArrivee())
+                                    {
+                                        std::cout<<"rentre dans le if d'arrivee"<<std::endl;
+                                        //k_arrete_a_supp=m_sommet[p]->getIndice();
+                                        k_arrete_a_supp=p;
+                                    }
+                                }
+                            }
+                        }
+
+                        std::cout<<"arrivee de cette arrete a supp = "<<m_sommet[k_arrete_a_supp]->getIndice()<<std::endl;
                     }
                     if (nb_test==0)
                     {
@@ -586,6 +616,11 @@ void Graphe::supprimer_arrete()
                     }
 
                 }
+                m_sommet[g_arrete_dep]->supprimer_adjacence(m_sommet[k_arrete_a_supp]->getIndice()); ///supp  adj
+                m_sommet[k_arrete_a_supp]->supprimer_adjacence(m_sommet[g_arrete_dep]->getIndice());
+
+                m_arrete.erase (m_arrete.begin()+(indice_arrete_final));
+                std::cout<<"erase ok "<<std::endl;
             }
             else
             {
