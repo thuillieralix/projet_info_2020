@@ -385,7 +385,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
     {
             Svgfile svgout;
             svgout.addGrid() ;
-            int ymax=0,xmax=0;
+            float ymax=0,xmax=0;
             for (size_t g=0;g<m_sommet.size();g++)
             {
                 if (m_sommet[g]->get_x()>xmax)
@@ -397,9 +397,9 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                     ymax=m_sommet[g]->get_y();
                 }
             }
-            int agrandireX, agrandireY;
-            agrandireX=900/xmax;
-            agrandireY=800/ymax;
+            float agrandireX, agrandireY;
+            agrandireX=850/xmax;
+            agrandireY=750/ymax;
             std::string tmp;
             ///on dessine dans svgout
              float max1=0, max2=0,max3=0;
@@ -439,23 +439,30 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                 if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
                 {
                     std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
-                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"red");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max3, "black");
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +95 , m_sommet[h]->get_y()*agrandireY+13,max3, "black");
                 }
-                if(tab_indice_degre_NORMALISE[h]==max2)
+                else if(tab_indice_degre_NORMALISE[h]==max2)
                 {
                     std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
-                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"orange");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +95 , m_sommet[h]->get_y()*agrandireY+13,max2, "black");
                 }
-                if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
+                else if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
                 {
                     std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
-                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX-50,m_sommet[h]->get_y()*agrandireY-50,15,"yellow");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -15, m_sommet[h]->get_y()*agrandireY-15, "indDeg = ", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX -5, m_sommet[h]->get_y()*agrandireY,max1, "black");
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX+95 , m_sommet[h]->get_y()*agrandireY+13,max1, "black");
+                }
+                else
+                {
+                    std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
+                    svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY-50,5,"black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY-15, "indDeg=", "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +95, m_sommet[h]->get_y()*agrandireY,tab_indice_degre_NORMALISE[h], "black");
                 }
             }
 
@@ -464,7 +471,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                 //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
 
                 tmp=m_sommet[d]->getNom();
-                svgout.addText(m_sommet[d]->get_x()*agrandireX -35, m_sommet[d]->get_y()*agrandireY-35, tmp, "black");
+                svgout.addText(m_sommet[d]->get_x()*agrandireX , m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
             }
         int extremite_dep,extremite_ar,indice;
@@ -474,16 +481,16 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                 extremite_ar=m_arrete[i]->getArrivee();
                 indice =m_arrete[i]->getIndice();
 
-                svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX-50,m_sommet[extremite_dep]->get_y()*agrandireY-50
-                               ,m_sommet[extremite_ar]->get_x()*agrandireX-50,m_sommet[extremite_ar]->get_y()*agrandireY-50,"black");
+                svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
+                       ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
                 int x_poids, y_poids;
-                int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX-50);
-                int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY-50);
-                int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX-50);
-                int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY-50);
+                int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
+                int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
+                int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
+                int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
                 x_poids=x_dep+(x_ar-x_dep)/2;
                 y_poids=y_dep+(y_ar-y_dep)/2-20;
-                svgout.addText(x_poids, y_poids, indice, "blue");
+                //svgout.addText(x_poids, y_poids, indice, "blue");
 
             }
 

@@ -39,9 +39,12 @@ int main()
         std::cout << " 3: supprimer une arrete" << std::endl;
         std::cout << " 4: tester la connexite du graphe" << std::endl;
         std::cout << " 5: afficher composantes graphe " << std::endl;
-        std::cout << " 6: quitter" << std::endl<< std::endl;
+        std::cout << " 6: quitter" << std::endl;
         std::cout << " 7: comparer indice (choix de quel indice apres)" << std::endl;
         std::cout << " 8: centralite de proximite" << std::endl;
+        std::cout << " 9: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
+        std::cout << " 10: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
+        std::cout << " 11: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -158,6 +161,18 @@ int main()
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
+        case 9:
+            g.trouver_centralite_degres(3);
+            break;
+
+        case 10:
+            g.trouver_indice_centralite_vecteur_propre(3);
+            break;
+
+        case 11:
+            g.centralite_de_proximite(3);
+            break;
+            
         default:
             std::cout << "Erreur de saisie, il faut recommencer" << std::endl;
             std::cout << std::endl<< std::endl<< std::endl;
