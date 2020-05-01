@@ -84,18 +84,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         float x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
         float y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
         float tmp;
-        if (x_ar>x_dep)
-        {
-            x_dep=tmp;
-            x_dep=x_ar;
-            x_ar=x_dep;
-        }
-        if (y_ar>y_dep)
-        {
-            y_dep=tmp;
-            y_dep=y_ar;
-            y_ar=y_dep;
-        }
+       
         x_poids=x_dep+(x_ar-x_dep)/2;
         y_poids=y_dep+(y_ar-y_dep)/2-20;
         //svgout.addText(x_poids, y_poids, indice, "blue");
