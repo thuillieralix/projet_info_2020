@@ -367,23 +367,115 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
 
 void Graphe::centralite_intermediarite()
 {
-    int sommetDepart = -1;
     //tab 2 dimensions avec 3 attributs par cases
-    std::vector<std::vector<std::vector<int>>> resDijkstra;
+    std::vector<std::vector<std::vector<int>>> resDijkstra , stockPassage;
+    std::vector<std::vector<int>> stockChemins;
+    float numerateur = 0, denominateur = 0, result = 0;
 
-    //blindage pour avoir un sommet qui existe et qui est dans le graphe
-    while(sommetDepart < 0 || sommetDepart > getOrdre())
+    //initialisation des tableau
+    for( int i=0 ; i<m_ordre ; ++i)
     {
-        std::cout<<"Entrez le sommet de depart"<<std::endl;
-        std::cin>>sommetDepart;
+        //initialisation de la 1ere dim
+        stockChemins.push_back(std::vector<int>());
+        stockPassage.push_back(std::vector<std::vector<int>>());
+        for (int j = 0; j < m_ordre; j++)
+        {
+            stockChemins[i].push_back(0);
+            stockPassage[i].push_back(std::vector<int> ());
+            stockPassage[i][j].push_back(-1);
+        }
     }
-    //recuperation du resultat de l'algo de Dijkstra
-    dijkstra_inter(sommetDepart, resDijkstra);
 
-    //calcul de la centralité de proximité
-    //int numerateur = 0;
-    //int denominateur = 0;
+    //pour chaque sommet
+    //on fait son dijkstra
+    // on stocke le nombre de chemins les plus courts dans un tableau 2 dimensions
+    for(int i=0 ; i<getOrdre() ; ++i )
+    {
+        //recuperation du resultat de l'algo de Dijkstra
+        dijkstra_inter(i, resDijkstra);
+        std::cout << "sortie dijkstra" << '\n';
+        //stockage des nombre de chemins du sommet i aux autres
+        //on stocke les sommets emprunte par le chemin
+        for (size_t j = 0; j<resDijkstra.size() ; ++j)
+        {
+            std::cout << "for en j " << '\n';
+            //si on est sur un sommet découvert
+            //le sommet d'origine n'a pas de prédecesseur
+            if(resDijkstra[i][j][2] != -1)
+            {
+                std::cout << "if resDijkstra[i][j][2] != -1" << '\n';
+                //nombre de chemins du sommet i au j
+                stockChemins[i][j] = resDijkstra[i].size();
+            }
+            //si on est sur un sommet non découvert
+            if(resDijkstra[i][j][2] == -1)
+            {
+                std::cout << "resDijkstra[i][j][2] == -1" << '\n';
+                //on set a 0
+                stockChemins[i][j] = 0;
+            }
+            //pour tous les chemins
+            for(unsigned int k=0 ; k<resDijkstra[j].size() ; ++k)
+            {
+                std::cout << "for en k" << '\n';
+                if(resDijkstra[j][k][2] != -1)
+                {
+                    std::cout << "resDijkstra[j][k][2] != -1" << '\n';
+                    //on ajoute les prédecesseurs
+                    //le chemins passent forcement par eux
+                    stockPassage[i][j].push_back(resDijkstra[j][k][2]);
+                }
+            }
+        }
+    }
 
+    //on calcule les indices de chaque sommets
+    //on calcule le numerateur et le denominateur
+    std::cout << "le sommet \t indice simple \t indice normalisé" << '\n';
+    //pour chaque somet
+    for(int i=0 ; i<m_ordre ; ++i)
+    {
+        numerateur = 0;
+        denominateur = 0;
+        //on parcours tout le tableau contenant les nbr de chemins
+        for (int j=0; j < stockChemins.size(); ++j)
+        {
+            //le sommet cible ne doit pas etre une extremite
+            if(j != i)
+            {
+                //parcours de la 2nde dimension
+                for(int k=0 ; k<stockChemins[j].size(); ++k)
+                {
+                    //////////a partir d'ici on est dans le couple j-k
+                    //si la case n'est pas vide et que le sommet en question n'es pas aux extremites
+                    if(stockChemins[j][k] > 0 && k != i)
+                    {
+                        //le nombre plus courts chemins n'ayant pas pour extremité i
+                        denominateur = denominateur + stockChemins[j][k];
+                    }
+                    if( k!=i )
+                    {
+                        for(int l=0 ; l<stockPassage[j][k].size() ; ++l)
+                        {
+                            if(stockPassage[j][k][l] == i)
+                            {
+                                ++numerateur;
+                            }
+                        }
+                    }
+
+                }
+                result = result +(numerateur/denominateur);
+            }
+        }
+        //ici doit se trouver le resultat final pour le sommet
+        std::cout <<i<<'\t' <<result << '\n';
+
+        //on parcourt le
+    }
+
+
+/*
     std::cout << "affichage du result dijkstra" << '\n';
     for(int i=0 ; i<resDijkstra.size() ; ++i)
     {
@@ -400,7 +492,7 @@ void Graphe::centralite_intermediarite()
             std::cout << "}\n";
         }
         std::cout << "} \n\n";
-    }
+    }*/
 
     //le dénominateur est la somme des distances du point de départ
 }
