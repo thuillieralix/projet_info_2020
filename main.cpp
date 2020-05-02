@@ -45,12 +45,12 @@ int main()
         std::cout << " 1: trouver indice de centralite de degre " << std::endl;
         std::cout << " 2: trouver indice de centralite vecteur propre" << std::endl;
         std::cout << " 3: trouver indice de centralite d'intermediarite" << '\n';
-        std::cout << " 4: supprimer une arrete" << std::endl;
+        std::cout << " 4: trouver indice de centralite de proximite" << std::endl;
         std::cout << " 5: tester la connexite du graphe" << std::endl;
         std::cout << " 6: afficher composantes graphe " << std::endl;
         std::cout << " 7: quitter" << std::endl;
         std::cout << " 8: comparer indice (choix de quel indice apres)" << std::endl;
-        std::cout << " 9: centralite de proximite" << std::endl;
+        std::cout << " 9: supprimer une arrete" << std::endl;
         std::cout << " 10: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
         std::cout << " 11: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
         std::cout << " 12: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
@@ -91,7 +91,7 @@ int main()
             g.centralite_intermediarite();
             break;
         case 4:
-            g.supprimer_arrete();
+            g.centralite_de_proximite(0);
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
@@ -175,7 +175,7 @@ int main()
             break;
         }
         case 9:
-            g.centralite_de_proximite(0);
+            g.supprimer_arrete();
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
