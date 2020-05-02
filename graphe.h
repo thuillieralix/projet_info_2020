@@ -12,9 +12,9 @@
 class Graphe
 {
 private :
-      int m_ordre;
-      int m_taille;
-      bool m_orientation;
+    int m_ordre;
+    int m_taille;
+    bool m_orientation;
     std::string fichier_topologie;
     std::string fichier_ponderation;
 

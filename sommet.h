@@ -33,11 +33,11 @@ public :
     void ADJ_mettre_indice_cvp_a_1();
     int calculer_somme_cvp_adj();
 
-    void actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau , std::vector<Arrete*> tab_arrete);
+    void actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int>> &tableau, std::vector<Arrete*> tab_arrete);
 
     void supprimer_adjacence(int indice_arrivee_arrete_a_supp);
 
-    void parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence);
+    void parcoursDFS(std::deque<int>& pile, std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence);
 
     std::vector <Sommet*> getAdj();
 

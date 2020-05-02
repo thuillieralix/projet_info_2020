@@ -36,7 +36,7 @@ int Sommet::getTabSize()
 }
 void Sommet::Ajouter_adj(Sommet* adj)
 {
-   m_adjacent.push_back(adj);
+    m_adjacent.push_back(adj);
 }
 void Sommet::Afficher_adj()
 {
@@ -52,7 +52,7 @@ float Sommet::getCvp()
 }
 void Sommet::mettre_indice_cvp(float nb)
 {
-     indice_cvp=nb;
+    indice_cvp=nb;
 }
 void Sommet::mettre_indice_cvp_a_1()
 {
@@ -68,7 +68,7 @@ void Sommet::ADJ_mettre_indice_cvp_a_1()
 int Sommet::calculer_somme_cvp_adj()
 {
     int somme_cvp=0;
-     for(size_t i=0; i< m_adjacent.size(); ++i)
+    for(size_t i=0; i< m_adjacent.size(); ++i)
     {
         somme_cvp=somme_cvp+m_adjacent[i]->getCvp();
 
@@ -114,7 +114,7 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
                 {
                     //std::cout << "ajout du sommet" << '\n';
                     //on met le numero, le poids et le predecesseur dans la case correspondante tableau
-                    tableau[m_adjacent[i]->getIndice()] = { 0 , tableau[plusPetitSommet][1] + poidsArreteI , plusPetitSommet };
+                    tableau[m_adjacent[i]->getIndice()] = { 0, tableau[plusPetitSommet][1] + poidsArreteI, plusPetitSommet };
                     //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
                     //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
                 }
@@ -125,7 +125,7 @@ void Sommet::actualiserDijkstra(int plusPetitSommet, std::vector<std::vector<int
 
 void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
 {
-    for(size_t i=0;i<m_adjacent.size();i++)
+    for(size_t i=0; i<m_adjacent.size(); i++)
     {
         if (m_adjacent[i]->getIndice()==indice_arrivee_arrete_a_supp)
         {
@@ -136,7 +136,7 @@ void Sommet::supprimer_adjacence(int indice_arrivee_arrete_a_supp)
 
 
 //partie du dfs propre a la classe sommet
-void Sommet::parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence)
+void Sommet::parcoursDFS(std::deque<int>& pile, std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence)
 {
     //recursif pour les sommets
     //passe le sommet parcouru a gris
@@ -215,7 +215,7 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
                 if((tableau[m_adjacent[i]->getIndice()][0][1] == tableau[plusPetitSommet][0][1] + poidsArreteI) )
                 {
                     //on met le numero, le poids et le predecesseur dans la case correspondante tableau
-                    tableau[m_adjacent[i]->getIndice()].push_back( { 0 , tableau[plusPetitSommet][0][1] + poidsArreteI , plusPetitSommet } );
+                    tableau[m_adjacent[i]->getIndice()].push_back( { 0, tableau[plusPetitSommet][0][1] + poidsArreteI, plusPetitSommet } );
                     //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
                     //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
                 }
@@ -223,7 +223,7 @@ void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vect
                 if((tableau[m_adjacent[i]->getIndice()][0][1] > tableau[plusPetitSommet][0][1] + poidsArreteI) || tableau[m_adjacent[i]->getIndice()][0][1] == -1 )
                 {
                     //on met le numero, le poids et le predecesseur dans la case correspondante tableau
-                    tableau[m_adjacent[i]->getIndice()][0] = { 0 , tableau[plusPetitSommet][0][1] + poidsArreteI , plusPetitSommet };
+                    tableau[m_adjacent[i]->getIndice()][0] = { 0, tableau[plusPetitSommet][0][1] + poidsArreteI, plusPetitSommet };
                     //std::cout << "sommets decouvert" << m_adjacent[i]->getIndice() << '\n';
                     //std::cout << "poidsArreteI dans ajout : " <<poidsArreteI<< '\n';
                 }
