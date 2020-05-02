@@ -125,56 +125,57 @@ int main()
 
                 switch(choix2)
                 {
-                case 1:
-                {
-                    stop2=1;
-                    //d'abord le faire avec le graphe normal (normalisé et non normalisé)
-                    g.trouver_centralite_degres(1);
-                    //après supprimer une ou plusieurs arrete
-                    g.supprimer_arrete();
-                    //refaire calcul indice degré
-                    g.trouver_centralite_degres(2);
-                    std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralite des degres"<< std::endl;
-                    //g.comparer_valeurs_indice_degre();
-                    g.comparer_valeurs_indice();
-                    break;
-                }
-                case 2:
-                {
-                    stop2=1;
+                    case 1:
+                    {
+                        stop2=1;
+                        //d'abord le faire avec le graphe normal (normalisé et non normalisé)
+                        g.trouver_centralite_degres(1);
+                        //après supprimer une ou plusieurs arrete
+                        g.supprimer_arrete();
+                        //refaire calcul indice degré
+                        g.trouver_centralite_degres(2);
+                        std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralite des degres"<< std::endl;
+                        //g.comparer_valeurs_indice_degre();
+                        g.comparer_valeurs_indice();
+                        break;
+                    }
+                    case 2:
+                    {
+                        stop2=1;
 
-                    g.trouver_indice_centralite_vecteur_propre(1);
+                        g.trouver_indice_centralite_vecteur_propre(1);
 
-                    g.supprimer_arrete();
+                        g.supprimer_arrete();
 
-                    g.trouver_indice_centralite_vecteur_propre(2);
+                        g.trouver_indice_centralite_vecteur_propre(2);
 
-                    //g.comparer_valeurs_indice_vecteur_propre();
-                    g.comparer_valeurs_indice();
-                    break;
-                }
-                case 3:
-                {
-                    g.centralite_de_proximite(1);
-                    g.supprimer_arrete();
-                    g.centralite_de_proximite(2);
-                    g.comparer_valeurs_indice();
-                    break;
-                }
-                case 4:
-                {
-                    g.centralite_intermediarite(1);
-                    g.supprimer_arrete();
-                    g.centralite_intermediarite(2);
-                    g.comparer_valeurs_indice();
-                    break;
-                }
-                default:
-                {
-
-                    break;
-                }
-
+                        //g.comparer_valeurs_indice_vecteur_propre();
+                        g.comparer_valeurs_indice();
+                        break;
+                    }
+                    case 3:
+                    {
+                        stop2=1;
+                        g.centralite_de_proximite(1);
+                        g.supprimer_arrete();
+                        g.centralite_de_proximite(2);
+                        g.comparer_valeurs_indice();
+                        break;
+                    }
+                    case 4:
+                    {
+                        stop2=1;
+                        g.centralite_intermediarite(1);
+                        g.supprimer_arrete();
+                        g.centralite_intermediarite(2);
+                        g.comparer_valeurs_indice();
+                        break;
+                    }
+                    default:
+                    {
+                        stop2=1;
+                        break;
+                    }
                 }
             }
             break;

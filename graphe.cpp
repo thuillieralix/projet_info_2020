@@ -528,7 +528,16 @@ void Graphe::supprimer_arrete()
             int indice_arrete_final;
             int k_arrete_a_supp;
             ///rajouter blindage
-            if (indice_arrete_a_supp <= m_arrete.size())
+            int blindage=0;
+            for(size_t l=0;l<m_arrete.size();l++)
+            {
+                if (m_arrete[l]->getIndice()==indice_arrete_a_supp)
+                {
+                    blindage=1;
+                }
+            }
+
+            if (blindage==1)
             {
                 for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {
@@ -581,7 +590,7 @@ void Graphe::supprimer_arrete()
 
                 m_arrete.erase (m_arrete.begin()+(indice_arrete_final));
             }
-            else
+            else if (blindage==0)
             {
                 std::cout<<"cette arrete n'existe pas, veuillez recommencer"<<std::endl;
             }
