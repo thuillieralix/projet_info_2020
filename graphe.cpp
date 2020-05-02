@@ -651,6 +651,7 @@ void Graphe::tester_connexite()
         }
 
 }
+
 void Graphe::charger_nouveau_fichier_ponderation(std::string fichier)
 {
     std::ifstream lire2(fichier.c_str());
