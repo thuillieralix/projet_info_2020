@@ -108,7 +108,6 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_arrete[indice]->mettre_poids(poids);
     }
 }
-
 Graphe::~Graphe()
 { }
 void Graphe::afficher()
@@ -822,7 +821,6 @@ void Graphe::centralite_de_proximite(int numero)
     }
 
 }
-
 std::vector<std::vector<int>> Graphe::dijkstra(int depart)
 {
     //std::cout<< "entree dans le dijkstra graphe"<<std::endl;
@@ -994,7 +992,6 @@ void Graphe::comparer_valeurs_indice()
     }
 
 }
-
 ///sert a avoir toutes les composantes connexes d'un graphe
 void Graphe::composantesConnexe()
 {
@@ -1036,7 +1033,6 @@ void Graphe::composantesConnexe()
     }
     std::cout<<"il y a "<<nbr_composantes<<" composantes connexes dans le graphe "<<std::endl;
 }
-
 //dfs fonctionnel aussi utilise pour les composantes connexes
 void Graphe::dfspath(int sommet_number, std::deque<int>& resultat, bool silence)
 {
