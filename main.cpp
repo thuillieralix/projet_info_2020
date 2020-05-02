@@ -45,6 +45,7 @@ int main()
         std::cout << " 9: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
         std::cout << " 10: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
         std::cout << " 11: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
+        std::cout << " 12: EXTENSION afficher parcours DFS\n" ; 
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -172,6 +173,13 @@ int main()
         case 11:
             g.centralite_de_proximite(3);
             break;
+
+        case 12:
+            int indice ; 
+            std::cout <<"Saisissez un sommet pour appliquer le DFS:";
+            std::cin>>indice ; 
+            g.DFS(indice);
+            break ; 
             
         default:
             std::cout << "Erreur de saisie, il faut recommencer" << std::endl;

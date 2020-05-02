@@ -33,7 +33,7 @@ public :
     int getOrdre();
 
     std::vector<std::vector<int>> dijkstra(int depart);
-    void centralite_de_proximite(int numero);
+    void centralite_de_proximite();
 
 
     void tester_connexite();
@@ -46,8 +46,8 @@ public :
     std::string getFichierTopo();
     std::string getFichierPonderation();
 
-    void composantesConnexe();
-    void dfspath(int sommet_number, std::deque<int>& resultat, bool silence);
+    std::vector<int> DFS (int indice0) const ;
+    std::vector<int> BFS (int indice0) const ;
 
 
 };

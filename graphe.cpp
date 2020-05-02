@@ -1122,3 +1122,80 @@ void Graphe::dfspath(int sommet_number, std::deque<int>& resultat, bool silence)
     ///appel de la fonction dfs récursive
     m_sommet[sommet_number]->parcoursDFS(pile , temoinParcours,resultat,silence);
 }
+
+
+std::vector <int> Graphe::DFS(int indice0) const
+{
+    std::vector<bool> visit ; /// true si le sommet est visite false si non
+    int premier = indice0 ;
+    for (size_t i = 0 ; i < m_sommet.size(); ++i)
+        visit.push_back(false) ; /// initialisation du vecteur visit
+    std::stack<int> pile ; /// déclaration de la pile (stack)
+    std::vector<int> marquage ; /// marque le sommet
+    /// vecteur contenant les prédecesseurs :
+    std::vector<int> pred ((int)m_sommet.size(),-1) ;
+    visit[indice0] = true ; /// premier sommet visité, premier sommet marqué
+    /// on l'enfile et on le marque
+    pile.push(indice0) ;
+    marquage.push_back(indice0) ;
+
+    /// implémentation du parcours DFS
+    while(!pile.empty()) /// tant que la pile n'est pas vide
+    {
+        /// défilement des prochains sommets de la pile
+        premier = pile.top(); /// récupération d'un pointeur sur sommet
+        pile.pop(); /// on l'enlève de la pile
+        for(int j= 0 ; j<m_sommet[premier]->getTabSize(); ++j)
+        {
+            if(visit[m_sommet[premier]->getAdj()[j]->getIndice()]!=true)/// si le sommet n'est pas marqué
+            {
+                visit[m_sommet[premier]->getAdj()[j]->getIndice()]=true; /// on le marque
+                //pred.push_back(m_sommet[premier]->getAdj()[j]->getIndice()) = premier.push(m_sommet[premier]->getAdj()[j]->getIndice()) ;
+                pile.push(m_sommet[premier]->getAdj()[j]->getIndice()); /// on le met dans la pile
+                marquage.push_back(m_sommet[premier]->getAdj()[j]->getIndice()); /// il fait partie des sommets marqués
+            }
+        }
+    }
+
+    std::cout << "Parcours DFS a partir de:"<<indice0<<"\n" ;
+    /// ordre de découverte des différents sommets
+    for(size_t i =0; i< marquage.size();++i)
+        std::cout<<marquage[i]<<" \n";
+    int tampon ;
+    /// test pour savoir si les sommets sont marqués ou non
+    bool test = false ;
+    bool test1 = false ;
+    /// Affichage du parcours
+    for(int i =0 ; i<m_sommet.size();++i)
+    {
+        tampon = i ;
+        test1 = false ;
+        for(auto s:marquage){
+            if(s == i) {test1 = true; break ;}
+        }
+        /// si le sommet est marqué et que ça n'est pas le sommet initial on l'affiche
+        if(test1 == true && i!= indice0)
+        {
+            do{
+                std::cout<<tampon<<" " << "<---"<<" ";
+                test = false ;
+                for(size_t j = 0 ; j<marquage.size(); ++j) /// on affiche tous les sommets concernés
+                {
+                    for(size_t k = 0 ; k<m_sommet[tampon]->getAdj().size();++k)
+                    {if(marquage[j]==m_sommet[tampon]->getAdj()[k]->getIndice()){
+                            tampon = m_sommet[tampon]->getAdj()[k]->getIndice() ;
+                            test = true ;
+                            break ;
+                        }
+                    }
+                    if(test == true) break ;
+                }
+            }
+            while(tampon!=indice0); /// tant que la valeur stockée est différente du sommet initial
+        }
+        /// si il n'y a que le premier d'indice marque on ne l'affiche que lui, fin du parcours
+        if(test1 == true) std::cout<<indice0<<std::endl ;
+    }
+    return marquage ;
+}
+
