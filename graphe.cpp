@@ -269,29 +269,25 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
                     std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
 
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indVec = ", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75 , m_sommet[h]->get_y()*agrandireY,max3, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max3, "black");
                 }
                else if(tab_indice_degre_NORMALISE[h]==max2)
                 {
                     std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indVec=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75 , m_sommet[h]->get_y()*agrandireY,max2, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
                 }
                 else if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
                 {
                     std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indVec=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX+75 , m_sommet[h]->get_y()*agrandireY,max1, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max1, "black");
                 }
                 else
                 {
                     std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indVec=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75, m_sommet[h]->get_y()*agrandireY,tab_indice_degre_NORMALISE[h], "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_degre_NORMALISE[h], "black");
                 }
             }
 
@@ -440,29 +436,25 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                 {
                     std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75 , m_sommet[h]->get_y()*agrandireY+13,max3, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20 , m_sommet[h]->get_y()*agrandireY+13,max3, "black");
                 }
                 else if(tab_indice_degre_NORMALISE[h]==max2)
                 {
                     std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75 , m_sommet[h]->get_y()*agrandireY+13,max2, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20 , m_sommet[h]->get_y()*agrandireY+13,max2, "black");
                 }
                 else if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
                 {
                     std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX+75 , m_sommet[h]->get_y()*agrandireY+13,max1, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX+20 , m_sommet[h]->get_y()*agrandireY+13,max1, "black");
                 }
                 else
                 {
                     std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, "indDeg=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +75, m_sommet[h]->get_y()*agrandireY+13,tab_indice_degre_NORMALISE[h], "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,tab_indice_degre_NORMALISE[h], "black");
                 }
             }
 
@@ -825,29 +817,25 @@ void Graphe::centralite_de_proximite(int numero)
                 {
                     std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indProx=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +80, m_sommet[h]->get_y()*agrandireY,max3, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max3, "black");
                 }
                 else if(tab_indice_prox_NORMALISE[h]==max2)
                 {
                     std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indProx=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +80, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
                 }
                 else if(tab_indice_prox_NORMALISE[h]==max1)//3e plus haut indice
                 {
                     std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indProx=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +80, m_sommet[h]->get_y()*agrandireY,max1, "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max1, "black");
                 }
                 else
                 {
                     std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
                     svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, "indProx=", "black");
-                    svgout.addText(m_sommet[h]->get_x()*agrandireX +80, m_sommet[h]->get_y()*agrandireY,tab_indice_prox_NORMALISE[h], "black");
+                    svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_prox_NORMALISE[h], "black");
                 }
             }
 
