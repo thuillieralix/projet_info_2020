@@ -180,7 +180,7 @@ int main()
             break;
 
         case 10:
-            std::cout<<<<std::endl;
+            std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
@@ -188,7 +188,7 @@ int main()
             break;
 
         case 11:
-            std::cout<<<<std::endl;
+            std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
@@ -196,7 +196,7 @@ int main()
             break;
 
         case 12:
-            std::cout<<<<std::endl;
+            std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
