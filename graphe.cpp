@@ -508,7 +508,7 @@ void Graphe::supprimer_arrete()
 
     while (stop!=0)
     {
-        std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
+        std::cout<<"voulez vous supprimer une arrete ? (oui ou non)"<<std::endl;
         std::cin>>supp_arrete;
         std::cin.ignore();
         std::cin.clear();
