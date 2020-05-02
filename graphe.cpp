@@ -537,8 +537,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
 //        }
     }
 }
-
-
 void Graphe::supprimer_arrete()
 {
     std::string supp_arrete;
@@ -646,7 +644,6 @@ void Graphe::supprimer_arrete()
         }
     }
 }
-
 void Graphe::tester_connexite()
 {
     ///graphe connexe si pour chaque sommet, il y a une arrete
@@ -689,12 +686,10 @@ void Graphe::charger_nouveau_fichier_ponderation(std::string fichier)
         m_arrete[indice]->mettre_poids(poids);
     }
 }
-
 int Graphe::getOrdre()
 {
     return m_ordre;
 }
-
 void Graphe::centralite_de_proximite(int numero)
 {
     std::string fichier1;
@@ -966,7 +961,6 @@ std::vector<std::vector<int>> Graphe::dijkstra(int depart)
     //On retourne le résultat sous forme d'un tableau
     return tableau;
 }
-
 void Graphe::mettre_fichier_topo(std::string fichier)
 {
     fichier_topologie=fichier;
@@ -983,7 +977,6 @@ std::string Graphe::getFichierPonderation()
 {
     return fichier_ponderation;
 }
-
 void Graphe::comparer_valeurs_indice()
 {
     std::vector<float> tab_avant_supp_non_normalise;
