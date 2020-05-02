@@ -43,6 +43,9 @@ public :
 
     float get_x();
     float get_y();
+    void actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vector<std::vector<int>>> &tableau, std::vector<Arrete*> tab_arrete);
+
+
 };
 
 #endif // SOMMET_H_INCLUDED

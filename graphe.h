@@ -33,12 +33,16 @@ public :
     int getOrdre();
 
     std::vector<std::vector<int>> dijkstra(int depart);
-    void centralite_de_proximite(int numero);
 
     void composantesConnexe();
     void dfspath(int sommet_number, std::deque<int>& resultat, bool silence);
+    void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
+    void centralite_de_proximite();
 
-    
+    void centralite_intermediarite();
+
+
+
     void tester_connexite();
     void supprimer_arrete();
 

@@ -14,8 +14,9 @@ int main()
     int k ;
 
     std::string fichier1, fichier2;
+    // Graphe g("fichier1.txt","fichier_poids.txt");
     int choix, stop=1;
-    int  saisie_nouv_fichier=0;
+    int saisie_fichier1=0, saisie_fichier2=0, saisie_nouv_fichier=0;
 
 
     std::cout << std::endl<< std::endl<< std::endl;
@@ -41,19 +42,20 @@ int main()
         std::cout << std::endl<< std::endl<< std::endl;
         SetConsoleTextAttribute(hConsole,15) ;
         std::cout << "Que voulez-vous faire ?" << std::endl;
-        std::cout << " 0: changer fichier pondération " << std::endl;
+        std::cout << " 0: changer fichier ponderation " << std::endl;
         std::cout << " 1: trouver indice de centralite de degre " << std::endl;
         std::cout << " 2: trouver indice de centralite vecteur propre" << std::endl;
-        std::cout << " 3: supprimer une arrete" << std::endl;
-        std::cout << " 4: tester la connexite du graphe" << std::endl;
-        std::cout << " 5: afficher composantes graphe " << std::endl;
-        std::cout << " 6: quitter" << std::endl;
-        std::cout << " 7: comparer indice (choix de quel indice apres)" << std::endl;
-        std::cout << " 8: centralite de proximite" << std::endl;
-        std::cout << " 9: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
-        std::cout << " 10: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
-        std::cout << " 11: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
-        std::cout << " 12: EXTENSION afficher parcours DFS\n" ;
+        std::cout << " 3: trouver indice de centralite d'intermediarite" << '\n';
+        std::cout << " 4: supprimer une arrete" << std::endl;
+        std::cout << " 5: tester la connexite du graphe" << std::endl;
+        std::cout << " 6: afficher composantes graphe " << std::endl;
+        std::cout << " 7: quitter" << std::endl;
+        std::cout << " 8: comparer indice (choix de quel indice apres)" << std::endl;
+        std::cout << " 9: centralite de proximite" << std::endl;
+        std::cout << " 10: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
+        std::cout << " 11: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
+        std::cout << " 12: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
+        std::cout << " 13: EXTENSION afficher parcours DFS\n" ;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -86,25 +88,28 @@ int main()
             break;
 
         case 3:
+            g.centralite_intermediarite();
+            break;
+        case 4:
             g.supprimer_arrete();
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
-        case 4:
+        case 5:
             g.tester_connexite();
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
-        case 5:
+        case 6:
             g.afficher();
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
-        case 6:
+        case 7:
             stop=0;
             break;
 
-        case 7:
+        case 8:
         {
             int choix2;
             int stop2=0;
@@ -114,7 +119,7 @@ int main()
                 std::cout<<"1: indice de centralite de degre"<<std::endl;
                 std::cout<<"2: indice de centrzlite de vecteur propre"<<std::endl;
                 std::cout<<"3: indice de centralite de proximite"<<std::endl;
-                std::cout<<"4: indoce de centralite d'intermediarite"<<std::endl;
+                std::cout<<"4: indice de centralite d'intermediarite"<<std::endl;
                 std::cin>>choix2;
 
                 switch(choix2)
@@ -155,6 +160,10 @@ int main()
                     g.comparer_valeurs_indice();
                     break;
                 }
+                case 4:
+                {
+
+                }
                 default:
                 {
 
@@ -165,24 +174,24 @@ int main()
             }
             break;
         }
-        case 8:
+        case 9:
             g.centralite_de_proximite(0);
             std::cout << std::endl<< std::endl<< std::endl;
             break;
 
-        case 9:
+        case 10:
             g.trouver_centralite_degres(3);
             break;
 
-        case 10:
+        case 11:
             g.trouver_indice_centralite_vecteur_propre(3);
             break;
 
-        case 11:
+        case 12:
             g.centralite_de_proximite(3);
             break;
 
-        case 12:
+        case 13:
             int indice ;
             std::cout <<"Saisissez un sommet pour appliquer le DFS:";
             std::cin>>indice ;
