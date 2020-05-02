@@ -15,7 +15,7 @@ private :
     int m_indice;
     float m_x;
     float m_y;
-    std::string m_nom; 
+    std::string m_nom;
     float indice_cvp;
     std::vector<Sommet*> m_adjacent;
 public :
@@ -39,7 +39,7 @@ public :
 
     void parcoursDFS(std::deque<int>& pile , std::vector<int>& temoinParcours, std::deque<int>& resultat, bool silence);
 
-
+    std::vector <Sommet*> getAdj();
 
     float get_x();
     float get_y();

@@ -179,3 +179,7 @@ float Sommet::get_y()
 {
     return m_y;
 }
+std::vector <Sommet*> Sommet::getAdj()
+{
+    return m_adjacent;
+}

@@ -12,7 +12,7 @@ int main()
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     // you can loop k higher to see more color choices
     int k ;
-    
+
     std::string fichier1, fichier2;
     int choix, stop=1;
     int  saisie_nouv_fichier=0;
@@ -20,16 +20,16 @@ int main()
 
     std::cout << std::endl<< std::endl<< std::endl;
     SetConsoleTextAttribute(hConsole,3) ;
-    std::cout << "                              ACCESSIBILITE ET VULNERABILITE DES RESEAUX                  " << std::endl ; 
-    std::cout << std::endl << std::endl << std::endl ; 
+    std::cout << "                              ACCESSIBILITE ET VULNERABILITE DES RESEAUX                  " << std::endl ;
+    std::cout << std::endl << std::endl << std::endl ;
     SetConsoleTextAttribute(hConsole,3) ;
-    std::cout<<"Quel est le nom du fichier de topologie ? mettre le.txt à la fin"<<std::endl;
+    std::cout<<"Quel est le nom du fichier de topologie ? mettre le.txt a la fin"<<std::endl;
     std::cin>>fichier1;
     std::cout << std::endl<< std::endl<< std::endl;
 
 
     std::cout << std::endl<< std::endl<< std::endl;
-    std::cout<<"quel est le nom du fichier de ponderation ? mettre le.txt à la fin"<<std::endl;
+    std::cout<<"quel est le nom du fichier de ponderation ? mettre le.txt a la fin"<<std::endl;
     std::cin>>fichier2;
     std::cout << std::endl<< std::endl<< std::endl;
 
@@ -39,7 +39,7 @@ int main()
     while (stop!=0)
     {
         std::cout << std::endl<< std::endl<< std::endl;
-        SetConsoleTextAttribute(hConsole,15) ;       
+        SetConsoleTextAttribute(hConsole,15) ;
         std::cout << "Que voulez-vous faire ?" << std::endl;
         std::cout << " 0: changer fichier pondération " << std::endl;
         std::cout << " 1: trouver indice de centralite de degre " << std::endl;
@@ -53,7 +53,7 @@ int main()
         std::cout << " 9: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
         std::cout << " 10: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
         std::cout << " 11: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
-        std::cout << " 12: EXTENSION afficher parcours DFS\n" ; 
+        std::cout << " 12: EXTENSION afficher parcours DFS\n" ;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -183,12 +183,12 @@ int main()
             break;
 
         case 12:
-            int indice ; 
+            int indice ;
             std::cout <<"Saisissez un sommet pour appliquer le DFS:";
-            std::cin>>indice ; 
+            std::cin>>indice ;
             g.DFS(indice);
-            break ; 
-            
+            break ;
+
         default:
             std::cout << "Erreur de saisie, il faut recommencer" << std::endl;
             std::cout << std::endl<< std::endl<< std::endl;

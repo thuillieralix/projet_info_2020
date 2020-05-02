@@ -2,6 +2,7 @@
 #include "Sommet.h"
 #include "Arrete.h"
 #include "svgfile.h"
+#include "stack"
 
 Graphe::Graphe()
 {
