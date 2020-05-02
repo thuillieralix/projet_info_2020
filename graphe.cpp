@@ -259,22 +259,22 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
             {
 
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max3, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, max3, "black");
             }
             else if(tab_indice_degre_NORMALISE[h]==max2)
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max2, "black");
             }
             else if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max1, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, max1, "black");
             }
             else
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_degre_NORMALISE[h], "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,tab_indice_degre_NORMALISE[h], "black");
             }
         }
 
@@ -283,7 +283,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
             //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
 
             tmp=m_sommet[d]->getNom();
-            svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY-10, tmp, "black");
+            svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
         }
         int extremite_dep,extremite_ar,indice;
@@ -511,7 +511,8 @@ void Graphe::supprimer_arrete()
     {
         std::cout<<"voulez vous supprimer une arrete ?"<<std::endl;
         std::cin>>supp_arrete;
-
+        std::cin.ignore();
+        std::cin.clear();
 
         if (supp_arrete=="oui")
         {
@@ -528,16 +529,12 @@ void Graphe::supprimer_arrete()
             int indice_arrete_final;
             int k_arrete_a_supp;
             ///rajouter blindage
-            if (indice_arrete_a_supp <= m_arrete.size())
+            if (indice_arrete_a_supp <= m_arrete.size()&&supp_arrete!="oui"&&supp_arrete!="non")
             {
-                std::cout<<"arrete a supp trouvee"<<std::endl;
                 for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {
-                    std::cout<<"rentre dans le for"<<std::endl;
                     if (tab_indices_arretes[x]==indice_arrete_a_supp)
                     {
-                        std::cout<<"numero arrete a supp trouve dans le tableau d'arretes"<<std::endl;
-                        std::cout<<"indice arrete a sup = "<<indice_arrete_a_supp<<std::endl;
                         nb_test++;
 
                         ///parcourir tableau adjacences pour enlever cette connexion
@@ -554,7 +551,6 @@ void Graphe::supprimer_arrete()
                                     {
 //                                        g_arrete_dep=m_sommet[m]->getIndice();
                                         g_arrete_dep=m;
-                                        std::cout<<"rentre dans le if de depart"<<std::endl;
                                     }
                                 }
                             }
@@ -568,15 +564,12 @@ void Graphe::supprimer_arrete()
                                 {
                                     if(m_sommet[p]->getIndice()==m_arrete[e]->getArrivee())
                                     {
-                                        std::cout<<"rentre dans le if d'arrivee"<<std::endl;
                                         //k_arrete_a_supp=m_sommet[p]->getIndice();
                                         k_arrete_a_supp=p;
                                     }
                                 }
                             }
                         }
-
-                        std::cout<<"arrivee de cette arrete a supp = "<<m_sommet[k_arrete_a_supp]->getIndice()<<std::endl;
                     }
                     if (nb_test==0)
                     {
@@ -588,7 +581,6 @@ void Graphe::supprimer_arrete()
                 m_sommet[k_arrete_a_supp]->supprimer_adjacence(m_sommet[g_arrete_dep]->getIndice());
 
                 m_arrete.erase (m_arrete.begin()+(indice_arrete_final));
-                std::cout<<"erase ok "<<std::endl;
             }
             else
             {
@@ -612,7 +604,6 @@ void Graphe::tester_connexite()
     int connexe_test=1;
     for (size_t i=0; i<m_sommet.size(); i++)
     {
-        std::cout<<"i : "<<i<<std::endl;
         int nb_arrete;
         nb_arrete=0;
         for (size_t j=0; j<m_arrete.size(); j++)
@@ -780,22 +771,22 @@ void Graphe::centralite_de_proximite(int numero)
             if(tab_indice_prox_NORMALISE[h]==max3) //plus haut indice
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max3, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max3, "black");
             }
             else if(tab_indice_prox_NORMALISE[h]==max2)
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max2, "black");
             }
             else if(tab_indice_prox_NORMALISE[h]==max1)//3e plus haut indice
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max1, "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max1, "black");
             }
             else
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
-                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_prox_NORMALISE[h], "black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,tab_indice_prox_NORMALISE[h], "black");
             }
         }
 
@@ -804,7 +795,7 @@ void Graphe::centralite_de_proximite(int numero)
             //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
 
             tmp=m_sommet[d]->getNom();
-            svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY-10, tmp, "black");
+            svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
         }
         int extremite_dep,extremite_ar,indice;
