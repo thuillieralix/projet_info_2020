@@ -5,17 +5,25 @@
 #include <stdlib.h>
 #include<math.h>
 #include <string>
+#include <windows.h>
 
 int main()
 {
-
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    // you can loop k higher to see more color choices
+    int k ;
+    
     std::string fichier1, fichier2;
     int choix, stop=1;
     int  saisie_nouv_fichier=0;
 
 
     std::cout << std::endl<< std::endl<< std::endl;
-    std::cout<<"quel est le nom du fichier de topologie ? mettre le.txt à la fin"<<std::endl;
+    SetConsoleTextAttribute(hConsole,3) ;
+    std::cout << "                              ACCESSIBILITE ET VULNERABILITE DES RESEAUX                  " << std::endl ; 
+    std::cout << std::endl << std::endl << std::endl ; 
+    SetConsoleTextAttribute(hConsole,3) ;
+    std::cout<<"Quel est le nom du fichier de topologie ? mettre le.txt à la fin"<<std::endl;
     std::cin>>fichier1;
     std::cout << std::endl<< std::endl<< std::endl;
 
@@ -28,10 +36,10 @@ int main()
     Graphe g(fichier1,fichier2);
     g.mettre_fichier_topo(fichier1);
     g.mettre_fichier_ponderation(fichier2);
-
     while (stop!=0)
     {
         std::cout << std::endl<< std::endl<< std::endl;
+        SetConsoleTextAttribute(hConsole,15) ;       
         std::cout << "Que voulez-vous faire ?" << std::endl;
         std::cout << " 0: changer fichier pondération " << std::endl;
         std::cout << " 1: trouver indice de centralite de degre " << std::endl;
