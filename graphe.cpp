@@ -619,7 +619,29 @@ void Graphe::tester_connexite()
         }
         std::cout<<"nb_arrete : "<<nb_arrete<<std::endl;
         std::cout<<"nb_sommet : "<<nb_sommet<<std::endl;
-        if (nb_arrete>=nb_sommet-1)
+
+        int nb_ok=0,nb_ok_sommet=0;
+        for (size_t i=0;i<m_sommet.size();i++)
+        {
+            nb_ok=0;
+            for(size_t y=0;y<m_arrete.size();y++)
+            {
+                if (m_arrete[y]->getDepart()==m_sommet[i]->getIndice()||m_arrete[y]->getArrivee()==m_sommet[i]->getIndice())
+                {
+                    nb_ok++;
+
+                    std::cout<<"le sommet "<<m_sommet[i]->getIndice()<<" est relie a l'arrete : "<<m_arrete[y]->getIndice()<<std::endl;
+
+                    std::cout<<"nb_ok :"<<nb_ok<<std::endl;
+                }
+            }
+            if (nb_ok==0)
+            {
+                nb_ok_sommet++;
+            }
+        }
+        std::cout<<"nb_ok_sommet : "<<nb_ok_sommet<<std::endl;
+        if (nb_arrete>=nb_sommet-1&&nb_ok_sommet==0)
         {
             std::cout<<"le graphe est connexe"<<std::endl;
         }
