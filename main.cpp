@@ -56,6 +56,7 @@ int main()
         std::cout << " 12: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
         std::cout << " 13: EXTENSION afficher parcours DFS\n" ;
         std::cout << " 14: afficher graphe en SVG\n" ;
+        std::cout << " 15: EXTENSION afficher indice intermediarite NORMALISE en svgout" << std::endl;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -88,7 +89,7 @@ int main()
             break;
 
         case 3:
-            g.centralite_intermediarite();
+            g.centralite_intermediarite(0);
             break;
         case 4:
             g.centralite_de_proximite(0);
@@ -162,7 +163,11 @@ int main()
                 }
                 case 4:
                 {
-
+                    g.centralite_intermediarite(1);
+                    g.supprimer_arrete();
+                    g.centralite_intermediarite(2);
+                    g.comparer_valeurs_indice();
+                    break;
                 }
                 default:
                 {
@@ -212,6 +217,14 @@ int main()
 
         case 14:
             g.afficher_svg();
+            break;
+
+        case 15:
+            std::cout<<std::endl;
+            std::cout<<"en rouge : indice le + haut"<<std::endl;
+            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
+            g.centralite_intermediarite(3);
             break;
 
         default:

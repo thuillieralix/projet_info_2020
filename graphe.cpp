@@ -528,7 +528,7 @@ void Graphe::supprimer_arrete()
             int indice_arrete_final;
             int k_arrete_a_supp;
             ///rajouter blindage
-            if (indice_arrete_a_supp <= m_arrete.size()&&supp_arrete!="oui"&&supp_arrete!="non")
+            if (indice_arrete_a_supp <= m_arrete.size())
             {
                 for (size_t x=0; x<tab_indices_arretes.size(); x++)
                 {
@@ -1136,8 +1136,27 @@ std::vector <int> Graphe::DFS(int indice0) const
     }
     return marquage ;
 }
-void Graphe::centralite_intermediarite()
+void Graphe::centralite_intermediarite(int numero)
 {
+    std::string fichier1;
+    if (numero==1)
+    {
+        //cas ou on a pas encore supprimé d'arrete
+
+        fichier1="indice_sans_suppression.txt";
+
+    }
+    if (numero==2)
+    {
+        //cas ou on a pas encore supprimé d'arrete
+
+        fichier1="indice_avec_suppression.txt";
+
+    }
+
+    std::ofstream ecrire1(fichier1.c_str());
+    std::vector<float> tab_indice_prox_NON_NORMALISE;
+    std::vector<float> tab_indice_prox_NORMALISE;
     //tab 2 dimensions avec 3 attributs par cases
     std::vector<std::vector<std::vector<int>>> resDijkstra, stockPassage;
     std::vector<std::vector<int>> stockChemins;
@@ -1242,6 +1261,124 @@ void Graphe::centralite_intermediarite()
         //ex 0-1 et 1-0
         result = result/2;
         std::cout <<i<<"\t\t" <<result << "\t\t"<< (result*2)/coeff_norm <<'\n';
+        tab_indice_prox_NON_NORMALISE.push_back(result);
+        tab_indice_prox_NORMALISE.push_back((result*2)/coeff_norm);
+    }
+    ecrire1<<"NonNormalise"<<std::endl;
+    for (size_t y=0;y<tab_indice_prox_NON_NORMALISE.size();y++)
+    {
+        ecrire1<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
+    }
+    ecrire1<<"Normalise"<<std::endl;
+    for(size_t r=0;r<tab_indice_prox_NORMALISE.size();r++)
+    {
+        ecrire1<<tab_indice_prox_NORMALISE[r]<<std::endl;
+    }
+    if (numero==3)
+    {
+        Svgfile svgout;
+        svgout.addGrid() ;
+        float ymax=0,xmax=0;
+        for (size_t g=0; g<m_sommet.size(); g++)
+        {
+            if (m_sommet[g]->get_x()>xmax)
+            {
+                xmax=m_sommet[g]->get_x();
+            }
+            if (m_sommet[g]->get_y()>ymax)
+            {
+                ymax=m_sommet[g]->get_y();
+            }
+        }
+        float agrandireX, agrandireY;
+        agrandireX=850/xmax;
+        agrandireY=750/ymax;
+        std::string tmp;
+        ///on dessine dans svgout
+        float max1=0, max2=0,max3=0;
+        for (size_t m=0; m<tab_indice_prox_NORMALISE.size(); m++)
+        {
+            std::cout<< "voici le tab indice de degre indice "<<m<<" valeur : "<<tab_indice_prox_NORMALISE[m]<<std::endl;
+        }
+
+        for (size_t i=0; i<tab_indice_prox_NORMALISE.size(); i++)
+        {
+            if (tab_indice_prox_NORMALISE[i]>max3)
+            {
+                max1=max2;
+                max2=max3;
+                max3=tab_indice_prox_NORMALISE[i];
+            }
+            else if (tab_indice_prox_NORMALISE[i]<max3&&tab_indice_prox_NORMALISE[i]>max2)
+            {
+                max1=max2;
+                //std::swap(max1,max2);
+                max2=tab_indice_prox_NORMALISE[i];
+            }
+            else if (tab_indice_prox_NORMALISE[i]<max2&&tab_indice_prox_NORMALISE[i]>max1)
+            {
+                max1=tab_indice_prox_NORMALISE[i];
+            }
+        }
+
+        for (size_t r=0; r<tab_indice_prox_NORMALISE.size(); r++)
+        {
+            std::cout<<"pour le sommet "<<r<<" indice prox = "<<tab_indice_prox_NORMALISE[r]<<std::endl;
+        }
+
+        for(size_t h=0; h<tab_indice_prox_NORMALISE.size(); h++)
+        {
+            if(tab_indice_prox_NORMALISE[h]==max3) //plus haut indice
+            {
+                svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max3, "black");
+            }
+            else if(tab_indice_prox_NORMALISE[h]==max2)
+            {
+                svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max2, "black");
+            }
+            else if(tab_indice_prox_NORMALISE[h]==max1)//3e plus haut indice
+            {
+                svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max1, "black");
+            }
+            else
+            {
+                svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
+                svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,tab_indice_prox_NORMALISE[h], "black");
+            }
+        }
+
+        for (size_t d=0; d<m_sommet.size(); d++)
+        {
+            //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
+
+            tmp=m_sommet[d]->getNom();
+            svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
+
+        }
+        int extremite_dep,extremite_ar,indice;
+        for(int i=0; i<m_arrete.size(); i++)
+        {
+            extremite_dep=m_arrete[i]->getDepart();
+            extremite_ar=m_arrete[i]->getArrivee();
+            indice =m_arrete[i]->getIndice();
+
+            svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
+                           ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
+            int x_poids, y_poids;
+            int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
+            int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
+            int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
+            int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
+            x_poids=x_dep+(x_ar-x_dep)/2;
+            y_poids=y_dep+(y_ar-y_dep)/2-20;
+            //svgout.addText(x_poids, y_poids, indice, "blue");
+
+        }
+
+
     }
 }
 
