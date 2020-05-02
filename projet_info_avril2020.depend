@@ -191,3 +191,53 @@
 	"Sommet.h"
 	"Arrete.h"
 
+1588433978 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\arrete.cpp
+	"Arrete.h"
+
+1588433978 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\arrete.h
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+
+1588433978 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\main.cpp
+	<iostream>
+	"Graphe.h"
+	"Sommet.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string>
+	<windows.h>
+
+1588433978 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\graphe.h
+	<iostream>
+	<vector>
+	<queue>
+	<fstream>
+	"Sommet.h"
+	"Arrete.h"
+	<math.h>
+
+1588433978 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\sommet.h
+	"Arrete.h"
+	<iostream>
+	<vector>
+	<queue>
+	<string>
+	<math.h>
+
+1588433978 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\sommet.cpp
+	"Sommet.h"
+	"Arrete.h"
+
+1588433978 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+
+1588433978 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\svgfile.h
+	<string>
+	<fstream>
+	<set>
+

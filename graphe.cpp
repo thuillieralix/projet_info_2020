@@ -32,9 +32,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         lire >> sommet_y;
         sommet_x=sommet_x*100;
         sommet_y=sommet_y*100;
-        std::cout<<"sommet_y = "<<sommet_y<<std::endl;
         Sommet* s = new Sommet(m_indice, m_nom,sommet_x,sommet_y);
-        std::cout<<"voila l'indice : "<<s->getIndice()<<"pour le sommet : "<<i<<std::endl;
         m_sommet.push_back(s);
 
     }
@@ -70,9 +68,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
     {
         lire >> indice;
         lire >> extremite_dep;
-        std::cout<<"pour arrete "<<i<<" extremite dep : "<<extremite_dep<<std::endl;
         lire >> extremite_ar;
-        std::cout<<"pour arrete "<<i<<"extremite ar : "<<extremite_ar<<std::endl;
         ///faire adjacence
         Arrete* a=new Arrete(extremite_dep,extremite_ar,indice);
         m_arrete.push_back(a);
