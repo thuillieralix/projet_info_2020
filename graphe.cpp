@@ -60,7 +60,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         svgout.addDisk(m_sommet[d]->get_x()*agrandireX,m_sommet[d]->get_y()*agrandireY,5,"red");
 
         tmp=m_sommet[d]->getNom();
-        svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY-10, tmp, "black");
+        svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
         svgout.addText(m_sommet[d]->get_x()*agrandireX -30, m_sommet[d]->get_y()*agrandireY, m_sommet[d]->getIndice(), "black");
         svgout.addGrid() ;
     }
@@ -229,7 +229,6 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
         std::string tmp;
         ///on dessine dans svgout
         float max1=0, max2=0,max3=0;
-        std::cout<<"size tab : "<<tab_indice_degre_NORMALISE.size()<<std::endl;
         for (size_t m=0; m<tab_indice_degre_NORMALISE.size(); m++)
         {
             std::cout<< "voici le tab indice de vecteur propre indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
@@ -242,48 +241,38 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
                 max1=max2;
                 max2=max3;
                 max3=tab_indice_degre_NORMALISE[i];
-                std::cout<<"1"<<std::endl;
             }
             else if (tab_indice_degre_NORMALISE[i]<max3&&tab_indice_degre_NORMALISE[i]>max2)
             {
                 max1=max2;
                 //std::swap(max1,max2);
                 max2=tab_indice_degre_NORMALISE[i];
-                std::cout<<"2"<<std::endl;
             }
             else if (tab_indice_degre_NORMALISE[i]<max2&&tab_indice_degre_NORMALISE[i]>max1)
             {
                 max1=tab_indice_degre_NORMALISE[i];
-                std::cout<<"3"<<std::endl;
             }
         }
-        std::cout<<"max3 final : "<<max3<<std::endl;
-        std::cout<<"max2 final : "<<max2<<std::endl;
-        std::cout<<"max1 final : "<<max1<<std::endl;
         for(size_t h=0; h<tab_indice_degre_NORMALISE.size(); h++)
         {
             if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
             {
-                std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
 
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max3, "black");
             }
             else if(tab_indice_degre_NORMALISE[h]==max2)
             {
-                std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
             }
             else if(tab_indice_degre_NORMALISE[h]==max1)//3e plus haut indice
             {
-                std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY, max1, "black");
             }
             else
             {
-                std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_degre_NORMALISE[h], "black");
             }
@@ -434,7 +423,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
             std::cout<<"size tab : "<<tab_indice_degre_NORMALISE.size()<<std::endl;
             for (size_t m=0; m<tab_indice_degre_NORMALISE.size(); m++)
             {
-                std::cout<< "voici le tab indice de degré indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
+                std::cout<< "voici le tab indice de degre indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
             }
 
             for (size_t i=0; i<tab_indice_degre_NORMALISE.size(); i++)
@@ -756,10 +745,9 @@ void Graphe::centralite_de_proximite(int numero)
         std::string tmp;
         ///on dessine dans svgout
         float max1=0, max2=0,max3=0;
-        std::cout<<"size tab : "<<tab_indice_prox_NORMALISE.size()<<std::endl;
         for (size_t m=0; m<tab_indice_prox_NORMALISE.size(); m++)
         {
-            std::cout<< "voici le tab indice de degré indice "<<m<<" valeur : "<<tab_indice_prox_NORMALISE[m]<<std::endl;
+            std::cout<< "voici le tab indice de degre indice "<<m<<" valeur : "<<tab_indice_prox_NORMALISE[m]<<std::endl;
         }
 
         for (size_t i=0; i<tab_indice_prox_NORMALISE.size(); i++)
@@ -769,25 +757,18 @@ void Graphe::centralite_de_proximite(int numero)
                 max1=max2;
                 max2=max3;
                 max3=tab_indice_prox_NORMALISE[i];
-                std::cout<<"1"<<std::endl;
             }
             else if (tab_indice_prox_NORMALISE[i]<max3&&tab_indice_prox_NORMALISE[i]>max2)
             {
                 max1=max2;
                 //std::swap(max1,max2);
                 max2=tab_indice_prox_NORMALISE[i];
-                std::cout<<"2"<<std::endl;
             }
             else if (tab_indice_prox_NORMALISE[i]<max2&&tab_indice_prox_NORMALISE[i]>max1)
             {
                 max1=tab_indice_prox_NORMALISE[i];
-                std::cout<<"3"<<std::endl;
             }
         }
-        std::cout<<"max3 final : "<<max3<<std::endl;
-        std::cout<<"max2 final : "<<max2<<std::endl;
-        std::cout<<"max1 final : "<<max1<<std::endl;
-        std::cout<<"size tableau : "<<tab_indice_prox_NORMALISE.size()<<std::endl;
 
         for (size_t r=0; r<tab_indice_prox_NORMALISE.size(); r++)
         {
@@ -798,25 +779,21 @@ void Graphe::centralite_de_proximite(int numero)
         {
             if(tab_indice_prox_NORMALISE[h]==max3) //plus haut indice
             {
-                std::cout<<" 1 sommet d'indice egal à max3 "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max3, "black");
             }
             else if(tab_indice_prox_NORMALISE[h]==max2)
             {
-                std::cout<<" 1 sommet d'indice egal à max2 "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max2, "black");
             }
             else if(tab_indice_prox_NORMALISE[h]==max1)//3e plus haut indice
             {
-                std::cout<<" 1 sommet d'indice egal à max1 "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"yellow");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,max1, "black");
             }
             else
             {
-                std::cout<<" ELSE : 1 sommet d'indice inferieur "<<std::endl;
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,5,"black");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY,tab_indice_prox_NORMALISE[h], "black");
             }
@@ -1377,7 +1354,7 @@ void Graphe::afficher_svg()
         svgout.addDisk(m_sommet[d]->get_x()*agrandireX,m_sommet[d]->get_y()*agrandireY,5,"red");
 
         tmp=m_sommet[d]->getNom();
-        svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY-10, tmp, "black");
+        svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
         svgout.addText(m_sommet[d]->get_x()*agrandireX -30, m_sommet[d]->get_y()*agrandireY, m_sommet[d]->getIndice(), "black");
         svgout.addGrid() ;
     }

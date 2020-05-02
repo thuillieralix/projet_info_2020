@@ -182,24 +182,24 @@ int main()
         case 10:
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
-            std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
-            std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
+            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
             g.trouver_centralite_degres(3);
             break;
 
         case 11:
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
-            std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
-            std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
+            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
             g.trouver_indice_centralite_vecteur_propre(3);
             break;
 
         case 12:
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
-            std::cout<<"en orange : 2ème indice le + haut"<<std::endl;
-            std::cout<<"en jaune : 3ème indice le + haut"<<std::endl<<std::endl<<std::endl;
+            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
             g.centralite_de_proximite(3);
             break;
 
