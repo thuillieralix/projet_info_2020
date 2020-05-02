@@ -182,6 +182,8 @@ float Sommet::get_y()
 std::vector <Sommet*> Sommet::getAdj()
 {
     return m_adjacent;
+}
+
 void Sommet::actualiserDijkstra_inter(int plusPetitSommet, std::vector<std::vector<std::vector<int>>> &tableau, std::vector<Arrete*> tab_arrete)
 {
     int poidsArreteI=0;

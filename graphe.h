@@ -37,7 +37,7 @@ public :
     void composantesConnexe();
     void dfspath(int sommet_number, std::deque<int>& resultat, bool silence);
     void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
-    void centralite_de_proximite();
+    void centralite_de_proximite(int numero);
 
     void centralite_intermediarite();
 

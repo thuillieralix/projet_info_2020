@@ -11,12 +11,11 @@ int main()
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     // you can loop k higher to see more color choices
-    int k ;
 
     std::string fichier1, fichier2;
     // Graphe g("fichier1.txt","fichier_poids.txt");
     int choix, stop=1;
-    int saisie_fichier1=0, saisie_fichier2=0, saisie_nouv_fichier=0;
+    int saisie_nouv_fichier=0;
 
 
     std::cout << std::endl<< std::endl<< std::endl;
