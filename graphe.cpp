@@ -608,30 +608,25 @@ void Graphe::supprimer_arrete()
 }
 void Graphe::tester_connexite()
 {
-    ///graphe connexe si pour chaque sommet, il y a une arrete
-    int connexe_test=1;
-    for (size_t i=0; i<m_sommet.size(); i++)
-    {
-        int nb_arrete;
-        nb_arrete=0;
-        for (size_t j=0; j<m_arrete.size(); j++)
+        int nb_sommet=0, nb_arrete=0;
+        for (size_t i=0;i<m_sommet.size();i++)
         {
-
-            if (m_arrete[j]->getDepart()==m_sommet[i]->getIndice()||m_arrete[j]->getArrivee()==m_sommet[i]->getIndice())
-            {
-                nb_arrete++;
-            }
+                nb_sommet++;
         }
-        if(nb_arrete==0)
+        for (size_t p=0;p<m_arrete.size();p++)
         {
-            std::cout<<"le graphe n'est pas connexe"<<std::endl<<std::endl;
-            connexe_test=0;
-            break;
-
+            nb_arrete++;
         }
-    }
-    if(connexe_test==1)
-        std::cout<<"le graphe est connexe"<<std::endl;
+        std::cout<<"nb_arrete : "<<nb_arrete<<std::endl;
+        std::cout<<"nb_sommet : "<<nb_sommet<<std::endl;
+        if (nb_arrete>=nb_sommet-1)
+        {
+            std::cout<<"le graphe est connexe"<<std::endl;
+        }
+        else
+        {
+            std::cout<<"le graphe est pas connexe"<<std::endl;
+        }
 
 }
 void Graphe::charger_nouveau_fichier_ponderation(std::string fichier)
