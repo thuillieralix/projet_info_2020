@@ -298,7 +298,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
 
         }
         int extremite_dep,extremite_ar,indice;
-        for(int i=0; i<m_taille; i++)
+        for(int i=0; i<m_arrete.size(); i++)
         {
             extremite_dep=m_arrete[i]->getDepart();
             extremite_ar=m_arrete[i]->getArrivee();
@@ -499,7 +499,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
 
             }
             int extremite_dep,extremite_ar,indice;
-            for(int i=0; i<m_taille; i++)
+            for(int i=0; i<m_arrete.size(); i++)
             {
                 extremite_dep=m_arrete[i]->getDepart();
                 extremite_ar=m_arrete[i]->getArrivee();
@@ -841,7 +841,7 @@ void Graphe::centralite_de_proximite(int numero)
 
         }
         int extremite_dep,extremite_ar,indice;
-        for(int i=0; i<m_taille; i++)
+        for(int i=0; i<m_arrete.size(); i++)
         {
             extremite_dep=m_arrete[i]->getDepart();
             extremite_ar=m_arrete[i]->getArrivee();
