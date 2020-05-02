@@ -55,6 +55,7 @@ public :
 
     std::vector<int> DFS (int indice0) const ;
     std::vector<int> BFS (int indice0) const ;
+    void afficher_svg();
 
 
 };

@@ -370,12 +370,46 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         {
             deg_max=nb_degre;
         }
-        std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
-        tab_indice_degre_NORMALISE.push_back(nb_degre);
-
         ecire1<<nb_degre<<std::endl;
+        std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
 
-        if (num_pour_comparer==3)
+    }
+    std::cout<<std::endl<<std::endl<<std::endl;
+    std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
+    std::cout<<std::endl;
+
+    float indice_deg=0.00;
+    std::cout<<"indice normalise de degre : "<<std::endl;
+
+    ecire1<<"Normalise "<<std::endl;
+
+//    if (num_pour_comparer==2)
+//        { //cas ou on a pas encore supprimé d'arrete
+//
+//            ecire2<<"indice de degre normalise "<<std::endl;
+//        }
+    for (size_t x=0; x<m_sommet.size(); x++)
+    {
+        nb_degre=0;
+        for (size_t z=0; z<m_arrete.size(); z++)
+        {
+            if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
+            {
+                nb_degre++;
+            }
+            if (m_arrete[z]->getArrivee()==m_sommet[x]->getIndice())
+            {
+                nb_degre++;
+            }
+        }
+        indice_deg=nb_degre/deg_max;
+        tab_indice_degre_NORMALISE.push_back(indice_deg);
+        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
+
+        ecire1<<indice_deg<<std::endl;
+    }
+
+    if (num_pour_comparer==3)
         {
             Svgfile svgout;
             svgout.addGrid() ;
@@ -485,47 +519,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
             }
 
         }
-
-    }
-    std::cout<<std::endl<<std::endl<<std::endl;
-    std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
-    std::cout<<std::endl;
-
-    float indice_deg=0.00;
-    std::cout<<"indice normalise de degre : "<<std::endl;
-
-    ecire1<<"Normalise "<<std::endl;
-
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre normalise "<<std::endl;
-//        }
-    for (size_t x=0; x<m_sommet.size(); x++)
-    {
-        nb_degre=0;
-        for (size_t z=0; z<m_arrete.size(); z++)
-        {
-            if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-            if (m_arrete[z]->getArrivee()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-        }
-        indice_deg=nb_degre/deg_max;
-        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
-
-        ecire1<<indice_deg<<std::endl;
-
-//        if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<indice_deg<<std::endl;
-//        }
-    }
 }
 void Graphe::supprimer_arrete()
 {
@@ -1189,9 +1182,6 @@ std::vector <int> Graphe::DFS(int indice0) const
     }
     return marquage ;
 }
-
-
-
 void Graphe::centralite_intermediarite()
 {
     //tab 2 dimensions avec 3 attributs par cases
@@ -1368,5 +1358,62 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
             sortie = true;
         }
         plusPetitSommet = -1;
+    }
+}
+void Graphe::afficher_svg()
+{
+    Svgfile svgout ;
+    int indice, extremite_dep, extremite_ar;
+    int x1, y1, x2, y2;
+    float ymax=0,xmax=0;
+    for (size_t g=0; g<m_sommet.size(); g++)
+    {
+        if (m_sommet[g]->get_x()>xmax)
+        {
+            xmax=m_sommet[g]->get_x();
+        }
+        if (m_sommet[g]->get_y()>ymax)
+        {
+            ymax=m_sommet[g]->get_y();
+        }
+    }
+    float agrandireX, agrandireY;
+    agrandireX=850/xmax;
+    agrandireY=750/ymax;
+    std::string tmp;
+    for (size_t d=0; d<m_sommet.size(); d++)
+    {
+
+        svgout.addDisk(m_sommet[d]->get_x()*agrandireX,m_sommet[d]->get_y()*agrandireY,5,"red");
+
+        tmp=m_sommet[d]->getNom();
+        svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY-10, tmp, "black");
+        svgout.addText(m_sommet[d]->get_x()*agrandireX -30, m_sommet[d]->get_y()*agrandireY, m_sommet[d]->getIndice(), "black");
+        svgout.addGrid() ;
+    }
+    for(int i=0; i<m_arrete.size(); i++)
+    {
+        extremite_dep=m_arrete[i]->getDepart();
+        extremite_ar=m_arrete[i]->getArrivee();
+        indice=m_arrete[i]->getIndice();
+        svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
+                       ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
+        float x_poids, y_poids;
+        float x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
+        float y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
+        float x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
+        float y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
+        float tmp;
+        if (x_dep>x_ar)
+            x_poids=x_ar+(x_dep-x_ar)/2;
+        else if (x_dep<x_ar)
+            x_poids=x_dep+(x_ar-x_dep)/2;
+        else if (y_dep>y_ar)
+            y_poids=y_ar+(y_dep-y_ar)/2;
+        else if (y_dep<y_ar)
+            y_poids=y_dep+(y_ar-y_dep)/2;
+        x_poids=x_dep+(x_ar-x_dep)/2;
+        y_poids=y_dep+(y_ar-y_dep)/2;
+        svgout.addText(x_poids, y_poids, indice, "blue");
     }
 }

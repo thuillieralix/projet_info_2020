@@ -55,6 +55,7 @@ int main()
         std::cout << " 11: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
         std::cout << " 12: EXTENSION afficher indice proximite NORMALISE en svgout" << std::endl;
         std::cout << " 13: EXTENSION afficher parcours DFS\n" ;
+        std::cout << " 14: afficher graphe en SVG\n" ;
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -196,6 +197,10 @@ int main()
             std::cin>>indice ;
             g.DFS(indice);
             break ;
+
+        case 14:
+            g.afficher_svg();
+            break;
 
         default:
             std::cout << "Erreur de saisie, il faut recommencer" << std::endl;
