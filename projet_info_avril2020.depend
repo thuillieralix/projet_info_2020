@@ -96,12 +96,13 @@
 	"Sommet.h"
 	"Arrete.h"
 
-1588432335 source:c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.cpp
+1588523051 source:c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.cpp
 	"Graphe.h"
 	"Sommet.h"
 	"Arrete.h"
 	"svgfile.h"
 	"stack"
+	<fstream>
 
 1588520632 c:\users\marc\onedrive\documents\github\projet_info_2020\graphe.h
 	<iostream>

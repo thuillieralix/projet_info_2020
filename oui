@@ -1,0 +1,28 @@
+indices de centralite d'INTERMEDIARITE
+le sommet 	indice simple 	indice normalise
+0		0		0
+1		0		0
+2		6		1
+3		0		0
+4		0		0
+indices de centralite de PROXIMITE
+le sommet 	indice simple 	indice normalise
+0		0.010101		0.040404
+1		0.00877193		0.0350877
+2		0.0119048		0.047619
+3		0.00653595		0.0261438
+4		0.0045045		0.018018
+indices de centralite de VECTEUR PROPRE
+le sommet 	indice simple 	indice normalise
+0		1		0.223607
+1		1		0.223607
+2		4		0.894427
+3		1		0.223607
+4		1		0.223607
+indices de centralite de DEGRES
+le sommet 	indice simple 	indice normalise
+0		1		0.25
+1		1		0.25
+2		4		1
+3		1		0.25
+4		1		0.25

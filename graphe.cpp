@@ -1612,10 +1612,15 @@ int Graphe::saveIndices()
     std::string nomFichier;
 
     std::cout << "Saisissez le nom du fichier de sauvegarde avec le nom de l'extension (.txt)" << '\n';
-    std::cout << "si vous saisissez le nom d'un fichier deja existant, les donnees contenues seront ecrasees" << '\n';
+    std::cout << "le nom du fichier doit etre different de ceux deja existants" << '\n';
     std::cin >> nomFichier;
+    std::ifstream testExistence(nomFichier);
+    if(testExistence)
+    {
+        std::cout << "fichier deja existant veuillez choisir un autre nom" << '\n';
+        return 0;
+    }
     std::ofstream monFlux(nomFichier);
-
     if(!monFlux)
     {
         std::cout << "ERREUR D'OUVERTURE" << '\n';
