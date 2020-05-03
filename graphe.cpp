@@ -99,7 +99,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
 
     std::ifstream lire2(fichier2.c_str());
     int m_nbre_arrete, poids;
-
+    //ajout fichier ponderation initial
     lire2>>m_nbre_arrete;
     for (int y=0; y<m_nbre_arrete; y++)
     {
@@ -113,7 +113,7 @@ Graphe::~Graphe()
 { }
 void Graphe::afficher()
 {
-
+    //affichage des sommets avec leurs adjacents
     for(unsigned int i=0; i<m_sommet.size(); i++)
     {
         std::cout << "Sommet " << m_sommet[i]->getIndice() << " : " << m_sommet[i]->getNom()<< std::endl;
@@ -121,6 +121,7 @@ void Graphe::afficher()
         m_sommet[i]->Afficher_adj();
         std::cout << std::endl;
     }
+    //affichage des arretes avec leur poids
     for(unsigned int j=0; j<m_arrete.size(); j++)
     {
         std::cout << "Arrete " << m_arrete[j]->getIndice() << " : " << m_arrete[j]->getDepart()<<" "<< m_arrete[j]->getArrivee();
@@ -138,13 +139,15 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
     if (num_pour_comparer==1)
     {
         //cas ou on a pas encore supprimé d'arrete
+        //sert pour la comparaison d'indice quand on compare les lectures 
+        //dans deux fichiers différents pour les deuxfois ou on test cet indice
 
         fichier1="indice_sans_suppression.txt";
 
     }
     if (num_pour_comparer==2)
     {
-        //cas ou on a pas encore supprimé d'arrete
+        //cas ou on a deja supprimé l'arrete
 
         fichier1="indice_avec_suppression.txt";
 
@@ -188,7 +191,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
     }
 
 
-    lambda=pow(somme_c_sommets,0.5);//4.41
+    lambda=pow(somme_c_sommets,0.5);
 
     ecrire1<<"Normalise"<<std::endl;
 
@@ -230,6 +233,10 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
     }
     if (num_pour_comparer==3)
     {
+        ///extension affichage en svg de cet indice
+        //en rouge : indice le + haut
+        //en orange : 2eme indice le + haut
+        // en jaune : 3 eme indice le + haut
         Svgfile svgout;
         svgout.addGrid() ;
         float ymax=0,xmax=0;
@@ -244,6 +251,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
                 ymax=m_sommet[g]->get_y();
             }
         }
+        //pour mettre a la taille de l'ecran svg
         float agrandireX, agrandireY;
         agrandireX=850/xmax;
         agrandireY=750/ymax;
@@ -254,7 +262,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
         {
             std::cout<< "voici le tab indice de vecteur propre indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
         }
-
+        //on trouve les 3 nombres pour les 3 indices max
         for (size_t i=0; i<tab_indice_degre_NORMALISE.size(); i++)
         {
             if (tab_indice_degre_NORMALISE[i]>max3)
@@ -274,6 +282,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
                 max1=tab_indice_degre_NORMALISE[i];
             }
         }
+        //on regarde pour quels sommets leur indice de degré normalisé correspond à un max
         for(size_t h=0; h<tab_indice_degre_NORMALISE.size(); h++)
         {
             if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
@@ -282,7 +291,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"red");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13, max3, "black");
             }
-            else if(tab_indice_degre_NORMALISE[h]==max2)
+            else if(tab_indice_degre_NORMALISE[h]==max2) //2eme plus haut indice
             {
                 svgout.addDisk(m_sommet[h]->get_x()*agrandireX,m_sommet[h]->get_y()*agrandireY,10,"orange");
                 svgout.addText(m_sommet[h]->get_x()*agrandireX +20, m_sommet[h]->get_y()*agrandireY+13,max2, "black");
@@ -301,7 +310,6 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
 
         for (size_t d=0; d<m_sommet.size(); d++)
         {
-            //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
 
             tmp=m_sommet[d]->getNom();
             svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
@@ -326,13 +334,14 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
     if (num_pour_comparer==1)
     {
         //cas ou on a pas encore supprimé d'arrete
+        //pour la comparaison de l'indice 
 
         fichier1="indice_sans_suppression.txt";
 
     }
     if (num_pour_comparer==2)
     {
-        //cas ou on a pas encore supprimé d'arrete
+        //cas ou on a supprimé l'arrete
 
         fichier1="indice_avec_suppression.txt";
 
@@ -350,12 +359,8 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
     ecire1<<"nonNormalise "<<std::endl;
 
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre non normalise "<<std::endl;
-//        }
     std::vector<float> tab_indice_degre_NORMALISE;
+    //on calcule l'indice non normalise
     for (size_t i=0; i<m_sommet.size(); i++)
     {
         nb_degre=0;
@@ -383,7 +388,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
         {
             indices[m_sommet[i]->getIndice()][0] = nb_degre;
         }
-        //tab_indice_degre_NORMALISE.push_back(nb_degre);
 
     }
     if(indices.size() != m_sommet.size())
@@ -398,11 +402,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
     ecire1<<"Normalise "<<std::endl;
 
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre normalise "<<std::endl;
-//        }
+//    on calcule l'indice normalise
     for (size_t x=0; x<m_sommet.size(); x++)
     {
         nb_degre=0;
@@ -418,6 +418,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
             }
         }
         indice_deg=nb_degre/deg_max;
+        //on sauvegarde dans le tableau pour l'affichage svg de cet indice en normalise
         tab_indice_degre_NORMALISE.push_back(indice_deg);
         if(indices.size() != m_sommet.size())
         {
@@ -433,6 +434,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
     if (num_pour_comparer==3)
         {
+            ///extension affichage en SVG
             Svgfile svgout;
             svgout.addGrid() ;
             float ymax=0,xmax=0;
@@ -458,7 +460,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
             {
                 std::cout<< "voici le tab indice de degre indice "<<m<<" valeur : "<<tab_indice_degre_NORMALISE[m]<<std::endl;
             }
-
+            //on trouve quels sont les 3 indices les + haut
             for (size_t i=0; i<tab_indice_degre_NORMALISE.size(); i++)
             {
                 if (tab_indice_degre_NORMALISE[i]>max3)
@@ -470,7 +472,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
                 else if (tab_indice_degre_NORMALISE[i]<max3&&tab_indice_degre_NORMALISE[i]>max2)
                 {
                     max1=max2;
-                    //std::swap(max1,max2);
                     max2=tab_indice_degre_NORMALISE[i];
                 }
                 else if (tab_indice_degre_NORMALISE[i]<max2&&tab_indice_degre_NORMALISE[i]>max1)
@@ -478,6 +479,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
                     max1=tab_indice_degre_NORMALISE[i];
                 }
             }
+            //on trouve les sommets qui vont avec ces indices les plus haut et on met la bonne couleur
             for(size_t h=0; h<tab_indice_degre_NORMALISE.size(); h++)
             {
                 if(tab_indice_degre_NORMALISE[h]==max3) //plus haut indice
@@ -504,8 +506,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
             for (size_t d=0; d<m_sommet.size(); d++)
             {
-                //svgout.addDisk(m_sommet[d]->get_x()*agrandireX-50,m_sommet[d]->get_y()*agrandireY-50,5,"red");
-
                 tmp=m_sommet[d]->getNom();
                 svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
@@ -523,32 +523,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
         }
 
-
-
-
-
-
-    ecire1<<"Normalise "<<std::endl;
-
-    for (size_t x=0; x<m_sommet.size(); x++)
-    {
-        nb_degre=0;
-        for (size_t z=0; z<m_arrete.size(); z++)
-        {
-            if (m_arrete[z]->getDepart()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-            if (m_arrete[z]->getArrivee()==m_sommet[x]->getIndice())
-            {
-                nb_degre++;
-            }
-        }
-        indice_deg=nb_degre/deg_max;
-
-        ecire1<<indice_deg<<std::endl;
-
-    }
 }
 void Graphe::supprimer_arrete()
 {
@@ -637,6 +611,7 @@ void Graphe::supprimer_arrete()
                     }
 
                 }
+                //on supprime l'adjacence due a cette arrete
                 m_sommet[g_arrete_dep]->supprimer_adjacence(m_sommet[k_arrete_a_supp]->getIndice()); ///supp  adj
                 m_sommet[k_arrete_a_supp]->supprimer_adjacence(m_sommet[g_arrete_dep]->getIndice());
 
