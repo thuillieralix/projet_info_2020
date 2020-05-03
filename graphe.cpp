@@ -533,7 +533,7 @@ void Graphe::supprimer_arrete()
             {
                 if (m_arrete[l]->getIndice()==indice_arrete_a_supp)
                 {
-                    blindage=1;
+                    blindage=1; //elle existe bien
                 }
             }
 
@@ -617,8 +617,6 @@ void Graphe::tester_connexite()
         {
             nb_arrete++;
         }
-        std::cout<<"nb_arrete : "<<nb_arrete<<std::endl;
-        std::cout<<"nb_sommet : "<<nb_sommet<<std::endl;
 
         int nb_ok=0,nb_ok_sommet=0;
         for (size_t i=0;i<m_sommet.size();i++)
@@ -630,9 +628,6 @@ void Graphe::tester_connexite()
                 {
                     nb_ok++;
 
-                    std::cout<<"le sommet "<<m_sommet[i]->getIndice()<<" est relie a l'arrete : "<<m_arrete[y]->getIndice()<<std::endl;
-
-                    std::cout<<"nb_ok :"<<nb_ok<<std::endl;
                 }
             }
             if (nb_ok==0)
@@ -640,7 +635,6 @@ void Graphe::tester_connexite()
                 nb_ok_sommet++;
             }
         }
-        std::cout<<"nb_ok_sommet : "<<nb_ok_sommet<<std::endl;
         if (nb_arrete>=nb_sommet-1&&nb_ok_sommet==0)
         {
             std::cout<<"le graphe est connexe"<<std::endl;

@@ -49,7 +49,7 @@ int main()
         std::cout << " 5: tester la connexite du graphe" << std::endl;
         std::cout << " 6: afficher composantes graphe " << std::endl;
         std::cout << " 7: quitter" << std::endl;
-        std::cout << " 8: comparer indice (choix de quel indice apres)" << std::endl;
+        std::cout << " 8: comparer indice (choix de quel indice + suppression d'une arrete apres)" << std::endl;
         std::cout << " 9: supprimer une arrete" << std::endl;
         std::cout << " 10: EXTENSION afficher indice degre NORMALISE en svgout" << std::endl;
         std::cout << " 11: EXTENSION afficher indice vecteur propre NORMALISE en svgout" << std::endl;
