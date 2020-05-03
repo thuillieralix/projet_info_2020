@@ -9,6 +9,7 @@
 
 int main()
 {
+    // Code couleur pour console windows, source : stackoverflow
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     // you can loop k higher to see more color choices
 
@@ -36,6 +37,7 @@ int main()
     Graphe g(fichier1,fichier2);
     g.mettre_fichier_topo(fichier1);
     g.mettre_fichier_ponderation(fichier2);
+    /// début menu 
     while (stop!=0)
     {
         std::cout << std::endl<< std::endl<< std::endl;

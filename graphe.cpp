@@ -5,7 +5,6 @@
 #include "stack"
 #include <fstream>
 
-
 Graphe::Graphe()
 {
     m_orientation = 0;
@@ -107,8 +106,10 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         m_arrete[indice]->mettre_poids(poids);
     }
 }
+
 Graphe::~Graphe()
 { }
+
 void Graphe::afficher()
 {
 
@@ -129,6 +130,7 @@ void Graphe::afficher()
     std::cout << std::endl << std::endl;
 
 }
+
 void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std::vector<std::vector<float> > &indices )
 {
     ///pour comparaison
@@ -698,7 +700,7 @@ void Graphe::tester_connexite()
         if (nb_arrete>=nb_sommet-1&&nb_ok_sommet==0)
         {
             std::cout<<"le graphe est connexe"<<std::endl;
-            if (nb_arrete>=nb_sommet-(nb_sommet-1)&&nb_ok_sommet==0)
+            if (nb_arrete>=nb_sommet-(nb_sommet-1)&&nb_ok_sommet==0) 
                 std::cout<<"le graphe est k-sommet-connexe ou " << nb_sommet <<"-sommet-connexe\n" ;
 
             //DFS(0);
