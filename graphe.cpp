@@ -692,10 +692,16 @@ void Graphe::centralite_de_proximite(int numero)
         if(denominateur > 0)
         {
             nb=1/denominateur;
+            nb2=numerateur/denominateur;
+        }
+        if(denominateur == 0)
+        {
+            nb=0;
+            nb2=0;
         }
         //std::cout << "Indice de proximite non normalise du sommet "<<sommetDepart<<" est : " <<nb<< '\n';
         tab_indice_prox_NON_NORMALISE.push_back(nb);
-        nb2=numerateur/denominateur;
+
         //std::cout << "Indice de proximite normalise du sommet "<<sommetDepart<<" est : " << nb2<< '\n';
         tab_indice_prox_NORMALISE.push_back(nb2);
     }
