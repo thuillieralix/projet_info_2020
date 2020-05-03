@@ -51,6 +51,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         }
     }
     float agrandireX, agrandireY;
+    //pour mettre à la taille de l'ecran svg
     agrandireX=850/xmax;
     agrandireY=750/ymax;
     std::string tmp;
@@ -90,6 +91,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
             y_poids=y_dep+(y_ar-y_dep)/2;
         x_poids=x_dep+(x_ar-x_dep)/2;
         y_poids=y_dep+(y_ar-y_dep)/2;
+        //pour mettre indice de l'arrete en bleu
         svgout.addText(x_poids, y_poids, indice, "blue");
     }
 
@@ -166,7 +168,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
     ecrire1<<"NonNormalise"<<std::endl;
 
     //faire
-    if(indices.size() != m_ordre)
+    if(indices.size() != m_sommet.size())
     {
         std::cout<<"pour l'indice de centralite du vecteur propre NON NORMALISE : "<<std::endl;
     }
@@ -195,7 +197,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
     float cvp=0;
     int c2;
     std::vector<float> tableau_cvp;
-    if(indices.size() != m_ordre)
+    if(indices.size() != m_sommet.size())
     {
         std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
     }
@@ -213,11 +215,11 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std
         else
             cvp=c2;
         tableau_cvp.push_back(cvp);
-        if(indices.size() != m_ordre)
+        if(indices.size() != m_sommet.size())
         {
             std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
         }
-        if(indices.size() == m_ordre)
+        if(indices.size() == m_sommet.size())
         {
             indices[m_sommet[j]->getIndice()][1] = cvp;
         }
@@ -530,11 +532,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
     ecire1<<"Normalise "<<std::endl;
 
-//    if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<"indice de degre normalise "<<std::endl;
-//        }
     for (size_t x=0; x<m_sommet.size(); x++)
     {
         nb_degre=0;
@@ -553,11 +550,6 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
         ecire1<<indice_deg<<std::endl;
 
-//        if (num_pour_comparer==2)
-//        { //cas ou on a pas encore supprimé d'arrete
-//
-//            ecire2<<indice_deg<<std::endl;
-//        }
     }
 }
 void Graphe::supprimer_arrete()
@@ -786,7 +778,7 @@ void Graphe::centralite_de_proximite(int numero, std::vector<std::vector<float> 
         tab_indice_prox_NORMALISE.push_back(nb2);
     }
 
-    if(indices.size() == m_ordre)
+    if(indices.size() == m_sommet.size())
     {
         for(int i=0 ; i<m_ordre ; ++i)
         {
@@ -794,7 +786,7 @@ void Graphe::centralite_de_proximite(int numero, std::vector<std::vector<float> 
             indices[i][1] = tab_indice_prox_NORMALISE[i];
         }
     }
-    if(indices.size() != m_ordre)
+    if(indices.size() != m_sommet.size())
     {
         ecrire1<<"NonNormalise "<<std::endl;
         std::cout<<"affichage indice prox non normalise"<<std::endl;
