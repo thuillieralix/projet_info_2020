@@ -38,7 +38,6 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
     }
     lire >> m_taille;
     int indice, extremite_dep, extremite_ar;
-    int x1, y1, x2, y2;
     float ymax=0,xmax=0;
     for (size_t g=0; g<m_sommet.size(); g++)
     {
@@ -81,7 +80,6 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         float y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
         float x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
         float y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
-        float tmp;
         if (x_dep>x_ar)
             x_poids=x_ar+(x_dep-x_ar)/2;
         else if (x_dep<x_ar)
@@ -285,23 +283,14 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
             svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
         }
-        int extremite_dep,extremite_ar,indice;
-        for(int i=0; i<m_arrete.size(); i++)
+        int extremite_dep,extremite_ar;
+        for(size_t i=0; i<m_arrete.size(); i++)
         {
             extremite_dep=m_arrete[i]->getDepart();
             extremite_ar=m_arrete[i]->getArrivee();
-            indice =m_arrete[i]->getIndice();
 
             svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
                            ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
-            int x_poids, y_poids;
-            int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
-            int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
-            int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
-            int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
-            x_poids=x_dep+(x_ar-x_dep)/2;
-            y_poids=y_dep+(y_ar-y_dep)/2;
-            //svgout.addText(x_poids, y_poids, indice, "blue");
 
         }
 
@@ -476,23 +465,14 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
                 svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
             }
-            int extremite_dep,extremite_ar,indice;
-            for(int i=0; i<m_arrete.size(); i++)
+            int extremite_dep,extremite_ar;
+            for(size_t i=0; i<m_arrete.size(); i++)
             {
                 extremite_dep=m_arrete[i]->getDepart();
                 extremite_ar=m_arrete[i]->getArrivee();
-                indice =m_arrete[i]->getIndice();
 
                 svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
                                ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
-                int x_poids, y_poids;
-                int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
-                int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
-                int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
-                int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
-                x_poids=x_dep+(x_ar-x_dep)/2;
-                y_poids=y_dep+(y_ar-y_dep)/2-20;
-                //svgout.addText(x_poids, y_poids, indice, "blue");
 
             }
 
@@ -546,7 +526,7 @@ void Graphe::supprimer_arrete()
                         nb_test++;
 
                         ///parcourir tableau adjacences pour enlever cette connexion
-                        int g=0,k=0;
+
 
                         for (size_t e=0; e<m_arrete.size(); e++)
                         {
@@ -818,23 +798,14 @@ void Graphe::centralite_de_proximite(int numero)
             svgout.addText(m_sommet[d]->get_x()*agrandireX, m_sommet[d]->get_y()*agrandireY, tmp, "black");
 
         }
-        int extremite_dep,extremite_ar,indice;
-        for(int i=0; i<m_arrete.size(); i++)
+        int extremite_dep,extremite_ar;
+        for(size_t i=0; i<m_arrete.size(); i++)
         {
             extremite_dep=m_arrete[i]->getDepart();
             extremite_ar=m_arrete[i]->getArrivee();
-            indice =m_arrete[i]->getIndice();
 
             svgout.addLine(m_sommet[extremite_dep]->get_x()*agrandireX,m_sommet[extremite_dep]->get_y()*agrandireY
                            ,m_sommet[extremite_ar]->get_x()*agrandireX,m_sommet[extremite_ar]->get_y()*agrandireY,"black");
-            int x_poids, y_poids;
-            int x_ar=(m_sommet[extremite_ar]->get_x()*agrandireX);
-            int y_ar =(m_sommet[extremite_ar]->get_y()*agrandireY);
-            int x_dep=(m_sommet[extremite_dep]->get_x()*agrandireX);
-            int y_dep=(m_sommet[extremite_dep]->get_y()*agrandireY);
-            x_poids=x_dep+(x_ar-x_dep)/2;
-            y_poids=y_dep+(y_ar-y_dep)/2-20;
-            //svgout.addText(x_poids, y_poids, indice, "blue");
 
         }
 
