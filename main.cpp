@@ -277,7 +277,7 @@ int main()
             std::cout << "Erreur de saisie, il faut recommencer" << std::endl;
             std::cout << std::endl<< std::endl<< std::endl;
             break;
-        }
+        } /// blindage 
 
     }
 
