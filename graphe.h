@@ -26,8 +26,8 @@ public :
     ~Graphe();
     void afficher();
     //void dessiner_graphe(std::string fichier) ;
-    void trouver_indice_centralite_vecteur_propre(int num_pour_comparer);
-    void trouver_centralite_degres(int num_pour_comparer);
+    void trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std::vector<std::vector<float> > &indices );
+    void trouver_centralite_degres(int num_pour_comparer, std::vector<std::vector<float> > &indices);
 
     void charger_nouveau_fichier_ponderation(std::string fichier);
     int getOrdre();
@@ -37,9 +37,9 @@ public :
     void composantesConnexe();
     void dfspath(int sommet_number, std::deque<int>& resultat, bool silence);
     void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
-    void centralite_de_proximite(int numero);
 
-    void centralite_intermediarite(int numero);
+    void centralite_de_proximite(int numero, std::vector<std::vector<float> > &indices);
+    void centralite_intermediarite(std::vector<std::vector<float> > &indices );
 
 
 
@@ -56,6 +56,9 @@ public :
     std::vector<int> DFS (int indice0)  ;
     //std::vector<int> BFS (int indice0) const ;
     void afficher_svg();
+
+    int saveIndices();
+
 
 
 };

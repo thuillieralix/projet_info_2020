@@ -57,6 +57,7 @@ int main()
         std::cout << " 13: EXTENSION afficher parcours DFS\n" ;
         std::cout << " 14: afficher graphe en SVG\n" ;
         std::cout << " 15: EXTENSION afficher indice intermediarite NORMALISE en svgout" << std::endl;
+        std::cout << " 16: sauvegarde des indices dans un fichier txt" << '\n';
         std::cin>>choix;
         std::cout << std::endl<< std::endl<< std::endl;
         switch (choix)
@@ -79,17 +80,28 @@ int main()
         }
 
         case 1:
-            g.trouver_centralite_degres(0);
-            std::cout << std::endl<< std::endl<< std::endl;
+            {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                g.trouver_centralite_degres(0, v);
+                std::cout << std::endl<< std::endl<< std::endl;
+            }
+
             break;
 
         case 2:
-            g.trouver_indice_centralite_vecteur_propre(0);
-            std::cout << std::endl<< std::endl<< std::endl;
+            {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                g.trouver_indice_centralite_vecteur_propre(0, v);
+                std::cout << std::endl<< std::endl<< std::endl;
+            }
             break;
 
         case 3:
-            g.centralite_intermediarite(0);
+            {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                g.centralite_intermediarite(v);
+            }
+
             break;
         case 4:
             g.centralite_de_proximite(0);
@@ -125,57 +137,55 @@ int main()
 
                 switch(choix2)
                 {
-                    case 1:
-                    {
-                        stop2=1;
-                        //d'abord le faire avec le graphe normal (normalisé et non normalisé)
-                        g.trouver_centralite_degres(1);
-                        //après supprimer une ou plusieurs arrete
-                        g.supprimer_arrete();
-                        //refaire calcul indice degré
-                        g.trouver_centralite_degres(2);
-                        std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralite des degres"<< std::endl;
-                        //g.comparer_valeurs_indice_degre();
-                        g.comparer_valeurs_indice();
-                        break;
-                    }
-                    case 2:
-                    {
-                        stop2=1;
+                case 1:
+                {
+                    std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                    stop2=1;
+                    //d'abord le faire avec le graphe normal (normalisé et non normalisé)
+                    g.trouver_centralite_degres(1,v);
+                    //après supprimer une ou plusieurs arrete
+                    g.supprimer_arrete();
+                    //refaire calcul indice degré
+                    g.trouver_centralite_degres(2,v);
+                    std::cout << std::endl<< std::endl<<"voici la comparaison pour l'indice de centralite des degres"<< std::endl;
+                    //g.comparer_valeurs_indice_degre();
+                    g.comparer_valeurs_indice();
+                    break;
+                }
+                case 2:
+                {
+                    std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                    stop2=1;
 
-                        g.trouver_indice_centralite_vecteur_propre(1);
+                    g.trouver_indice_centralite_vecteur_propre(1,v);
 
-                        g.supprimer_arrete();
+                    g.supprimer_arrete();
 
-                        g.trouver_indice_centralite_vecteur_propre(2);
+                    g.trouver_indice_centralite_vecteur_propre(2,v);
 
-                        //g.comparer_valeurs_indice_vecteur_propre();
-                        g.comparer_valeurs_indice();
-                        break;
-                    }
-                    case 3:
-                    {
-                        stop2=1;
-                        g.centralite_de_proximite(1);
-                        g.supprimer_arrete();
-                        g.centralite_de_proximite(2);
-                        g.comparer_valeurs_indice();
-                        break;
-                    }
-                    case 4:
-                    {
-                        stop2=1;
-                        g.centralite_intermediarite(1);
-                        g.supprimer_arrete();
-                        g.centralite_intermediarite(2);
-                        g.comparer_valeurs_indice();
-                        break;
-                    }
-                    default:
-                    {
-                        stop2=1;
-                        break;
-                    }
+                    //g.comparer_valeurs_indice_vecteur_propre();
+                    g.comparer_valeurs_indice();
+                    break;
+                }
+                case 3:
+                {
+                    std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                    g.centralite_de_proximite(1,v);
+                    g.supprimer_arrete();
+                    g.centralite_de_proximite(2,v);
+                    g.comparer_valeurs_indice();
+                    break;
+                }
+                case 4:
+                {
+
+                }
+                default:
+                {
+
+                    break;
+                }
+
                 }
             }
             break;
@@ -186,27 +196,37 @@ int main()
             break;
 
         case 10:
-            std::cout<<std::endl;
-            std::cout<<"en rouge : indice le + haut"<<std::endl;
-            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
-            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
-            g.trouver_centralite_degres(3);
+            {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                std::cout<<std::endl;
+                std::cout<<"en rouge : indice le + haut"<<std::endl;
+                std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+                std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
+                g.trouver_centralite_degres(3,v);
+            }
             break;
 
         case 11:
+        {
+            std::vector<std::vector<float>> v = {{0,0},{0,0}};
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
-            g.trouver_indice_centralite_vecteur_propre(3);
+            g.trouver_indice_centralite_vecteur_propre(3,v);
+        }
             break;
 
         case 12:
-            std::cout<<std::endl;
-            std::cout<<"en rouge : indice le + haut"<<std::endl;
-            std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
-            std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
-            g.centralite_de_proximite(3);
+        {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                std::cout<<std::endl;
+                std::cout<<"en rouge : indice le + haut"<<std::endl;
+                std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
+                std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
+                g.centralite_de_proximite(3,v);
+
+        }
             break;
 
         case 13:
@@ -221,11 +241,23 @@ int main()
             break;
 
         case 15:
+        {
+            std::vector<std::vector<float>> v = {{0,0},{0,0}};
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
-            g.centralite_intermediarite(3);
+            g.centralite_intermediarite(3,v);
+        }
+
+            break;
+
+        case 16:
+            int succes = 0;
+            while(succes != 1)
+            {
+                succes = g.saveIndices();
+            }
             break;
 
         default:
