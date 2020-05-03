@@ -647,7 +647,7 @@ void Graphe::tester_connexite()
             if (nb_arrete>=nb_sommet-(nb_sommet-1)&&nb_ok_sommet==0)
                 std::cout<<"le graphe est k-sommet-connexe ou " << nb_sommet <<"-sommet-connexe\n" ;
 
-            DFS(0);
+            //DFS(0);
         }
         else
         {
