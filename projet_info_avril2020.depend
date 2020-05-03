@@ -203,7 +203,7 @@
 	<queue>
 	<string>
 
-1588501542 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\main.cpp
+1588528840 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\main.cpp
 	<iostream>
 	"Graphe.h"
 	"Sommet.h"
@@ -213,7 +213,7 @@
 	<string>
 	<windows.h>
 
-1588501562 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\graphe.h
+1588528422 c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\graphe.h
 	<iostream>
 	<vector>
 	<queue>
@@ -244,10 +244,11 @@
 	<fstream>
 	<set>
 
-1588501765 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\graphe.cpp
+1588529258 source:c:\users\alix\documents\github\projet_info_2020_mars_final\projet_info_2020\graphe.cpp
 	"Graphe.h"
 	"Sommet.h"
 	"Arrete.h"
 	"svgfile.h"
 	"stack"
+	<fstream>
 

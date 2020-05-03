@@ -172,6 +172,7 @@ int main()
                 }
                 case 3:
                 {
+                    stop2=1;
                     std::vector<std::vector<float>> v = {{0,0},{0,0}};
                     g.centralite_de_proximite(1,v);
                     g.supprimer_arrete();
@@ -182,6 +183,12 @@ int main()
                 case 4:
                 {
 
+                    stop2=1;
+                    std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                    g.centralite_intermediarite(1,v);
+                    g.supprimer_arrete();
+                    g.centralite_intermediarite(2,v);
+                    g.comparer_valeurs_indice();
                 }
                 default:
                 {
@@ -251,8 +258,8 @@ int main()
             std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
             g.centralite_intermediarite(3,v);
-            }
             break;
+            }
 
         case 16:
             {

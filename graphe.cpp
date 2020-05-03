@@ -341,7 +341,7 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
 
     float nb_degre;
     float deg_max=0;
-    if(indices.size() != m_ordre)
+    if(indices.size() != m_sommet.size())
     {
         std::cout<<"indice de degre non normalise : "<<std::endl;
     }
@@ -373,18 +373,18 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
             deg_max=nb_degre;
         }
         ecire1<<nb_degre<<std::endl;
-        if(indices.size() != m_ordre)
+        if(indices.size() != m_sommet.size())
         {
             std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
         }
-        if(indices.size() == m_ordre)
+        if(indices.size() == m_sommet.size())
         {
             indices[m_sommet[i]->getIndice()][0] = nb_degre;
         }
-        tab_indice_degre_NORMALISE.push_back(nb_degre);
+        //tab_indice_degre_NORMALISE.push_back(nb_degre);
 
     }
-    if(indices.size() != m_ordre)
+    if(indices.size() != m_sommet.size())
     {
         std::cout<<std::endl<<std::endl<<std::endl;
         std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
@@ -417,11 +417,11 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::v
         }
         indice_deg=nb_degre/deg_max;
         tab_indice_degre_NORMALISE.push_back(indice_deg);
-        if(indices.size() != m_ordre)
+        if(indices.size() != m_sommet.size())
         {
             std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
         }
-        if(indices.size() == m_ordre)
+        if(indices.size() == m_sommet.size())
         {
             indices[m_sommet[x]->getIndice()][1] = indice_deg;
         }
