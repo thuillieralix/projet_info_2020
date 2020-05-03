@@ -39,7 +39,7 @@ public :
     void dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vector<int>>> & resDijkstra);
 
     void centralite_de_proximite(int numero, std::vector<std::vector<float> > &indices);
-    void centralite_intermediarite(std::vector<std::vector<float> > &indices );
+    void centralite_intermediarite(int numero, std::vector<std::vector<float>> &indice);
 
 
 

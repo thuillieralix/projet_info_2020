@@ -99,13 +99,16 @@ int main()
         case 3:
             {
                 std::vector<std::vector<float>> v = {{0,0},{0,0}};
-                g.centralite_intermediarite(v);
+                g.centralite_intermediarite(0,v);
             }
 
             break;
         case 4:
-            g.centralite_de_proximite(0);
-            std::cout << std::endl<< std::endl<< std::endl;
+            {
+                std::vector<std::vector<float>> v = {{0,0},{0,0}};
+                g.centralite_de_proximite(0,v);
+                std::cout << std::endl<< std::endl<< std::endl;
+            }
             break;
 
         case 5:
@@ -241,22 +244,23 @@ int main()
             break;
 
         case 15:
-        {
+            {
             std::vector<std::vector<float>> v = {{0,0},{0,0}};
             std::cout<<std::endl;
             std::cout<<"en rouge : indice le + haut"<<std::endl;
             std::cout<<"en orange : 2eme indice le + haut"<<std::endl;
             std::cout<<"en jaune : 3eme indice le + haut"<<std::endl<<std::endl<<std::endl;
             g.centralite_intermediarite(3,v);
-        }
-
+            }
             break;
 
         case 16:
-            int succes = 0;
-            while(succes != 1)
             {
-                succes = g.saveIndices();
+                int succes = 0;
+                while(succes != 1)
+                {
+                    succes = g.saveIndices();
+                }
             }
             break;
 
