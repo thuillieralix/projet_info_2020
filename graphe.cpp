@@ -618,6 +618,10 @@ void Graphe::tester_connexite()
         if (nb_arrete>=nb_sommet-1&&nb_ok_sommet==0)
         {
             std::cout<<"le graphe est connexe"<<std::endl;
+            if (nb_arrete>=nb_sommet-(nb_sommet-1)&&nb_ok_sommet==0)
+                std::cout<<"le graphe est k-sommet-connexe ou " << nb_sommet <<"-sommet-connexe\n" ;
+
+            DFS(0);
         }
         else
         {
@@ -1050,16 +1054,19 @@ void Graphe::dfspath(int sommet_number, std::deque<int>& resultat, bool silence)
 }
 
 
-std::vector <int> Graphe::DFS(int indice0) const
+std::vector <int> Graphe::DFS(int indice0) 
 {
     std::vector<bool> visit ; /// true si le sommet est visite false si non
     int premier = indice0 ;
+    
     for (size_t i = 0 ; i < m_sommet.size(); ++i)
         visit.push_back(false) ; /// initialisation du vecteur visit
+    
     std::stack<int> pile ; /// déclaration de la pile (stack)
     std::vector<int> marquage ; /// marque le sommet
     /// vecteur contenant les prédecesseurs :
     std::vector<int> pred ((int)m_sommet.size(),-1) ;
+    
     visit[indice0] = true ; /// premier sommet visité, premier sommet marqué
     /// on l'enfile et on le marque
     pile.push(indice0) ;
