@@ -53,8 +53,8 @@ public :
     std::string getFichierTopo();
     std::string getFichierPonderation();
 
-    std::vector<int> DFS (int indice0) const ;
-    std::vector<int> BFS (int indice0) const ;
+    std::vector<int> DFS (int indice0)  ;
+    //std::vector<int> BFS (int indice0) const ;
     void afficher_svg();
 
 
