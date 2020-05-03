@@ -52,6 +52,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
         }
     }
     float agrandireX, agrandireY;
+    //pour mettre à la taille de l'ecran svg
     agrandireX=850/xmax;
     agrandireY=750/ymax;
     std::string tmp;
@@ -91,6 +92,7 @@ Graphe::Graphe(std::string fichier, std::string fichier2)
             y_poids=y_dep+(y_ar-y_dep)/2;
         x_poids=x_dep+(x_ar-x_dep)/2;
         y_poids=y_dep+(y_ar-y_dep)/2;
+        //pour mettre indice de l'arrete en bleu
         svgout.addText(x_poids, y_poids, indice, "blue");
     }
 
