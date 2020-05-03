@@ -3,6 +3,7 @@
 #include "Arrete.h"
 #include "svgfile.h"
 #include "stack"
+#include <fstream>
 
 
 Graphe::Graphe()
@@ -135,7 +136,7 @@ void Graphe::afficher()
     std::cout << std::endl << std::endl;
 
 }
-void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
+void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer, std::vector<std::vector<float> > &indices )
 {
     ///pour comparaison
     std::string fichier1;
@@ -170,12 +171,23 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     ecrire1<<"NonNormalise"<<std::endl;
 
     //faire
-    std::cout<<"pour l'indice de centralite du vecteur propre NON NORMALISE : "<<std::endl;
+    if(indices.size() != m_ordre)
+    {
+        std::cout<<"pour l'indice de centralite du vecteur propre NON NORMALISE : "<<std::endl;
+    }
     for (size_t x=0; x<m_sommet.size(); x++) //pour le calcul de lambda
     {
         c=0;
         c=m_sommet[x]->calculer_somme_cvp_adj();
-        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<c<<std::endl;
+        if(indices.size() != m_ordre)
+        {
+            std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<c<<std::endl;
+        }
+        if(indices.size() == m_ordre)
+        {
+            indices[m_sommet[x]->getIndice()][0] = c;
+        }
+
         somme_c_sommets=somme_c_sommets+pow(c,2);
         ecrire1<<c<<std::endl;
     }
@@ -188,7 +200,10 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
     float cvp=0;
     int c2;
     std::vector<float> tableau_cvp;
-    std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
+    if(indices.size() != m_ordre)
+    {
+        std::cout<<"pour l'indice de centralite du vecteur propre NORMALISE : "<<std::endl;
+    }
     float dlambda=0;
     std::vector<float> tab_indice_degre_NORMALISE;
     for (size_t j=0; j<m_sommet.size(); j++) //pour calcul cvp de chaque sommet
@@ -203,7 +218,14 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
         else
             cvp=c2;
         tableau_cvp.push_back(cvp);
-        std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
+        if(indices.size() != m_ordre)
+        {
+            std::cout<<"pour le sommet "<<m_sommet[j]->getIndice()<<" : "<<cvp<<std::endl;
+        }
+        if(indices.size() == m_ordre)
+        {
+            indices[m_sommet[j]->getIndice()][1] = cvp;
+        }
         tab_indice_degre_NORMALISE.push_back(cvp);
         ecrire1<<cvp<<std::endl;
     }
@@ -323,7 +345,7 @@ void Graphe::trouver_indice_centralite_vecteur_propre(int num_pour_comparer)
 
     }
 }
-void Graphe::trouver_centralite_degres(int num_pour_comparer)
+void Graphe::trouver_centralite_degres(int num_pour_comparer, std::vector<std::vector<float> > &indices)
 {
     std::string fichier1;
     if (num_pour_comparer==1)
@@ -346,7 +368,10 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
 
     float nb_degre;
     float deg_max=0;
-    std::cout<<"indice de degre non normalise : "<<std::endl;
+    if(indices.size() != m_ordre)
+    {
+        std::cout<<"indice de degre non normalise : "<<std::endl;
+    }
 
     ecire1<<"nonNormalise "<<std::endl;
 
@@ -374,7 +399,14 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         {
             deg_max=nb_degre;
         }
-        std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
+        if(indices.size() != m_ordre)
+        {
+            std::cout<<"pour le sommet "<<m_sommet[i]->getIndice()<<" : "<<nb_degre<<std::endl;
+        }
+        if(indices.size() == m_ordre)
+        {
+            indices[m_sommet[i]->getIndice()][0] = nb_degre;
+        }
         tab_indice_degre_NORMALISE.push_back(nb_degre);
 
         ecire1<<nb_degre<<std::endl;
@@ -491,12 +523,17 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
         }
 
     }
-    std::cout<<std::endl<<std::endl<<std::endl;
-    std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
-    std::cout<<std::endl;
+    if(indices.size() != m_ordre)
+    {
+        std::cout<<std::endl<<std::endl<<std::endl;
+        std::cout<<"voici le deg max du graph : "<<deg_max<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<"indice normalise de degre : "<<std::endl;
+    }
+
 
     float indice_deg=0.00;
-    std::cout<<"indice normalise de degre : "<<std::endl;
+
 
     ecire1<<"Normalise "<<std::endl;
 
@@ -520,7 +557,14 @@ void Graphe::trouver_centralite_degres(int num_pour_comparer)
             }
         }
         indice_deg=nb_degre/deg_max;
-        std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
+        if(indices.size() != m_ordre)
+        {
+            std::cout<<"pour le sommet "<<m_sommet[x]->getIndice()<<" : "<<indice_deg<<std::endl;
+        }
+        if(indices.size() == m_ordre)
+        {
+            indices[m_sommet[x]->getIndice()][1] = indice_deg;
+        }
 
         ecire1<<indice_deg<<std::endl;
 
@@ -684,27 +728,21 @@ int Graphe::getOrdre()
 {
     return m_ordre;
 }
-void Graphe::centralite_de_proximite(int numero)
+void Graphe::centralite_de_proximite(int numero, std::vector<std::vector<float> > &indices)
 {
     std::string fichier1;
     if (numero==1)
     {
         //cas ou on a pas encore supprimé d'arrete
-
         fichier1="indice_sans_suppression.txt";
-
     }
     if (numero==2)
     {
         //cas ou on a pas encore supprimé d'arrete
-
         fichier1="indice_avec_suppression.txt";
-
     }
 
     std::ofstream ecrire1(fichier1.c_str());
-
-
 
     int sommetDepart = -1;
     std::vector<std::vector<int>> resDijkstra;
@@ -741,20 +779,32 @@ void Graphe::centralite_de_proximite(int numero)
         tab_indice_prox_NORMALISE.push_back(nb2);
     }
 
-    ecrire1<<"NonNormalise "<<std::endl;
-    std::cout<<"affichage indice prox non normalise"<<std::endl;
-    for (size_t y=0; y<m_sommet.size(); y++)
+    if(indices.size() == m_ordre)
     {
-        std::cout<<"pour le sommet "<<y<<" : "<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
-        ecrire1<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
+        for(int i=0 ; i<m_ordre ; ++i)
+        {
+            indices[i][0] = tab_indice_prox_NON_NORMALISE[i];
+            indices[i][1] = tab_indice_prox_NORMALISE[i];
+        }
     }
-    ecrire1<<"Normalise "<<std::endl;
-    std::cout<<"affichage indice prox normalise"<<std::endl;
-    for (size_t z=0; z<m_sommet.size(); z++)
+    if(indices.size() != m_ordre)
     {
-        std::cout<<"pour le sommet "<<z<<" : "<<tab_indice_prox_NORMALISE[z]<<std::endl;
-        ecrire1<<tab_indice_prox_NORMALISE[z]<<std::endl;
+        ecrire1<<"NonNormalise "<<std::endl;
+        std::cout<<"affichage indice prox non normalise"<<std::endl;
+        for (size_t y=0; y<m_sommet.size(); y++)
+        {
+            std::cout<<"pour le sommet "<<y<<" : "<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
+            ecrire1<<tab_indice_prox_NON_NORMALISE[y]<<std::endl;
+        }
+        ecrire1<<"Normalise "<<std::endl;
+        std::cout<<"affichage indice prox normalise"<<std::endl;
+        for (size_t z=0; z<m_sommet.size(); z++)
+        {
+            std::cout<<"pour le sommet "<<z<<" : "<<tab_indice_prox_NORMALISE[z]<<std::endl;
+            ecrire1<<tab_indice_prox_NORMALISE[z]<<std::endl;
+        }
     }
+
     if (numero==3)
     {
         Svgfile svgout;
@@ -1196,7 +1246,7 @@ std::vector <int> Graphe::DFS(int indice0) const
 
 
 
-void Graphe::centralite_intermediarite()
+void Graphe::centralite_intermediarite(std::vector<std::vector<float> > &indices )
 {
     //tab 2 dimensions avec 3 attributs par cases
     std::vector<std::vector<std::vector<int>>> resDijkstra, stockPassage;
@@ -1215,7 +1265,6 @@ void Graphe::centralite_intermediarite()
         {
             stockChemins[i].push_back(0);
             stockPassage[i].push_back(std::vector<int> ());
-            //stockPassage[i][j].push_back(-1);
         }
     }
 
@@ -1260,7 +1309,10 @@ void Graphe::centralite_intermediarite()
 
     //on calcule les indices de chaque sommets
     //on calcule le numerateur et le denominateur
-    std::cout << "le sommet \tindice simple \tindice normalise" << '\n';
+    if(indices.size() != m_ordre)
+    {
+        std::cout << "le sommet \tindice simple \tindice normalise" << '\n';
+    }
     //pour chaque somet
     for(int i=0 ; i<m_ordre ; ++i)
     {
@@ -1301,7 +1353,16 @@ void Graphe::centralite_intermediarite()
         //on doit le diviser par 2 car on compte les réciproques
         //ex 0-1 et 1-0
         result = result/2;
-        std::cout <<i<<"\t\t" <<result << "\t\t"<< (result*2)/coeff_norm <<'\n';
+        if(indices.size() != m_ordre)
+        {
+            std::cout <<i<<"\t\t" <<result << "\t\t"<< (result*2)/coeff_norm <<'\n';
+        }
+        //sauvegarde des resultats
+        if(indices.size() == m_ordre)
+        {
+            indices[i][0] = result;
+            indices[i][1] = (result*2)/coeff_norm;
+        }
     }
 }
 
@@ -1373,4 +1434,69 @@ void Graphe::dijkstra_inter(int sommetDepart, std::vector<std::vector<std::vecto
         }
         plusPetitSommet = -1;
     }
+}
+
+int Graphe::saveIndices()
+{
+    std::string nomFichier;
+
+    std::cout << "Saisissez le nom du fichier de sauvegarde avec le nom de l'extension (.txt)" << '\n';
+    std::cout << "si vous saisissez le nom d'un fichier deja existant, les donnees contenues seront ecrasees" << '\n';
+    std::cin >> nomFichier;
+    std::ofstream monFlux(nomFichier);
+
+    if(!monFlux)
+    {
+        std::cout << "ERREUR D'OUVERTURE" << '\n';
+        return 0;
+    }
+    if(monFlux)
+    {
+        std::vector<std::vector<float> > indices;
+        //initialisation du vector pour qu'il ait la bonne taille
+        for (size_t i = 0; i < m_ordre; i++)
+        {
+             indices.push_back({{0},{0}});
+        }
+        //sauvegarde des indices d'intermediarite
+        centralite_intermediarite(indices);
+        monFlux<<"indices de centralite d'INTERMEDIARITE"<<std::endl;
+        monFlux<<"le sommet \tindice simple \tindice normalise"<<std::endl;
+        for (size_t i = 0; i < m_ordre; i++)
+        {
+            monFlux <<i<<"\t\t" << indices[i][0] << "\t\t"<< indices[i][1] <<'\n';
+        }
+        std::cout << "\n" << '\n';
+
+        //sauvegarde des indices de proximite
+        centralite_de_proximite(0, indices);
+        monFlux<<"indices de centralite de PROXIMITE"<<std::endl;
+        monFlux<<"le sommet \tindice simple \tindice normalise"<<std::endl;
+        for (size_t i = 0; i < m_ordre; i++)
+        {
+            monFlux <<i<<"\t\t" << indices[i][0] << "\t\t"<< indices[i][1] <<'\n';
+        }
+
+        //sauvegarde des indices de vecteur propre
+        trouver_indice_centralite_vecteur_propre(0, indices);
+        monFlux<<"indices de centralite de VECTEUR PROPRE"<<std::endl;
+        monFlux<<"le sommet \tindice simple \tindice normalise"<<std::endl;
+        for (size_t i = 0; i < m_ordre; i++)
+        {
+            monFlux <<i<<"\t\t" << indices[i][0] << "\t\t"<< indices[i][1] <<'\n';
+        }
+
+        //sauvegarde des indices de centralite de degres
+        trouver_centralite_degres(0, indices);
+        monFlux<<"indices de centralite de DEGRES"<<std::endl;
+        monFlux<<"le sommet \tindice simple \tindice normalise"<<std::endl;
+        for (size_t i = 0; i < m_ordre; i++)
+        {
+            monFlux <<i<<"\t\t" << indices[i][0] << "\t\t"<< indices[i][1] <<'\n';
+        }
+
+        return 1;
+    }
+    return -1;
+
 }
